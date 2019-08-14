@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: aleksey <aleksey@student.42.fr>            +#+  +:+       +#+         #
+#    By: bkiehn <bkiehn@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/24 19:28:38 by bkiehn            #+#    #+#              #
-#    Updated: 2019/08/13 17:13:43 by aleksey          ###   ########.fr        #
+#    Updated: 2019/08/14 21:51:41 by bkiehn           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,13 +25,13 @@ LIBAFERST = make -C $(LIBRARY)
 LIBRARY = libft
 	
 $(NAME): $(OBJS)
-	gcc -o $(NAME) $(OBJS) -I $(INC) -L ./$(LIBRARY) -lft 
+	@gcc -o $(NAME) $(OBJS) -I $(INC) -L ./$(LIBRARY) -lft -lftprintf
 
 liba:
 	make -C $(LIBRARY)
 
 objs/%.o: srcs/%.c
-	gcc -c $< -o $@ -I $(INC)
+	@gcc -c $< -o $@ -I $(INC)
 
 debug:
 	gcc -g3 -o $(NAME) $(SRCS) -I $(INC) -L ./$(LIBRARY) -lft
