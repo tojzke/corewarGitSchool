@@ -6,7 +6,7 @@
 /*   By: bkiehn <bkiehn@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/13 16:22:13 by aleksey           #+#    #+#             */
-/*   Updated: 2019/08/14 21:43:24 by bkiehn           ###   ########.fr       */
+/*   Updated: 2019/08/15 20:08:10 by bkiehn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,14 +32,24 @@
 typedef struct 		s_rules
 {
 	int				dump;
-	int 			numberPlayer;
+
+	char 			numberPlayer[4];
+	int				muchPlayer;
 	int				nextNumberPlayer;
+
 	char			battlefield[MEM_SIZE];
+	// union 			pointer
+	// {
+	// 	int			ints;
+	// 	char		chars[4];
+	// };
+	
 }					t_rules;
 
 typedef struct		s_champion
 {
 	int				number;
+	int				fd;
 	char*			name;
 	int				reg[REG_NUMBER + 1];
 	int				size;

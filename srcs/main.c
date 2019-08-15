@@ -6,7 +6,7 @@
 /*   By: bkiehn <bkiehn@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/13 16:42:09 by aleksey           #+#    #+#             */
-/*   Updated: 2019/08/14 23:07:33 by bkiehn           ###   ########.fr       */
+/*   Updated: 2019/08/15 22:19:36 by bkiehn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,47 @@
 
 int		createChampion(t_champion* champions, t_rules* rules, int fd)
 {	
-	int	*source;
+	int*	tmp;
+	int		hex;
+	int		count;
 	
-	source = (int*)malloc(4);
-	read(fd, source, 1);
-	printf("%x", *source);
+	count = 4;
+	hex = 0;
+	tmp = (int*)malloc(sizeof(int));
+	while (count--)
+	{
+		read(fd, tmp, 1);
+		hex += *tmp << (count * 8);
+		*tmp = 0;
+	}
+	if (hex != COREWAR_EXEC_MAGIC)
+		return 0; //Засланый казачёк
+
+	if ((lseek(fd, PROG_NAME_LENGTH + 4, SEEK_CUR)) == -1L)
+		return 0; //Внутри казачка пустота
+	count = 4;
+	int size = 0;
+	while (count--)
+	{
+		read(fd, tmp, 1);
+		size += *tmp << (count * 8);
+		*tmp = 0;
+	}
+	if (size > CHAMP_MAX_SIZE)
+		return 0; //Жирный казачёк
+
+	lseek(fd, -(PROG_NAME_LENGTH + 8), SEEK_CUR);
+	char* name;
+	name = (char*)malloc(PROG_NAME_LENGTH + 4);
+	read(fd, name, PROG_NAME_LENGTH + 4);
+	
+	lseek(fd, 4, SEEK_CUR);
+	char* comment;
+	comment = (char*)malloc(COMMENT_CHAR + 4);
+	read(fd, comment, COMMENT_CHAR + 4);
+
+	ft_printf("%s\n", name);
+	ft_printf("%s\n", comment);
 	return 1;
 }
 
