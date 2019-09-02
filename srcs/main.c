@@ -6,66 +6,63 @@
 /*   By: bkiehn <bkiehn@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/13 16:42:09 by aleksey           #+#    #+#             */
-/*   Updated: 2019/08/15 22:19:36 by bkiehn           ###   ########.fr       */
+/*   Updated: 2019/09/02 23:03:57 by bkiehn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
 
-int		createChampion(t_champion* champions, t_rules* rules, int fd)
-{	
-	int*	tmp;
-	int		hex;
-	int		count;
-	
-	count = 4;
-	hex = 0;
-	tmp = (int*)malloc(sizeof(int));
-	while (count--)
+int			checkNumberChampion(int curentNumberChampion, t_rules* rules, t_champion** champions)
+{
+	if (curentNumberChampion < 1 || curentNumberChampion > 4)
+		return 0; //Не возможный номер петуха
+	if (rules->muchPlayer == 4)
+		return 0; //Превышенно количество петухов
+	rules->muchPlayer++;
+	if (curentNumberChampion != 0 && champions[curentNumberChampion] != NULL)
+		return 0; //Такой петух уже есть
+	else if (curentNumberChampion != 0)
 	{
-		read(fd, tmp, 1);
-		hex += *tmp << (count * 8);
-		*tmp = 0;
+		champions[curentNumberChampion] = ft_memalloc(sizeof(t_champion));
+		champions[curentNumberChampion]->number = curentNumberChampion;
+		champions[curentNumberChampion]->reg[1] = -curentNumberChampion;
 	}
-	if (hex != COREWAR_EXEC_MAGIC)
-		return 0; //Засланый казачёк
 
-	if ((lseek(fd, PROG_NAME_LENGTH + 4, SEEK_CUR)) == -1L)
-		return 0; //Внутри казачка пустота
-	count = 4;
-	int size = 0;
-	while (count--)
-	{
-		read(fd, tmp, 1);
-		size += *tmp << (count * 8);
-		*tmp = 0;
-	}
-	if (size > CHAMP_MAX_SIZE)
-		return 0; //Жирный казачёк
-
-	lseek(fd, -(PROG_NAME_LENGTH + 8), SEEK_CUR);
-	char* name;
-	name = (char*)malloc(PROG_NAME_LENGTH + 4);
-	read(fd, name, PROG_NAME_LENGTH + 4);
-	
-	lseek(fd, 4, SEEK_CUR);
-	char* comment;
-	comment = (char*)malloc(COMMENT_CHAR + 4);
-	read(fd, comment, COMMENT_CHAR + 4);
-
-	ft_printf("%s\n", name);
-	ft_printf("%s\n", comment);
-	return 1;
+	return curentNumberChampion;
 }
 
-int		parseArg(int argc, char** argv, t_rules *rules, t_champion *champions)
+
+int			calcNumberChampion(int curentNumberChampion, t_rules* rules, t_champion** champions)
+{
+	if (curentNumberChampion != 0)
+		return curentNumberChampion;
+	if (rules->muchPlayer == 4)
+		return 0; //Превышенно количество петухов
+	rules->muchPlayer++;
+	curentNumberChampion = 1;
+
+	while (champions[curentNumberChampion] != NULL)
+	{
+		curentNumberChampion++;
+	}
+	
+	champions[curentNumberChampion] = ft_memalloc(sizeof(t_champion));
+	champions[curentNumberChampion]->number = curentNumberChampion;
+	champions[curentNumberChampion]->reg[1] = -curentNumberChampion;
+	return curentNumberChampion;
+}
+
+int		parseArg(int argc, char** argv, t_rules *rules, t_champion **champions)
 {
 	int arg;
 	int fd;
+	int	curentNumberChampion;
+
 
 	arg = 1;
 	while (arg < argc)
 	{
+		curentNumberChampion = 0;
 		if (!ft_strcmp(argv[arg], "-dump"))
 		{
 			arg++;
@@ -78,7 +75,11 @@ int		parseArg(int argc, char** argv, t_rules *rules, t_champion *champions)
 		{
 			arg++;
 			if (arg <= argc)
-				rules->nextNumberPlayer = ft_atoi(argv[arg]);
+			{
+				curentNumberChampion = checkNumberChampion(ft_atoi(argv[arg]), rules, champions);
+				if (curentNumberChampion == 0)
+					return 0; //Что то не то с номером петуха
+			}
 			else
 				return 0; //ошибка юзача
 		}
@@ -87,7 +88,12 @@ int		parseArg(int argc, char** argv, t_rules *rules, t_champion *champions)
 			if ((fd = open(argv[arg], O_RDONLY)) == -1)
 				return 0; //ошибка открытия файла
 			else
-				createChampion(champions, rules, fd);
+			{
+				curentNumberChampion = calcNumberChampion(curentNumberChampion, rules, champions);
+				if (curentNumberChampion == 0)
+					return 0; //С номером петуха что-то не так
+				createChampion(champions[curentNumberChampion], rules, fd);
+			}
 		}
 		arg++;
 	}
@@ -95,12 +101,12 @@ int		parseArg(int argc, char** argv, t_rules *rules, t_champion *champions)
 }
 
 int 	main(int argc, char** argv) {
-	t_rules *rules;
-	t_champion *champions;
+	t_rules* rules;
+	t_champion* champions[5];
 
 	rules = ft_memalloc(sizeof(t_rules));
 	if (!parseArg(argc, argv, rules, champions))
-		ft_printf("Oshibka nahuy, akuratnee");
+		ft_printf("Oshibka nahuy, akuratnee\n");
 
 }
 

@@ -6,7 +6,7 @@
 #    By: bkiehn <bkiehn@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/24 19:28:38 by bkiehn            #+#    #+#              #
-#    Updated: 2019/08/14 21:51:41 by bkiehn           ###   ########.fr        #
+#    Updated: 2019/09/02 20:56:04 by bkiehn           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,7 +45,7 @@ fclean: clean
 	make -C $(LIBRARY) fclean
 	
 re: fclean libare
-	gcc -o $(NAME) $(FLAGS) $(SRCS) -I $(INC) -L ./$(LIBRARY) -lft
+	gcc -o $(NAME) $(SRCS) -I $(INC) -L ./$(LIBRARY) -lft -lftprintf
 
 libare:
 	make -C $(LIBRARY) re
