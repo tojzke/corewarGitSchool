@@ -6,7 +6,7 @@
 /*   By: bkiehn <bkiehn@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/02 20:37:53 by bkiehn            #+#    #+#             */
-/*   Updated: 2019/09/03 23:10:27 by bkiehn           ###   ########.fr       */
+/*   Updated: 2019/09/04 21:08:22 by bkiehn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,31 +73,20 @@ char*	readComment(int fd)
 	return comment;
 }
 
-char*		readBody(int fd, t_champion* champion)
+int		readBody(int fd, t_champion* champion)
 {
-	// char* body;
+	int		count_read;
+	char	tmp[1];			
 
-	// body = (char*)malloc(champion->size);
-	// read(fd, body, champion->size);
-	// return body;
-	
-	int		count;
-	int*	tmp;
-	int		hex;
+	champion->body = (unsigned char*)malloc(champion->size);
+	count_read = read(fd, champion->body, champion->size);
+	if (count_read != champion->size)
+		return 0; //Размер петуха несоответствует обещанному
+	count_read = read(fd, tmp, 1);
+	if (count_read != 0 && champion->size != 0)
+		return 0; //Размер петуха несоответствует обещанному
 
-	count = champion->size;
-	hex = 0;
-	tmp = (int*)malloc(sizeof(int));
-
-	while (count--)
-	{
-		read(fd, tmp, 1);
-		// hex += *tmp << (count * 8);
-		ft_printf("%d (%x); ", *tmp, *tmp);
-		// *tmp = 0;
-	}
-	ft_printf("\n");
-	return "zdes budet telo petuha";
+	return 1;
 }
 
 int		createChampion(t_champion* champion, t_rules* rules, int fd)
@@ -110,11 +99,13 @@ int		createChampion(t_champion* champion, t_rules* rules, int fd)
 	
 	if ((champion->size = checkSizeChampion(fd)) == -1)
 		return 0; //Жирный казачёк
-
+		
 	champion->name = readName(fd);
 	champion->comment = readComment(fd);
 	champion->fd = fd;
-	champion->body = readBody(fd, champion);
+	
+	if (!readBody(fd, champion))
+		return 0; //Размер петуха несоответствует обещанному
 
 	
 	
@@ -124,6 +115,14 @@ int		createChampion(t_champion* champion, t_rules* rules, int fd)
 	ft_printf("comment: %s\n", champion->comment);
 	ft_printf("number: %d\n", champion->number);
 	ft_printf("size: %d\n", champion->size);
-	ft_printf("body: %s\n", champion->body);
+	ft_printf("body: ", champion->body);
+	print_bytes_hex(champion->body, champion->size);
+
+	// short tmp;
+	// tmp = champion->body[20];
+	// tmp = tmp << 8;
+	// tmp += champion->body[21];
+	// ft_printf("%hd\n", tmp);
+
 	return 1;
 }

@@ -6,7 +6,7 @@
 /*   By: bkiehn <bkiehn@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/13 16:42:09 by aleksey           #+#    #+#             */
-/*   Updated: 2019/09/03 21:41:14 by bkiehn           ###   ########.fr       */
+/*   Updated: 2019/09/04 21:54:02 by bkiehn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,9 @@ int			checkNumberChampion(int currentNumberChampion, t_rules* rules, t_champion*
 {
 	if (currentNumberChampion < 1 || currentNumberChampion > 4)
 		return 0; //Не возможный номер петуха
-	if (rules->muchPlayer == 4)
+	if (rules->much_players == 4)
 		return 0; //Превышенно количество петухов
-	rules->muchPlayer++;
+	rules->much_players++;
 	if (champions[currentNumberChampion] != NULL)
 		return 0; //Такой петух уже есть
 	champions[currentNumberChampion] = ft_memalloc(sizeof(t_champion));
@@ -33,9 +33,9 @@ int			calcNumberChampion(t_rules* rules, t_champion** champions)
 {
 	int		currentNumberChampion;
 
-	if (rules->muchPlayer == 4)
+	if (rules->much_players == 4)
 		return 0; //Превышенно количество петухов
-	rules->muchPlayer++;
+	rules->much_players++;
 	currentNumberChampion = 1;
 
 	while (champions[currentNumberChampion] != NULL)
@@ -88,7 +88,8 @@ int		parseArg(int argc, char** argv, t_rules *rules, t_champion **champions)
 				if (currentNumberChampion == 0)
 					if ((currentNumberChampion = calcNumberChampion(rules, champions)) == 0)
 						return 0; //С номером пктуха что-то не так
-				createChampion(champions[currentNumberChampion], rules, fd);
+				if (!createChampion(champions[currentNumberChampion], rules, fd))
+					return 0; //Ошибка при создании разрушителя миров
 				currentNumberChampion = 0;
 			}
 		}
@@ -105,7 +106,11 @@ int 	main(int argc, char** argv) {
 	champions = ft_memalloc(sizeof(t_champion*) * 5);
 	rules = ft_memalloc(sizeof(t_rules));
 	if (!parseArg(argc, argv, rules, champions))
-		ft_printf("%sOshibka nahuy, akuratnee%s\n", RED, NO_COLLOR);
-
+	{
+		ft_printf("%sОшибка на этапе обнаружения настроек для разрушителей или при их создании.%s\n", RED, NO_COLOR);
+		exit (0);
+	}
+	create_battlefield(rules, champions);
+	print_battlefiled(rules, champions);
 }
 

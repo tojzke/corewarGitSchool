@@ -6,7 +6,7 @@
 /*   By: bkiehn <bkiehn@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/13 16:22:13 by aleksey           #+#    #+#             */
-/*   Updated: 2019/09/03 23:08:57 by bkiehn           ###   ########.fr       */
+/*   Updated: 2019/09/04 21:53:56 by bkiehn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 # define BLUE     	"\033[34m"
 # define VIOLET     "\033[35m"
 # define CYAN      	"\033[36m"
-# define NO_COLLOR	"\033[m"
+# define NO_COLOR	"\033[m"
 
 # include "../libft/includes/libft.h"
 # include "ft_printf.h"
@@ -33,11 +33,9 @@
 typedef struct 		s_rules
 {
 	int				dump;
+	int				much_players;
 
-	char 			numberPlayer[4];
-	int				muchPlayer;
-
-	char			battlefield[MEM_SIZE];
+	unsigned char	battlefield[MEM_SIZE];
 }					t_rules;
 
 typedef struct		s_champion
@@ -46,7 +44,7 @@ typedef struct		s_champion
 	int				fd;
 	char*			name;
 	char*			comment;
-	char*			body;
+	unsigned char*	body;
 	int				reg[REG_NUMBER + 1];
 	int				size;
 	//struct corewar* next;
@@ -54,6 +52,9 @@ typedef struct		s_champion
 }					t_champion;
 
 int					createChampion(t_champion* champion, t_rules* rules, int fd);
+void 				print_bytes_hex(unsigned char* bytes, int size);
+void				create_battlefield(t_rules* rules, t_champion** champions);
+void				print_battlefiled(t_rules* rules, t_champion** champions);
 
 
 #endif
