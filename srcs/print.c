@@ -6,7 +6,7 @@
 /*   By: bkiehn <bkiehn@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/04 19:36:33 by bkiehn            #+#    #+#             */
-/*   Updated: 2019/09/04 22:05:51 by bkiehn           ###   ########.fr       */
+/*   Updated: 2019/09/11 21:46:20 by bkiehn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,41 +31,35 @@ void 	print_bytes_hex(unsigned char* bytes, int size)
 	ft_printf("\n");
 }
 
-int		select_champion(t_champion** champions, int start)
+int		select_champion(t_champion** champions, int current_champion)
 {
-	while (champions[start] == NULL)
-		start++;
-	return start;
+	while (champions[current_champion] == NULL)
+		current_champion++;
+	return current_champion;
 }
 
 void	print_battlefiled(t_rules* rules, t_champion** champions)
 {
 	int count;
-	int	interval;
-	int champion;
+	int number_champion;
 
 	count = 0;
-	champion = select_champion(champions, 1);
-	interval = MEM_SIZE / rules->much_players;
+	number_champion = select_champion(champions, 1);
 	while (count < MEM_SIZE) 
 	{
-		if (count == 0 || count % interval == 0)
+		if (count == champions[number_champion]->position)
+			ft_printf(champions[number_champion]->color);
+		if (count == champions[number_champion]->size + champions[number_champion]->position)
 		{
-			ft_printf(RED);
+			ft_printf(NO_COLOR);
+			number_champion = select_champion(champions, number_champion + 1);
 		}
-		ft_printf("%.2x", rules->battlefield[count]);
-		count++;
+
 		ft_printf("%.2x", rules->battlefield[count]);
 		if (((count + 1) % 32) == 0)
 			ft_printf("\n");
-		else
+		else if (((count + 1) % 2) == 0)
 			ft_printf(" ");
-		if (count == champions[champion]->size)
-		{
-			ft_printf(NO_COLOR);
-			champion = select_champion(champions, champion + 1);
-		}
 		count++;
 	}
-	ft_printf("\n");
 }

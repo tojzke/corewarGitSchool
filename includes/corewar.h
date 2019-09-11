@@ -6,7 +6,7 @@
 /*   By: bkiehn <bkiehn@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/13 16:22:13 by aleksey           #+#    #+#             */
-/*   Updated: 2019/09/04 21:53:56 by bkiehn           ###   ########.fr       */
+/*   Updated: 2019/09/11 21:24:03 by bkiehn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,8 @@ typedef struct 		s_rules
 {
 	int				dump;
 	int				much_players;
-
 	unsigned char	battlefield[MEM_SIZE];
+	int				last_alive;
 }					t_rules;
 
 typedef struct		s_champion
@@ -47,6 +47,8 @@ typedef struct		s_champion
 	unsigned char*	body;
 	int				reg[REG_NUMBER + 1];
 	int				size;
+	int				position;
+	char*			color;
 	//struct corewar* next;
 	
 }					t_champion;
@@ -55,6 +57,7 @@ int					createChampion(t_champion* champion, t_rules* rules, int fd);
 void 				print_bytes_hex(unsigned char* bytes, int size);
 void				create_battlefield(t_rules* rules, t_champion** champions);
 void				print_battlefiled(t_rules* rules, t_champion** champions);
+int					select_champion(t_champion** champions, int current_champion);
 
 
 #endif

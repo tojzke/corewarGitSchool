@@ -6,7 +6,7 @@
 /*   By: bkiehn <bkiehn@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/04 21:04:28 by bkiehn            #+#    #+#             */
-/*   Updated: 2019/09/04 21:29:37 by bkiehn           ###   ########.fr       */
+/*   Updated: 2019/09/11 20:39:50 by bkiehn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ void	champion_move_battlefield(t_champion* champion, t_rules* rules, int positio
 	int	count;
 
 	count = 0;
+	champion->position = position;
 	while (count < champion->size)
 	{
 		rules->battlefield[position] = champion->body[count];

@@ -6,7 +6,7 @@
 /*   By: bkiehn <bkiehn@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/02 20:37:53 by bkiehn            #+#    #+#             */
-/*   Updated: 2019/09/04 21:08:22 by bkiehn           ###   ########.fr       */
+/*   Updated: 2019/09/11 21:16:02 by bkiehn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,18 @@ char*	readName(int fd)
 	return name;
 }
 
+void	select_color(t_champion* champion)
+{
+	if (champion->number == 1)
+		champion->color = ft_strdup(RED);
+	else if (champion->number == 2)
+		champion->color = ft_strdup(GREEN);
+	else if (champion->number == 3)
+		champion->color = ft_strdup(BLUE);
+	else if (champion->number == 4)
+		champion->color = ft_strdup(YELLOW);
+}
+
 char*	readComment(int fd)
 {
 	char* comment;
@@ -103,9 +115,11 @@ int		createChampion(t_champion* champion, t_rules* rules, int fd)
 	champion->name = readName(fd);
 	champion->comment = readComment(fd);
 	champion->fd = fd;
+	select_color(champion);
 	
 	if (!readBody(fd, champion))
 		return 0; //Размер петуха несоответствует обещанному
+	close(fd);
 
 	
 	

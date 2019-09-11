@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: bkiehn <bkiehn@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/08/13 16:42:09 by aleksey           #+#    #+#             */
-/*   Updated: 2019/09/04 21:54:02 by bkiehn           ###   ########.fr       */
+/*   Created: 2019/09/11 21:44:53 by bkiehn            #+#    #+#             */
+/*   Updated: 2019/09/11 21:51:35 by bkiehn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,16 @@ int		parseArg(int argc, char** argv, t_rules *rules, t_champion **champions)
 	return 1;
 }
 
+void	set_rules(t_rules* rules, t_champion** champions)
+{
+    int current_champion;
+
+    current_champion = 4;
+    while (champions[current_champion] == NULL)
+        current_champion--;
+    rules->last_alive = current_champion;
+}
+
 int 	main(int argc, char** argv) {
 	t_rules*		rules;
 	t_champion**	champions;
@@ -108,6 +118,13 @@ int 	main(int argc, char** argv) {
 	if (!parseArg(argc, argv, rules, champions))
 	{
 		ft_printf("%sОшибка на этапе обнаружения настроек для разрушителей или при их создании.%s\n", RED, NO_COLOR);
+		exit (0);
+	}
+	if (rules->much_players != 0)
+		set_rules(rules, champions);
+	else
+	{
+		ft_printf("Zdes budet usage\n");
 		exit (0);
 	}
 	create_battlefield(rules, champions);
