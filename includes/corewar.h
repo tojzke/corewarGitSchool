@@ -6,7 +6,7 @@
 /*   By: bkiehn <bkiehn@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/13 16:22:13 by aleksey           #+#    #+#             */
-/*   Updated: 2019/09/11 21:24:03 by bkiehn           ###   ########.fr       */
+/*   Updated: 2019/09/12 21:37:32 by bkiehn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,13 @@
 typedef struct 		s_rules
 {
 	int				dump;
-	int				much_players;
+	int				much_players;		//количество игроков
 	unsigned char	battlefield[MEM_SIZE];
-	int				last_alive;
+	int				last_alive;        //последний прокукарекавший петух
+	int				number_cycle;     //Количество циклов с начала игры
+	int				number_live_of_ctd; //Количество выполненых операций live за CYCLE_TO_DIE
+	int				ctd;				//CYCLE_TO_DIE - длительность периода до проверки
+	int				number_check;		//Количество проведёных проверок
 }					t_rules;
 
 typedef struct		s_champion
@@ -47,10 +51,13 @@ typedef struct		s_champion
 	unsigned char*	body;
 	int				reg[REG_NUMBER + 1];
 	int				size;
-	int				position;
+	int				position;  //позиция на поле боя
 	char*			color;
-	//struct corewar* next;
-	
+	int				carry;
+	int				code_operation;
+	int				last_live_in_cycle;
+	int				cycle_before_run;
+	int				number_byte_for_next_operation;
 }					t_champion;
 
 int					createChampion(t_champion* champion, t_rules* rules, int fd);

@@ -6,7 +6,7 @@
 /*   By: bkiehn <bkiehn@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/11 21:44:53 by bkiehn            #+#    #+#             */
-/*   Updated: 2019/09/11 21:51:35 by bkiehn           ###   ########.fr       */
+/*   Updated: 2019/09/12 21:18:40 by bkiehn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,6 +107,9 @@ void	set_rules(t_rules* rules, t_champion** champions)
     while (champions[current_champion] == NULL)
         current_champion--;
     rules->last_alive = current_champion;
+	rules->ctd = CYCLE_TO_DIE;
+	ft_printf("     Rules\nlast_alive: %d\ncycles_to_die: %d\n", rules->last_alive, rules->ctd);
+	ft_printf("------------------\n");
 }
 
 int 	main(int argc, char** argv) {
