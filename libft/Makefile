@@ -16,7 +16,7 @@ SRC = *.c
 
 FLAGS = -Wall -Wextra -Werror
 
-INC = includes/libft.h
+INC = /includes/libft.h
 
 OBJC = $(SRC:.c=.o)
 
