@@ -6,7 +6,7 @@
 /*   By: bkiehn <bkiehn@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/02 20:37:53 by bkiehn            #+#    #+#             */
-/*   Updated: 2019/09/11 21:16:02 by bkiehn           ###   ########.fr       */
+/*   Updated: 2019/09/18 18:38:50 by aleksey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,23 +120,5 @@ int		createChampion(t_champion* champion, t_rules* rules, int fd)
 	if (!readBody(fd, champion))
 		return 0; //Размер петуха несоответствует обещанному
 	close(fd);
-
-	
-	
-	
-
-	ft_printf("name: %s\n", champion->name);
-	ft_printf("comment: %s\n", champion->comment);
-	ft_printf("number: %d\n", champion->number);
-	ft_printf("size: %d\n", champion->size);
-	ft_printf("body: ", champion->body);
-	print_bytes_hex(champion->body, champion->size);
-
-	// short tmp;
-	// tmp = champion->body[20];
-	// tmp = tmp << 8;
-	// tmp += champion->body[21];
-	// ft_printf("%hd\n", tmp);
-
 	return 1;
 }

@@ -6,7 +6,7 @@
 /*   By: bkiehn <bkiehn@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/11 21:44:53 by bkiehn            #+#    #+#             */
-/*   Updated: 2019/09/12 21:18:40 by bkiehn           ###   ########.fr       */
+/*   Updated: 2019/09/18 18:46:55 by aleksey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,14 +87,13 @@ int		parseArg(int argc, char** argv, t_rules *rules, t_champion **champions)
 			{
 				if (currentNumberChampion == 0)
 					if ((currentNumberChampion = calcNumberChampion(rules, champions)) == 0)
-						return 0; //С номером пктуха что-то не так
+						return 0; //С номером петуха что-то не так
 				if (!createChampion(champions[currentNumberChampion], rules, fd))
 					return 0; //Ошибка при создании разрушителя миров
 				currentNumberChampion = 0;
 			}
 		}
 		arg++;
-		ft_printf("------------------\n");
 	}
 	return 1;
 }
@@ -109,12 +108,12 @@ void	set_rules(t_rules* rules, t_champion** champions)
     rules->last_alive = current_champion;
 	rules->ctd = CYCLE_TO_DIE;
 	ft_printf("     Rules\nlast_alive: %d\ncycles_to_die: %d\n", rules->last_alive, rules->ctd);
-	ft_printf("------------------\n");
 }
 
 int 	main(int argc, char** argv) {
 	t_rules*		rules;
 	t_champion**	champions;
+	t_champion*     cursors;
 
 	champions = ft_memalloc(sizeof(t_champion*) * 5);
 	rules = ft_memalloc(sizeof(t_rules));
@@ -131,6 +130,16 @@ int 	main(int argc, char** argv) {
 		exit (0);
 	}
 	create_battlefield(rules, champions);
-	print_battlefiled(rules, champions);
+	/*
+	 * Исторически сложилось, что начал работать с массивом
+	 * чемпионов и последнии параметры для них устанавливаются в
+	 * creat_battlefield, но для удобства реализации процесса игры
+	 * чемпионов нужно переделать в список, и обозвать их курсорами
+	 * что делается в creat_cursor, но это всё теже структуры.
+	 * number_cursor определяется здесь же
+	 */
+	cursors = create_cursor(champions, rules);
+	print_cursors(cursors);
+	//print_battlefiled(rules, champions);
 }
 

@@ -6,7 +6,7 @@
 /*   By: bkiehn <bkiehn@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/13 16:22:13 by aleksey           #+#    #+#             */
-/*   Updated: 2019/09/12 21:37:32 by bkiehn           ###   ########.fr       */
+/*   Updated: 2019/09/18 19:17:00 by aleksey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,41 +30,47 @@
 # include <fcntl.h>
 # include <stdlib.h>
 
-typedef struct 		s_rules
+typedef struct 			s_rules
 {
-	int				dump;
-	int				much_players;		//количество игроков
-	unsigned char	battlefield[MEM_SIZE];
-	int				last_alive;        //последний прокукарекавший петух
-	int				number_cycle;     //Количество циклов с начала игры
-	int				number_live_of_ctd; //Количество выполненых операций live за CYCLE_TO_DIE
-	int				ctd;				//CYCLE_TO_DIE - длительность периода до проверки
-	int				number_check;		//Количество проведёных проверок
-}					t_rules;
+	int					dump;
+	int					much_players;		//количество игроков
+	unsigned char		battlefield[MEM_SIZE];
+	int					last_alive;        //последний прокукарекавший петух
+	int					number_cycle;     //Количество циклов с начала игры
+	int					number_live_of_ctd; //Количество выполненых операций live за CYCLE_TO_DIE
+	int					ctd;				//CYCLE_TO_DIE - длительность периода до проверки
+	int					number_check;		//Количество проведёных проверок
+}						t_rules;
 
-typedef struct		s_champion
+typedef struct			s_champion
 {
-	int				number;
-	int				fd;
-	char*			name;
-	char*			comment;
-	unsigned char*	body;
-	int				reg[REG_NUMBER + 1];
-	int				size;
-	int				position;  //позиция на поле боя
-	char*			color;
-	int				carry;
-	int				code_operation;
-	int				last_live_in_cycle;
-	int				cycle_before_run;
-	int				number_byte_for_next_operation;
-}					t_champion;
+    int             	number_cursor;
+	int					number;
+	int					fd;
+	char*				name;
+	char*				comment;
+	unsigned char*		body;
+	int					reg[REG_NUMBER + 1];
+	int					size;
+	int					position;  //позиция на поле боя
+	char*				color;
+	int					carry;
+	int					code_operation;
+	int					last_live_in_cycle;
+	int					cycle_before_run;
+	int					number_byte_for_next_operation;
+	void				(*to_string)(struct s_champion* cursor);
+	struct s_champion* 	next;
+}						t_champion;
 
-int					createChampion(t_champion* champion, t_rules* rules, int fd);
-void 				print_bytes_hex(unsigned char* bytes, int size);
-void				create_battlefield(t_rules* rules, t_champion** champions);
-void				print_battlefiled(t_rules* rules, t_champion** champions);
-int					select_champion(t_champion** champions, int current_champion);
+int						createChampion(t_champion* champion, t_rules* rules, int fd);
+void 					print_bytes_hex(unsigned char* bytes, int size);
+void					create_battlefield(t_rules* rules, t_champion** champions);
+void					print_battlefiled(t_rules* rules, t_champion** champions);
+int						select_champion(t_champion** champions, int current_champion);
+t_champion*				create_cursor(t_champion** champions, t_rules* rules);
+void					print_cursors(t_champion* cursor);
+void					to_string(t_champion* cursors);
 
 
 #endif

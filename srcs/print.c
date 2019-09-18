@@ -6,7 +6,7 @@
 /*   By: bkiehn <bkiehn@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/04 19:36:33 by bkiehn            #+#    #+#             */
-/*   Updated: 2019/09/11 21:46:20 by bkiehn           ###   ########.fr       */
+/*   Updated: 2019/09/18 19:25:34 by aleksey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,28 @@ void 	print_bytes_hex(unsigned char* bytes, int size)
 
 int		select_champion(t_champion** champions, int current_champion)
 {
+    if (current_champion > MAX_PLAYERS)
+        return 0;
 	while (champions[current_champion] == NULL)
-		current_champion++;
+	{
+        current_champion++;
+        if (current_champion > MAX_PLAYERS)
+            return 0;
+    }
 	return current_champion;
+}
+
+int     definition_color(t_champion** champions, int number_champion, int count)
+{
+    if (count == champions[number_champion]->position)
+        ft_printf(champions[number_champion]->color);
+    if (count == champions[number_champion]->size + champions[number_champion]->position)
+    {
+        ft_printf(NO_COLOR);
+        number_champion = select_champion(champions, number_champion + 1);
+    }
+
+    return number_champion;
 }
 
 void	print_battlefiled(t_rules* rules, t_champion** champions)
@@ -47,19 +66,48 @@ void	print_battlefiled(t_rules* rules, t_champion** champions)
 	number_champion = select_champion(champions, 1);
 	while (count < MEM_SIZE) 
 	{
-		if (count == champions[number_champion]->position)
-			ft_printf(champions[number_champion]->color);
-		if (count == champions[number_champion]->size + champions[number_champion]->position)
-		{
-			ft_printf(NO_COLOR);
-			number_champion = select_champion(champions, number_champion + 1);
-		}
-
+	    if (number_champion != 0)
+            number_champion = definition_color(champions, number_champion, count);
 		ft_printf("%.2x", rules->battlefield[count]);
 		if (((count + 1) % 32) == 0)
 			ft_printf("\n");
 		else if (((count + 1) % 2) == 0)
 			ft_printf(" ");
 		count++;
+	}
+}
+
+void	to_string(t_champion* cursors)
+{
+	int count;
+
+	count = 1;
+	ft_printf("-------------------------\n%s", cursors->color);
+	ft_printf("number_cursor: %d\n", cursors->number_cursor);
+	ft_printf("number: %d\n", cursors->number);
+	ft_printf("name: %s\n", cursors->name);
+	ft_printf("comment: %s\n", cursors->comment);
+	ft_printf("size: %d\n", cursors->size);
+	ft_printf("position: %d\ncarry: %d\ncode_operation: %d\n",
+			  cursors->position, cursors->carry, cursors->code_operation);
+	ft_printf("last_live_in_cycle: %d\ncycle_before_run: %d\nnumber_byte_for_next_operation: %d\n",
+			  cursors->last_live_in_cycle, cursors->cycle_before_run, cursors->number_byte_for_next_operation);
+	ft_printf("Registers:\n");
+	while (count <= REG_NUMBER)
+	{
+		ft_printf("\tREG_%d: %d\n", count, cursors->reg[count]);
+		count++;
+	}
+	ft_printf("Body:\n");
+	print_bytes_hex(cursors->body, cursors->size);
+	ft_printf("%s-------------------------\n", NO_COLOR);
+}
+
+void	print_cursors(t_champion* cursors)
+{
+	while (cursors != 0)
+	{
+		cursors->to_string(cursors);
+		cursors = cursors->next;
 	}
 }

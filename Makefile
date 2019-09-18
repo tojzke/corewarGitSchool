@@ -34,7 +34,7 @@ objs/%.o: srcs/%.c
 	@gcc -c $< -o $@ -I $(INC)
 
 debug:
-	gcc -g3 -o $(NAME) $(SRCS) -I $(INC) -L ./$(LIBRARY) -lft
+	gcc -g3 -o $(NAME) $(SRCS) -I $(INC) -L ./$(LIBRARY) -lft -lftprintf
 
 clean:
 	rm -f $(OBJS)
