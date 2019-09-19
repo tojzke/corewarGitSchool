@@ -6,7 +6,7 @@
 /*   By: bkiehn <bkiehn@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/04 19:36:33 by bkiehn            #+#    #+#             */
-/*   Updated: 2019/09/18 19:25:34 by aleksey          ###   ########.fr       */
+/*   Updated: 2019/09/19 11:55:31 by aleksey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ void	print_battlefiled(t_rules* rules, t_champion** champions)
 	}
 }
 
-void	to_string(t_champion* cursors)
+void	to_string(t_champion* cursors, char flag_body)
 {
 	int count;
 
@@ -98,16 +98,33 @@ void	to_string(t_champion* cursors)
 		ft_printf("\tREG_%d: %d\n", count, cursors->reg[count]);
 		count++;
 	}
-	ft_printf("Body:\n");
-	print_bytes_hex(cursors->body, cursors->size);
+	if (flag_body)
+	{
+		ft_printf("Body:\n");
+		print_bytes_hex(cursors->body, cursors->size);
+	}
 	ft_printf("%s-------------------------\n", NO_COLOR);
 }
 
-void	print_cursors(t_champion* cursors)
+void	print_cursors(t_champion* cursors, char flag_body)
 {
 	while (cursors != 0)
 	{
-		cursors->to_string(cursors);
+		cursors->to_string(cursors, flag_body);
 		cursors = cursors->next;
 	}
+}
+
+void	print_rules(t_rules* rules)
+{
+	ft_printf("---------------------------\n         Rules:            \n"
+		   "---------------------------\ndump: %d\nnumber_cursors: %d\n"
+		   "much_players: %d\n"
+		    "last_alive: %d\nnumber_cycle: %d\nnumber_live_of_ctd: %d\n"
+	        "cycles_to_die(ctd): %d\nnumber_check: %d\n"
+		    "---------------------------\n",
+	        rules->dump, rules->number_cursors,
+	        rules->much_players, rules->last_alive,
+			rules->number_cycle, rules->number_live_of_ctd, rules->ctd,
+			rules->number_check);
 }

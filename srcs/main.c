@@ -6,7 +6,7 @@
 /*   By: bkiehn <bkiehn@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/11 21:44:53 by bkiehn            #+#    #+#             */
-/*   Updated: 2019/09/18 18:46:55 by aleksey          ###   ########.fr       */
+/*   Updated: 2019/09/19 15:03:31 by aleksey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,6 @@ void	set_rules(t_rules* rules, t_champion** champions)
         current_champion--;
     rules->last_alive = current_champion;
 	rules->ctd = CYCLE_TO_DIE;
-	ft_printf("     Rules\nlast_alive: %d\ncycles_to_die: %d\n", rules->last_alive, rules->ctd);
 }
 
 int 	main(int argc, char** argv) {
@@ -139,7 +138,9 @@ int 	main(int argc, char** argv) {
 	 * number_cursor определяется здесь же
 	 */
 	cursors = create_cursor(champions, rules);
-	print_cursors(cursors);
-	//print_battlefiled(rules, champions);
+	print_rules(rules);
+	start_game(cursors, rules, champions);
+//	print_cursors(cursors, 0);
+//	print_battlefiled(rules, champions);
 }
 
