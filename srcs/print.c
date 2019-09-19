@@ -83,7 +83,7 @@ void	to_string(t_champion* cursors, char flag_body)
 
 	count = 1;
 	ft_printf("-------------------------\n%s", cursors->color);
-	ft_printf("number_cursor: %d\n", cursors->number_cursor);
+	ft_printf("number_cursor: %d\n", cursors->number_cursors);
 	ft_printf("number: %d\n", cursors->number);
 	ft_printf("name: %s\n", cursors->name);
 	ft_printf("comment: %s\n", cursors->comment);

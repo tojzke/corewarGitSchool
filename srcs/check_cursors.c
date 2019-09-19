@@ -70,8 +70,7 @@ void			check_cursors(t_champion** cursors, t_rules* rules)
 			MAX_CHECKS == rules->number_check)
 	{
 		rules->ctd -= CYCLE_DELTA;
-		rules->number_check == 0;
+		rules->number_check = 0;
 	}
-	rules->number_live_of_ctd == 0;
-
+	rules->number_live_of_ctd = 0;
 }

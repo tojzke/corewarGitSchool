@@ -34,7 +34,7 @@ t_champion*	create_cursor(t_champion** champions, t_rules* rules)
     while (++count <= rules->much_players)
     {
         current_champion = select_champion(champions, current_champion);
-        champions[current_champion]->number_cursor = count;
+        champions[current_champion]->number_cursors = count;
         champions[current_champion]->to_string = &to_string;
         cursors = add_cursor_in_start(cursors, champions[current_champion]);
 		rules->number_cursors++;
