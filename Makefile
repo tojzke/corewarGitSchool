@@ -6,7 +6,7 @@
 #    By: bkiehn <bkiehn@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/24 19:28:38 by bkiehn            #+#    #+#              #
-#    Updated: 2019/09/20 16:52:25 by aleksey          ###   ########.fr        #
+#    Updated: 2019/09/20 19:46:47 by bkiehn           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,6 +33,7 @@ liba:
 	make -C $(LIBRARY)
 
 objs/%.o: srcs/%.c
+	@mkdir -p objs
 	@gcc -c $< -o $@ -I $(INC)
 
 debug:
@@ -48,7 +49,7 @@ fclean: clean
 	make -C $(LIBRARY) fclean
 	make -C $(PRINTF) fclean
 	
-re: fclean libare printfre
+re: fclean libare printfre $(OBJS)
 	gcc -o $(NAME) $(SRCS) -I $(INC) -L ./$(LIBRARY) -lft  -L ./ft_printf_fd -lftprintf
 
 libare:
