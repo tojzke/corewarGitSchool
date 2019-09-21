@@ -12,6 +12,12 @@
 
 #include "corewar.h"
 
+void    action_with_cursor(t_champion* cursor, rules)
+{
+    if (cursor->cycle_before_run == 0)
+        //Получить номер операции и установить cycle_before_run
+}
+
 void	introduction(t_champion** champions, t_rules* rules)
 {
 	int             current_champion;
@@ -45,7 +51,7 @@ void	start_game(t_champion* cursors, t_rules* rules, t_champion** champions)
 
 		while (cursor)
 		{
-			//view cursor
+			action_with_cursor(cursor, rules);
 			cursor = cursor->next;
 		}
 		ctd--;
@@ -55,8 +61,7 @@ void	start_game(t_champion* cursors, t_rules* rules, t_champion** champions)
 			check_cursors(&cursors, rules);
 			ctd = rules->ctd;
 		}
+		if rules->dump == 
 	}
-
-
 
 }

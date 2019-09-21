@@ -6,7 +6,7 @@
 /*   By: bkiehn <bkiehn@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/11 21:44:53 by bkiehn            #+#    #+#             */
-/*   Updated: 2019/09/20 20:03:22 by bkiehn           ###   ########.fr       */
+/*   Updated: 2019/09/20 22:13:27 by bkiehn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,8 +139,8 @@ int 	main(int argc, char** argv) {
 	 */
 	cursors = create_cursor(champions, rules);
 	print_rules(rules);
-	start_game(cursors, rules, champions);
 	print_cursors(cursors, 1);
-	print_battlefiled(rules, champions);
+    start_game(cursors, rules, champions);
+    print_battlefiled(rules, champions);
 }
 
