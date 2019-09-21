@@ -3,3 +3,5 @@ objs/*.o
 libft/*.o
 ft_printf_fd/objs/*.o
 ft_printf_fd/libft/*.o
+*cmake*
+*.dSYM

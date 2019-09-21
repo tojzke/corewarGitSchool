@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   corewar.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bkiehn <bkiehn@student.42.fr>              +#+  +:+       +#+        */
+/*   By: dzboncak <dzboncak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/13 16:22:13 by aleksey           #+#    #+#             */
-/*   Updated: 2019/09/20 16:55:12 by aleksey          ###   ########.fr       */
+/*   Updated: 2019/09/21 20:31:42 by dzboncak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@
 # include "../libft/includes/libft.h"
 # include "ft_printf.h"
 # include "op.h"
+# include "commands.h"
 # include "unistd.h"
 # include <stdio.h>
 # include <fcntl.h>
