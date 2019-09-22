@@ -6,7 +6,7 @@
 /*   By: dzboncak <dzboncak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/19 18:03:54 by dzboncak          #+#    #+#             */
-/*   Updated: 2019/09/21 19:24:14 by dzboncak         ###   ########.fr       */
+/*   Updated: 2019/09/22 19:19:02 by dzboncak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@
 int		is_valid_args_code(t_rules *rules, t_champion *cursor)
 {
 	unsigned char *args_code;
-	
-	args_code = rules->battlefield[cursor->position + 1]; //  Переместится на код типов аргументов
+
+	args_code = rules->battlefield + cursor->position + 1; //  Переместиться на код типов аргументов
 	if (allowed_args(cursor->code_operation, args_code))
 	{
 
