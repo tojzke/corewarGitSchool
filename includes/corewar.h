@@ -24,6 +24,7 @@
 
 # include "../libft/includes/libft.h"
 # include "ft_printf.h"
+# include "commands.h"
 # include "op.h"
 # include "commands.h"
 # include "unistd.h"
