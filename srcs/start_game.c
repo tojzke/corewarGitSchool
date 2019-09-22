@@ -19,8 +19,11 @@ void    action_with_cursor(t_champion* cursor, t_rules* rules)
 		cursor->code_operation = rules->battlefield[cursor->position];
     	if (rules->battlefield[cursor->position] >= LIVE_OP &&
 				rules->battlefield[cursor->position] <= AFF_OP)
-    		cursor->cycle_before_run = g_op_tab[cursor->code_operation].
-    				cycle_before_run;
+    	{
+			cursor->cycle_before_run = g_op_tab[cursor->code_operation].
+					cycle_before_run;
+			ft_printf("Код операции: %d\nЦиклов до исполения: %d\n", cursor->code_operation, cursor->cycle_before_run);
+		}
     	else
     		cursor->position++;
 
@@ -32,7 +35,7 @@ void    action_with_cursor(t_champion* cursor, t_rules* rules)
 		cursor->cycle_before_run--;
 		if (cursor->cycle_before_run == 0)
 			exec_command(rules, cursor);
-			//Отправляем курсор на выполение команды, Макса функция
+			//Отправляем курсор на валидауию байта типов агументов, аргументов и  выполение команды, Макса функция
 	}
 }
 
@@ -79,8 +82,9 @@ void	start_game(t_champion* cursors, t_rules* rules, t_champion** champions)
 			check_cursors(&cursors, rules);
 			ctd = rules->ctd;
 		}
+		cursor = cursors;
 		if (rules->dump == rules->number_cycle)
-			ft_printf("print dump memory");
+			ft_printf("print dump memory\n");
 			//Печать дампа памяти
 			//Выход из проги
 	}

@@ -79,9 +79,20 @@ typedef struct		header_s
 typedef struct          s_op
 {
 	char*				name;
-	unsigned char		number_arg;
+	unsigned char		number_arg; // кол-во принимаемых аргументов
 	unsigned char       arg_num_possibilites[3];
+						/*
+						 * какое количество типов аргументов может быть
+						 * в каждом из аргументов
+						 */
 	unsigned char		arg[3][3];
+						/*
+						 * key arg_num_possibilites первый индекс
+						 * value arg_num_possibilites второй индекс, ограничивающий
+						 * 		верхнюю границу возможных аргумиентов
+						 *
+						 * какие могут быть типы аргументов в каждом аргументе
+						 */
 	unsigned char		number;
 	int					cycle_before_run;
 	char*				description;
