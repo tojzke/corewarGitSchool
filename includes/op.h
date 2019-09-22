@@ -80,7 +80,8 @@ typedef struct          s_op
 {
 	char*				name;
 	unsigned char		number_arg;
-	unsigned char		arg[3];
+	unsigned char       arg_num_possibilites[3];
+	unsigned char		arg[3][3];
 	unsigned char		number;
 	int					cycle_before_run;
 	char*				description;

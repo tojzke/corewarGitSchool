@@ -6,7 +6,7 @@
 /*   By: dzboncak <dzboncak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/21 18:55:53 by dzboncak          #+#    #+#             */
-/*   Updated: 2019/09/21 20:29:49 by dzboncak         ###   ########.fr       */
+/*   Updated: 2019/09/22 19:24:24 by dzboncak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,13 +32,12 @@ int is_valid_arg(int op_code, unsigned char args_code, int arg_num)
 
 int	allowed_args(int op_code, unsigned char args_code)
 {
-	int	i_arg;
-	unsigned char single_arg_code;
+	int	arg_num;
 
-	i_arg = 1;
-	while (i_arg <= MAX_ARGS)
+    arg_num = 1;
+	while (arg_num <= MAX_ARGS)
 	{
-		is_valid_arg(op_code,args_code, i_arg);
-		++i_arg;
+		is_valid_arg(op_code, args_code, arg_num);
+		++arg_num;
 	}
 }
