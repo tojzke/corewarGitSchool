@@ -84,6 +84,7 @@ void					start_game(t_champion* cursors, t_rules* rules,
 t_champion*				add_cursor_in_start(t_champion* cursors,
 									   		t_champion* champion);
 void					check_cursors(t_champion** cursors, t_rules* rules);
+void					exec_command(t_rules *rules, t_champion *cursor);
 
 
 #endif

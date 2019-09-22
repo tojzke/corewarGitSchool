@@ -12,10 +12,18 @@
 
 #include "corewar.h"
 
-void    action_with_cursor(t_champion* cursor, rules)
+void    action_with_cursor(t_champion* cursor, t_rules* rules)
 {
     if (cursor->cycle_before_run == 0)
 	{
+		cursor->code_operation = rules->battlefield[cursor->position];
+    	if (rules->battlefield[cursor->position] >= LIVE_OP &&
+				rules->battlefield[cursor->position] <= AFF_OP)
+    		cursor->cycle_before_run = g_op_tab[cursor->code_operation].
+    				cycle_before_run;
+    	else
+    		cursor->position++;
+
         //Получить номер операции и установить cycle_before_run
         //Если номер операции неверен cycle_before_run = 0, position++
 	}
@@ -23,6 +31,7 @@ void    action_with_cursor(t_champion* cursor, rules)
     {
 		cursor->cycle_before_run--;
 		if (cursor->cycle_before_run == 0)
+			exec_command(rules, cursor);
 			//Отправляем курсор на выполение команды, Макса функция
 	}
 }
@@ -70,7 +79,10 @@ void	start_game(t_champion* cursors, t_rules* rules, t_champion** champions)
 			check_cursors(&cursors, rules);
 			ctd = rules->ctd;
 		}
-		if rules->dump == 
+		if (rules->dump == rules->number_cycle)
+			ft_printf("print dump memory");
+			//Печать дампа памяти
+			//Выход из проги
 	}
 
 }
