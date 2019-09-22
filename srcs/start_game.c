@@ -15,7 +15,16 @@
 void    action_with_cursor(t_champion* cursor, rules)
 {
     if (cursor->cycle_before_run == 0)
+	{
         //Получить номер операции и установить cycle_before_run
+        //Если номер операции неверен cycle_before_run = 0, position++
+	}
+	else
+    {
+		cursor->cycle_before_run--;
+		if (cursor->cycle_before_run == 0)
+			//Отправляем курсор на выполение команды, Макса функция
+	}
 }
 
 void	introduction(t_champion** champions, t_rules* rules)

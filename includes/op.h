@@ -15,6 +15,7 @@
 ** On part du principe qu'un int fait 32 bits. Est-ce vrai chez vous ?
 */
 
+
 #define IND_SIZE				2
 #define REG_SIZE				4
 #define DIR_SIZE				REG_SIZE
@@ -74,3 +75,17 @@ typedef struct		header_s
   unsigned int		prog_size;
   char				comment[COMMENT_LENGTH + 1];
 }					header_t;
+
+typedef struct          s_op
+{
+	char*				name;
+	unsigned char		number_arg;
+	unsigned char		arg[3];
+	unsigned char		number;
+	int					cycle_before_run;
+	char*				description;
+	unsigned char		is_code_type_arg;
+	unsigned char		dir_size;
+}                       t_op;
+
+extern t_op            op_tab[17];
