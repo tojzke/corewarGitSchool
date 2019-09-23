@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   op.h                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bkiehn <bkiehn@student.42.fr>              +#+  +:+       +#+        */
+/*   By: dzboncak <dzboncak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/10/04 11:33:27 by zaz               #+#    #+#             */
-/*   Updated: 2019/09/12 21:15:46 by bkiehn           ###   ########.fr       */
+/*   Updated: 2019/09/23 18:47:12 by dzboncak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@
 **
 */
 
-typedef char	t_arg_type;
+typedef unsigned char	t_arg_type;
 
 #define T_REG					1
 #define T_DIR					2
@@ -102,3 +102,4 @@ typedef struct          s_op
 }                       t_op;
 
 extern t_op				g_op_tab[17];
+extern t_op_func        g_func_tab[17];

@@ -6,7 +6,7 @@
 /*   By: dzboncak <dzboncak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/20 21:18:01 by dzboncak          #+#    #+#             */
-/*   Updated: 2019/09/21 20:29:18 by dzboncak         ###   ########.fr       */
+/*   Updated: 2019/09/23 18:39:52 by dzboncak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,38 @@
 # define AFF_OP 0x10
 
 
-int	check_for_possible_args(int op_code, int args_code);
+/*
+** Args checking
+*/
+
+int		check_for_possible_args(int op_code, int args_code);
 void	print_bits(const size_t size, const void *ptr);
 int		is_bit_set(char num, int bit);
+unsigned int	get_value_from_battlefield(t_rules *rules,
+                                           int position, int offset, int size);
+
+/*
+** ASM functions
+*/
+
+typedef void	(*t_op_func)(t_rules*, t_champion*, unsigned char*);
+
+void	live_func(t_rules *rules, t_champion *cursor, unsigned char *t_args);
+void	load_func(t_rules *rules, t_champion *cursor, unsigned char *t_args);
+void	store_func(t_rules *rules, t_champion *cursor, unsigned char *t_args);
+void	add_func(t_rules *rules, t_champion *cursor, unsigned char *t_args);
+void	sub_func(t_rules *rules, t_champion *cursor, unsigned char *t_args);
+void	and_func(t_rules *rules, t_champion *cursor, unsigned char *t_args);
+void	or_func(t_rules *rules, t_champion *cursor, unsigned char *t_args);
+void	xor_func(t_rules *rules, t_champion *cursor, unsigned char *t_args);
+void	zjmp_func(t_rules *rules, t_champion *cursor, unsigned char *t_args);
+void	ldi_func(t_rules *rules, t_champion *cursor, unsigned char *t_args);
+void	sti_func(t_rules *rules, t_champion *cursor, unsigned char *t_args);
+void	fork_func(t_rules *rules, t_champion *cursor, unsigned char *t_args);
+void	lld_func(t_rules *rules, t_champion *cursor, unsigned char *t_args);
+void	lldi_func(t_rules *rules, t_champion *cursor, unsigned char *t_args);
+void	lfork_func(t_rules *rules, t_champion *cursor, unsigned char *t_args);
+void	aff_func(t_rules *rules, t_champion *cursor, unsigned char *t_args);
+
 
 #endif
