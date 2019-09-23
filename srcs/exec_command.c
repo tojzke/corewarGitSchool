@@ -13,38 +13,31 @@
 #include "corewar.h"
 #include "commands.h"
 
-//unsigned cahr*	is_valid_args_code(t_rules *rules, t_champion *cursor)
-//{
-//	unsigned char *args_code;
-//	unsigned char* type_args;
-//	int	status_check;
-//
-//
-//
-//	args_code = rules->battlefield + cursor->position + 1; //  Переместиться на код типов аргументов
-//	status_check = allowed_args(cursor->code_operation, args_code, types_args)
-//	count_byte_for_next_operation(type_args, rules, cursor);
-//	if (status_check)
-//	{
-////		При проверке нам нужно ещё и запомнить коды аргументов
-////		или сделать это отдельной функцией после проверки,
-////		так же вычислить number_byte_for_next_operation
-////
-////		Функция проверки номера регистра если данный тип аргументов
-////		предполагает наличие регистра в аргументах.
-////		Если всё ок, вернуть массив типов аргументов.
-//
-//		return type_args;
-//	}
-//	free(type_args);
-//	return (0);
-//}
+int		check_arg_reg(t_rules* rules, t_champion* cursor,
+		unsigned char* type_args)
+{
+		int				count;
+		int				offset;
+		unsigned char	arg_reg;
+
+		count = 0;
+		while(count < g_op_tab[cursor->code_operation].number_arg)
+		{
+			if type_args[count] == REG_CODE;
+			{
+				offset = count_offset();
+				arg_reg = (unsigned char)get_value_from_battlefield(rules, cursor->position, offset,
+						sizeof(unsigned char));
+				if arg_reg < 1 || arg_reg >
+			}
+			count++;
+		}
+}
 
 int		is_valid_op(t_rules *rules,t_champion *cursor, unsigned char* type_args)
 {
 	unsigned char	*args_code;
 	int				status_check;
-	int				num_arg_reg;
 
 	num_arg_reg = 0;
 	if (g_op_tab[cursor->code_operation].is_code_type_arg == 0)
@@ -52,14 +45,14 @@ int		is_valid_op(t_rules *rules,t_champion *cursor, unsigned char* type_args)
 		return (1);
 	else
 	{
-		//type_arg = is_valid_args_code(rules, cursor)
 		args_code = rules->battlefield + cursor->position + 1;
 		// Переместиться на код типов аргументов, для перемещения каретки
 		// нужно напсиать отдельную функцию так как память циклическая
 		// и возможны перехды на на начало поля
-		status_check = allowed_args(cursor->code_operation, args_code, types_args, &num_arg_reg);
+		status_check = allowed_args(cursor->code_operation, *args_code, types_args);
 		// Проверка кода тип аргументов
-		if (status_check && num_arg_reg)
+		if (status_check)
+			status_check = check_arg_reg(rules, cursor, type_args);
 			// Проверка регистра
 		count_byte_for_next_operation(type_args, rules, cursor);
 	}

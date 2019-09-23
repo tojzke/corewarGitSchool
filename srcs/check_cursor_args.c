@@ -17,8 +17,11 @@ int				check_types_args_for_operation(unsigned char type_arg,
 				unsigned char op_code, int arg_num)
 {
 	unsigned char check_status;
+	if (type_arg == 0) // Если есть аргумент то он должен быть одного из типов
+		return 0;
 	check_status = g_op_tab[op_code].types_args[arg_num] << (OP_CODE_SIZE - type_arg);
 	check_status = check_status >> (OP_CODE_SIZE - 1);
+	return (check_status);
 }
 
 //  Например, 10 01 00 00
@@ -39,8 +42,7 @@ unsigned char 	get_type_arg(int op_code, unsigned char args_code, int arg_num)
 	return single_arg_code;
 }
 
-int				allowed_args(int op_code, unsigned char args_code, unsigned char* types_args
-				int *num_arg_reg)
+int				allowed_args(int op_code, unsigned char args_code, unsigned char* types_args)
 {
 	int	arg_num;
 	int	status_check;
@@ -54,8 +56,6 @@ int				allowed_args(int op_code, unsigned char args_code, unsigned char* types_a
 		!check_types_args_for_operation(types_args[arg_num - 1], op_code, arg_num))
  		//операция проверки принадлежности типа аргумента операции, там же проверка на валидность t_reg
 				status_check = 0;
-		if (status_check && types_args[arg_num - 1] == REG_CODE)
-			*num_arg_reg = arg_num;
 		arg_num++;
 	}
 	return status_check;
