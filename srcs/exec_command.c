@@ -6,7 +6,7 @@
 /*   By: dzboncak <dzboncak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/19 18:03:54 by dzboncak          #+#    #+#             */
-/*   Updated: 2019/09/22 19:19:02 by dzboncak         ###   ########.fr       */
+/*   Updated: 2019/09/23 18:34:23 by dzboncak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,12 +77,13 @@ void	exec_command(t_rules *rules, t_champion *cursor)
 	ft_printf("Здесь код валиации типов аргументов, аргументов, и исполнения"
 		   "команды при успешной валидации\n");
 	unsigned char*		type_args;
-	types_args = (unsigned char*)malloc(sizeof(unsigned char) *
-				g_op_tab[cursor->code_operation].number_arg)
+	type_args = (unsigned char*)malloc(sizeof(unsigned char) *
+				g_op_tab[cursor->code_operation].number_arg);
 	// выделяем память под массив типов аргументов
 	if (is_valid_op(rules, cursor, type_args))
 	{
 		//			Функция выбора функции на исполнение команды
+		// g_func_tab[cursor->code_operation](rules, cursor, type_args)
 	}
 	free(type_args);
 	skip_command(rules, cursor);

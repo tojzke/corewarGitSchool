@@ -17,6 +17,7 @@ int				check_types_args_for_operation(unsigned char type_arg,
 				unsigned char op_code, int arg_num)
 {
 	unsigned char check_status;
+
 	check_status = g_op_tab[op_code].types_args[arg_num] << (OP_CODE_SIZE - type_arg);
 	check_status = check_status >> (OP_CODE_SIZE - 1);
 }
@@ -39,7 +40,7 @@ unsigned char 	get_type_arg(int op_code, unsigned char args_code, int arg_num)
 	return single_arg_code;
 }
 
-int				allowed_args(int op_code, unsigned char args_code, unsigned char* types_args
+int				allowed_args(int op_code, unsigned char args_code, unsigned char* types_args,
 				int *num_arg_reg)
 {
 	int	arg_num;
