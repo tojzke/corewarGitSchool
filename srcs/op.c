@@ -6,10 +6,11 @@
 /*   By: dzboncak <dzboncak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/10/04 11:43:01 by zaz               #+#    #+#             */
-/*   Updated: 2019/09/22 21:49:38 by dzboncak         ###   ########.fr       */
+/*   Updated: 2019/09/23 18:32:41 by dzboncak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "commands.h"
 #include "op.h"
 #include <stdlib.h>
 

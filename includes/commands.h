@@ -13,8 +13,6 @@
 #ifndef COMMANDS_H
 
 # define COMMANDS_H
-# include "corewar.h"
-# define MAX_ARGS 3
 # define OP_CODE_SIZE 8
 # define OP_CODE_OFFSET 2
 
@@ -35,6 +33,7 @@
 # define LFROK_OP 0x0f
 # define AFF_OP 0x10
 
+# include "corewar.h"
 
 /*
 ** Args checking
@@ -50,7 +49,6 @@ unsigned int	get_value_from_battlefield(t_rules *rules,
 ** ASM functions
 */
 
-typedef void	(*t_op_func)(t_rules*, t_champion*, unsigned char*);
 
 void	live_func(t_rules *rules, t_champion *cursor, unsigned char *t_args);
 void	load_func(t_rules *rules, t_champion *cursor, unsigned char *t_args);
