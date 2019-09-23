@@ -69,14 +69,13 @@ void	start_game(t_champion* cursors, t_rules* rules, t_champion** champions)
 	cursor = cursors;
 	while (rules->number_cursors)
 	{
-
+		rules->number_cycle++;
+		ctd--;
 		while (cursor)
 		{
 			action_with_cursor(cursor, rules);
 			cursor = cursor->next;
 		}
-		ctd--;
-		rules->number_cycle++;
 		if (ctd <= 0)
 		{
 			check_cursors(&cursors, rules);

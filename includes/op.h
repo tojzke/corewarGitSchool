@@ -14,11 +14,15 @@
 ** Toutes les tailles sont en octets.
 ** On part du principe qu'un int fait 32 bits. Est-ce vrai chez vous ?
 */
+#ifndef OP_H
 
+# define OP_H
 
 #define IND_SIZE				2
 #define REG_SIZE				1
 #define DIR_SIZE				REG_SIZE
+#define BYTES_BEFORE_ARGS		2
+#define OP_SIZE					1
 
 
 # define REG_CODE				1
@@ -101,5 +105,8 @@ typedef struct          s_op
 	unsigned char		dir_size;
 }                       t_op;
 
+
 extern t_op				g_op_tab[17];
 extern t_op_func        g_func_tab[17];
+
+#endif

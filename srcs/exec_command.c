@@ -13,30 +13,40 @@
 #include "corewar.h"
 #include "commands.h"
 
+int		count_size_args(unsigned char* type_args, int how_many_arg, int op_code)
+{
+
+}
+
 int		check_arg_reg(t_rules* rules, t_champion* cursor,
 		unsigned char* type_args)
 {
-		int				count;
-		int				offset;
-		unsigned char	arg_reg;
+	int				count;
+	int				offset;
+	unsigned char	arg_reg;
 
-		count = 0;
-		while(count < g_op_tab[cursor->code_operation].number_arg)
+	count = 0;
+	while(count < g_op_tab[cursor->code_operation].number_arg)
+	{
+		if (type_args[count] == REG_CODE)
 		{
-			if type_args[count] == REG_CODE;
-			{
-				offset = count_offset();
-				arg_reg = (unsigned char)get_value_from_battlefield(rules, cursor->position, offset,
-						sizeof(unsigned char));
-				if arg_reg < 1 || arg_reg >
-			}
-			count++;
+			offset = count_size_args(type_args, count, cursor->code_operation) + BYTES_BEFORE_ARGS;
+			/*
+			 * count_size_args подсчёт байт занимаемых аргументами до reg аргумента
+			 */
+			arg_reg = (unsigned char)get_value_from_battlefield(rules, cursor->position, offset,
+					sizeof(unsigned char));
+			if (arg_reg < 1 || arg_reg > MAX_REG)
+				return 0
 		}
+		count++;
+	}
+	return 1;
 }
 
 int		is_valid_op(t_rules *rules,t_champion *cursor, unsigned char* type_args)
 {
-	unsigned char	*args_code;
+	unsigned char	args_code;
 	int				status_check;
 
 	num_arg_reg = 0;
@@ -45,11 +55,12 @@ int		is_valid_op(t_rules *rules,t_champion *cursor, unsigned char* type_args)
 		return (1);
 	else
 	{
-		args_code = rules->battlefield + cursor->position + 1;
+		args_code = (unsigned char)get_value_from_battlefield(rules, cursor->position, OP_SIZE,
+															  sizeof(unsigned char));
 		// Переместиться на код типов аргументов, для перемещения каретки
 		// нужно напсиать отдельную функцию так как память циклическая
 		// и возможны перехды на на начало поля
-		status_check = allowed_args(cursor->code_operation, *args_code, types_args);
+		status_check = allowed_args(cursor->code_operation, args_code, types_args);
 		// Проверка кода тип аргументов
 		if (status_check)
 			status_check = check_arg_reg(rules, cursor, type_args);

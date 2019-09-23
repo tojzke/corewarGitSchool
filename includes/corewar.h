@@ -24,9 +24,7 @@
 
 # include "../libft/includes/libft.h"
 # include "ft_printf.h"
-# include "commands.h"
 # include "op.h"
-# include "commands.h"
 # include "unistd.h"
 # include <stdio.h>
 # include <fcntl.h>
@@ -85,6 +83,6 @@ t_champion*				add_cursor_in_start(t_champion* cursors,
 									   		t_champion* champion);
 void					check_cursors(t_champion** cursors, t_rules* rules);
 void					exec_command(t_rules *rules, t_champion *cursor);
-
+int						count_size_args(unsigned char* type_args, int how_many_arg, int op_code);
 
 #endif
