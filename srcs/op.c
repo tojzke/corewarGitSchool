@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "op.h"
 #include "commands.h"
+#include "op.h"
 #include <stdlib.h>
 
 t_op_func g_func_tab[17] =

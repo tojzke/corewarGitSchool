@@ -15,7 +15,8 @@
 ** On part du principe qu'un int fait 32 bits. Est-ce vrai chez vous ?
 */
 
-
+#ifndef OP_H
+# define OP_H
 #define IND_SIZE				2
 #define REG_SIZE				4
 #define DIR_SIZE				REG_SIZE
@@ -76,30 +77,4 @@ typedef struct		header_s
   char				comment[COMMENT_LENGTH + 1];
 }					header_t;
 
-typedef struct          s_op
-{
-	char*				name;
-	unsigned char		number_arg; // кол-во принимаемых аргументов
-//	unsigned char       arg_num_possibilites[3];
-//						/*
-//						 * какое количество типов аргументов может быть
-//						 * в каждом из аргументов
-//						 */
-//	unsigned char		arg[3][3];
-//						/*
-//						 * key arg_num_possibilites первый индекс
-//						 * value arg_num_possibilites второй индекс, ограничивающий
-//						 * 		верхнюю границу возможных аргумиентов
-//						 *
-//						 * какие могут быть типы аргументов в каждом аргументе
-//						 */
-	unsigned char		types_args[3];
-	unsigned char		number;
-	int					cycle_before_run;
-	char*				description;
-	unsigned char		is_code_type_arg;
-	unsigned char		dir_size;
-}                       t_op;
-
-extern t_op				g_op_tab[17];
-extern t_op_func        g_func_tab[17];
+#endif

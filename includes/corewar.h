@@ -24,13 +24,11 @@
 
 # include "../libft/includes/libft.h"
 # include "ft_printf.h"
-# include "commands.h"
-# include "op.h"
-# include "commands.h"
 # include "unistd.h"
 # include <stdio.h>
 # include <fcntl.h>
 # include <stdlib.h>
+# include "op.h"
 
 typedef struct 			s_rules
 {
@@ -66,6 +64,18 @@ typedef struct			s_champion
 	struct s_champion* 	next;
 }						t_champion;
 
+typedef struct          s_op
+{
+    char*				name;
+    unsigned char		number_arg; // кол-во принимаемых аргументов
+    unsigned char		types_args[3];
+    unsigned char		number;
+    int					cycle_before_run;
+    char*				description;
+    unsigned char		is_code_type_arg;
+    unsigned char		dir_size;
+}                       t_op;
+
 int						createChampion(t_champion* champion, t_rules* rules, int fd);
 void 					print_bytes_hex(unsigned char* bytes, int size);
 void					create_battlefield(t_rules* rules, t_champion** champions);
@@ -86,5 +96,10 @@ t_champion*				add_cursor_in_start(t_champion* cursors,
 void					check_cursors(t_champion** cursors, t_rules* rules);
 void					exec_command(t_rules *rules, t_champion *cursor);
 
+
+typedef void	(*t_op_func)(t_rules*, t_champion*, unsigned char*);
+
+extern  t_op g_op_tab[17];
+extern  t_op_func g_func_tab[17];
 
 #endif
