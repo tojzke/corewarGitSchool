@@ -27,4 +27,4 @@ void    live_func(t_rules *rules, t_champion *cursor, unsigned char *t_args)
     ++(rules->number_live_of_ctd);
 }
 
-void    ld_
+//void    ld_

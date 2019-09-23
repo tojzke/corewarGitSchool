@@ -13,33 +13,48 @@
 #include "corewar.h"
 #include "commands.h"
 
+/*
+ * count_size_args подсчёт байт занимаемых аргументами до how_many_arg аргумента
+ */
 int		count_size_args(unsigned char* type_args, int how_many_arg, int op_code)
 {
+	int		cur_arg;
+	int		num_bytes;
 
+	num_bytes = 0;
+	cur_arg = 0;
+	while (cur_arg < how_many_arg)
+	{
+		if (type_args[cur_arg] == REG_CODE)
+			num_bytes += REG_SIZE;
+		else if (type_args[cur_arg] == DIR_CODE)
+			num_bytes += g_op_tab[op_code].dir_size;
+		else if (type_args[cur_arg] == IND_CODE)
+			num_bytes += IND_SIZE;
+		cur_arg++;
+	}
+	return num_bytes;
 }
 
 int		check_arg_reg(t_rules* rules, t_champion* cursor,
 		unsigned char* type_args)
 {
-	int				count;
+	int				cur_arg;
 	int				offset;
 	unsigned char	arg_reg;
 
-	count = 0;
-	while(count < g_op_tab[cursor->code_operation].number_arg)
+	cur_arg = 0;
+	while(cur_arg < g_op_tab[cursor->code_operation].number_arg)
 	{
-		if (type_args[count] == REG_CODE)
+		if (type_args[cur_arg] == REG_CODE)
 		{
-			offset = count_size_args(type_args, count, cursor->code_operation) + BYTES_BEFORE_ARGS;
-			/*
-			 * count_size_args подсчёт байт занимаемых аргументами до reg аргумента
-			 */
+			offset = cur_arg_size_args(type_args, cur_arg, cursor->code_operation) + BYTES_BEFORE_ARGS;
 			arg_reg = (unsigned char)get_value_from_battlefield(rules, cursor->position, offset,
 					sizeof(unsigned char));
-			if (arg_reg < 1 || arg_reg > MAX_REG)
-				return 0
+			if (arg_reg < 1 || arg_reg > REG_NUMBER)
+				return 0;
 		}
-		count++;
+		cur_arg++;
 	}
 	return 1;
 }
@@ -49,7 +64,6 @@ int		is_valid_op(t_rules *rules,t_champion *cursor, unsigned char* type_args)
 	unsigned char	args_code;
 	int				status_check;
 
-	num_arg_reg = 0;
 	if (g_op_tab[cursor->code_operation].is_code_type_arg == 0)
 	// Операция не имеет кода типов аргументов, и аргумента T_REG
 		return (1);
@@ -60,12 +74,14 @@ int		is_valid_op(t_rules *rules,t_champion *cursor, unsigned char* type_args)
 		// Переместиться на код типов аргументов, для перемещения каретки
 		// нужно напсиать отдельную функцию так как память циклическая
 		// и возможны перехды на на начало поля
-		status_check = allowed_args(cursor->code_operation, args_code, types_args);
+		status_check = allowed_args(cursor->code_operation, args_code, type_args);
 		// Проверка кода тип аргументов
 		if (status_check)
 			status_check = check_arg_reg(rules, cursor, type_args);
 			// Проверка регистра
-		count_byte_for_next_operation(type_args, rules, cursor);
+		cursor->byte_for_next_operation = count_size_args(type_args,
+				g_op_tab[cursor->code_operation].number_arg, cursor->code_operation)
+				+ BYTES_BEFORE_ARGS;
 	}
 	return status_check;
 
@@ -87,9 +103,14 @@ void	exec_command(t_rules *rules, t_champion *cursor)
 	if (is_valid_op(rules, cursor, type_args))
 	{
 		//			Функция выбора функции на исполнение команды
-		// g_func_tab[cursor->code_operation](rules, cursor, type_args)
+		 g_func_tab[cursor->code_operation](rules, cursor, type_args)
 	}
+
 	free(type_args);
-	skip_command(rules, cursor);
+	cursor->position =  (cursor->position + cursor->byte_for_next_operation) % MEM_SIZE;
+	// Здесь нужна функция так как, byte_for_next_operation считается только для функций
+	// с кодом типов операций, для операций без кода типов byte_for_next_operation
+	// будет фиксированным
+
 	//Сдвинуть каретку на number_byte_for_next_operation
 }

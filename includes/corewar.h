@@ -96,6 +96,7 @@ t_champion*				add_cursor_in_start(t_champion* cursors,
 void					check_cursors(t_champion** cursors, t_rules* rules);
 void					exec_command(t_rules *rules, t_champion *cursor);
 int						count_size_args(unsigned char* type_args, int how_many_arg, int op_code);
+int						allowed_args(int op_code, unsigned char args_code, unsigned char* types_args);
 
 typedef void	(*t_op_func)(t_rules*, t_champion*, unsigned char*);
 

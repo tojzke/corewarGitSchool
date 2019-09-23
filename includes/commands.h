@@ -39,9 +39,9 @@
 ** Args checking
 */
 
-int		check_for_possible_args(int op_code, int args_code);
-void	print_bits(const size_t size, const void *ptr);
-int		is_bit_set(char num, int bit);
+int				check_for_possible_args(int op_code, int args_code);
+void			print_bits(const size_t size, const void *ptr);
+int				is_bit_set(char num, int bit);
 unsigned int	get_value_from_battlefield(t_rules *rules,
                                            int position, int offset, int size);
 
@@ -50,22 +50,22 @@ unsigned int	get_value_from_battlefield(t_rules *rules,
 */
 
 
-void	live_func(t_rules *rules, t_champion *cursor, unsigned char *t_args);
-void	load_func(t_rules *rules, t_champion *cursor, unsigned char *t_args);
-void	store_func(t_rules *rules, t_champion *cursor, unsigned char *t_args);
-void	add_func(t_rules *rules, t_champion *cursor, unsigned char *t_args);
-void	sub_func(t_rules *rules, t_champion *cursor, unsigned char *t_args);
-void	and_func(t_rules *rules, t_champion *cursor, unsigned char *t_args);
-void	or_func(t_rules *rules, t_champion *cursor, unsigned char *t_args);
-void	xor_func(t_rules *rules, t_champion *cursor, unsigned char *t_args);
-void	zjmp_func(t_rules *rules, t_champion *cursor, unsigned char *t_args);
-void	ldi_func(t_rules *rules, t_champion *cursor, unsigned char *t_args);
-void	sti_func(t_rules *rules, t_champion *cursor, unsigned char *t_args);
-void	fork_func(t_rules *rules, t_champion *cursor, unsigned char *t_args);
-void	lld_func(t_rules *rules, t_champion *cursor, unsigned char *t_args);
-void	lldi_func(t_rules *rules, t_champion *cursor, unsigned char *t_args);
-void	lfork_func(t_rules *rules, t_champion *cursor, unsigned char *t_args);
-void	aff_func(t_rules *rules, t_champion *cursor, unsigned char *t_args);
+void			live_func(t_rules *rules, t_champion *cursor, unsigned char *t_args);
+void			load_func(t_rules *rules, t_champion *cursor, unsigned char *t_args);
+void			store_func(t_rules *rules, t_champion *cursor, unsigned char *t_args);
+void			add_func(t_rules *rules, t_champion *cursor, unsigned char *t_args);
+void			sub_func(t_rules *rules, t_champion *cursor, unsigned char *t_args);
+void			and_func(t_rules *rules, t_champion *cursor, unsigned char *t_args);
+void			or_func(t_rules *rules, t_champion *cursor, unsigned char *t_args);
+void			xor_func(t_rules *rules, t_champion *cursor, unsigned char *t_args);
+void			zjmp_func(t_rules *rules, t_champion *cursor, unsigned char *t_args);
+void			ldi_func(t_rules *rules, t_champion *cursor, unsigned char *t_args);
+void			sti_func(t_rules *rules, t_champion *cursor, unsigned char *t_args);
+void			fork_func(t_rules *rules, t_champion *cursor, unsigned char *t_args);
+void			lld_func(t_rules *rules, t_champion *cursor, unsigned char *t_args);
+void			lldi_func(t_rules *rules, t_champion *cursor, unsigned char *t_args);
+void			lfork_func(t_rules *rules, t_champion *cursor, unsigned char *t_args);
+void			aff_func(t_rules *rules, t_champion *cursor, unsigned char *t_args);
 
 
 #endif

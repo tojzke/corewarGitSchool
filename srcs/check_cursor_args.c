@@ -40,7 +40,7 @@ unsigned char 	get_type_arg(unsigned char args_code, int arg_num)
 	return single_arg_code;
 }
 
-int				allowed_args(int op_code, unsigned char args_code, unsigned char* types_args)
+int				allowed_args(int op_code, unsigned char args_code, unsigned char* type_args)
 {
 	int	arg_num;
 	int	status_check;
@@ -49,9 +49,9 @@ int				allowed_args(int op_code, unsigned char args_code, unsigned char* types_a
     arg_num = 1;
 	while (arg_num <= g_op_tab[op_code].number_arg)
 	{
-		types_args[arg_num - 1] = get_type_arg(args_code, arg_num);
+		type_args[arg_num - 1] = get_type_arg(args_code, arg_num);
 		if (status_check &&
-		!check_types_args_for_operation(types_args[arg_num - 1], op_code, arg_num))
+		!check_types_args_for_operation(type_args[arg_num - 1], op_code, arg_num))
  		//операция проверки принадлежности типа аргумента операции
 				status_check = 0;
 		arg_num++;
