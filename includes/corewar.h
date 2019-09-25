@@ -41,6 +41,7 @@ typedef struct 			s_rules
 	int					number_live_of_ctd; //Количество выполненых операций live за CYCLE_TO_DIE
 	int					ctd;				//CYCLE_TO_DIE - длительность периода до проверки
 	int					number_check;		//Количество проведёных проверок
+	t_champion*			cursors;			//Указатель на начало списка кареток
 }						t_rules;
 
 typedef struct			s_champion

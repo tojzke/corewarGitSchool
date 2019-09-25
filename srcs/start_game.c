@@ -81,9 +81,15 @@ void	start_game(t_champion* cursors, t_rules* rules, t_champion** champions)
 		if (ctd <= 0)
 		{
 			check_cursors(&cursors, rules);
+			// ? участвуют ли в проверке созданые в это м же цикле каретки операциями fork
+			// если да, то строку "cursor = rules->cursors" нужно добавить между блоком
+			// проверки и блоком действий над курсорами
 			ctd = rules->ctd;
 		}
-		cursor = cursors;
+		cursor = rules->cursors;
+		// Заменил "cursor = cursors" на "cursor = rules->cursors" так как
+		// в блоке действий над курсорами может измениться "rules->cursors"
+		// доступа к "cursors" там нет
 		if (rules->dump == rules->number_cycle)
 			end_game(PRINTING_DUMP, rules, cursors);
 			//Печать дампа памяти

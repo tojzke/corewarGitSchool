@@ -40,5 +40,6 @@ t_champion*	create_cursor(t_champion** champions, t_rules* rules)
 		rules->number_cursors++;
 		current_champion++;
     }
+    rules->cursors = cursors;
 	return cursors;
 }

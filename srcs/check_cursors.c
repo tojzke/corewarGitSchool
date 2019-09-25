@@ -61,4 +61,8 @@ void			check_cursors(t_champion** cursors, t_rules* rules)
 		rules->number_check = 0;
 	}
 	rules->number_live_of_ctd = 0;
+	rules->cursors = *cursors;
+	// Можно было обойтись только входящим параметром rules но, так как
+	// rules->cursors появился после всего этого написанного, что бы не ломать
+	// код и голову просто добавилась последняя строчка "rules->cursors = *cursors";
 }

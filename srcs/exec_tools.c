@@ -16,26 +16,18 @@
 int		get_arg(t_rules* rules, t_champion* cursor, unsigned char *t_args, int num_arg)
 {
 	int arg;
-	int val;
 	int	offset;
 
 	offset = count_size_args(t_args, num_arg, int op_code) + BYTES_BEFORE_ARGS;
 	if (t_args[num_arg] == IND_CODE)
-	{
 		arg = (int)get_value_from_battlefield(rules, cursor->position, offset, IND_SIZE);
-		val = get_value_from_battlefield(rules, cursor->position, arg, REG_SIZE);
-	}
 	else if (t_args[num_arg] == DIR_CODE)
-		val = get_value_from_battlefield(rules, cursor->position, offset,
+		arg = (int)get_value_from_battlefield(rules, cursor->position, offset,
 										 g_op_tab[cursor->code_operation].dir_size);
 	else if (t_args[num_arg] == REG_CODE)
-	{
 		arg = get_value_from_battlefield(rules, cursor->position, offset,
 										 REG_CODE_SIZE);
-		val = cursor->reg[arg];
-	}
-
-	return val;
+	return arg;
 }
 
 unsigned int	get_value_from_battlefield(t_rules *rules,
