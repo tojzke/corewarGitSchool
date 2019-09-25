@@ -44,6 +44,7 @@ void			print_bits(const size_t size, const void *ptr);
 int				is_bit_set(char num, int bit);
 unsigned int	get_value_from_battlefield(t_rules *rules,
                                            int position, int offset, int size);
+void		set_value_in_battlefield(t_rules *rules, int position, int size, int value);
 
 /*
 ** ASM functions

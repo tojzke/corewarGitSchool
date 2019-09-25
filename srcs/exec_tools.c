@@ -37,6 +37,21 @@ unsigned int	get_value_from_battlefield(t_rules *rules,
     return (value);
 }
 
+void		set_value_in_battlefield(t_rules *rules, int position, int size, int value)
+{
+	unsigned char	byte_value;
+	int				byte_index;
+
+	byte_index = 0;
+	while (byte_index < size)
+	{
+		byte_value = 0;
+		byte_value |= (value >> (byte_index * 8));
+		rules->battlefield[(position + byte_index) % MEM_SIZE] = byte_value;
+		++byte_index;
+	}
+}
+
 void	print_bits(const size_t size, const void *ptr)
 {
 	unsigned char	*b;
