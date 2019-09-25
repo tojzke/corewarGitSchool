@@ -141,7 +141,7 @@ int 	main(int argc, char** argv) {
 	print_rules(rules);
 	print_cursors(cursors, 1);
     start_game(cursors, rules, champions);
-	print_rules(rules);
+//	print_rules(rules);
 //    print_battlefiled(rules, champions);
 }
 

@@ -26,7 +26,7 @@ int		count_size_args(unsigned char* type_args, int how_many_arg, int op_code)
 	while (cur_arg < how_many_arg)
 	{
 		if (type_args[cur_arg] == REG_CODE)
-			num_bytes += REG_SIZE;
+			num_bytes += REG_CODE_SIZE;
 		else if (type_args[cur_arg] == DIR_CODE)
 			num_bytes += g_op_tab[op_code].dir_size;
 		else if (type_args[cur_arg] == IND_CODE)

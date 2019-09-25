@@ -33,6 +33,8 @@
 # define LFROK_OP 0x0f
 # define AFF_OP 0x10
 
+# define PRINTING_DUMP 1
+
 # include "corewar.h"
 
 /*
