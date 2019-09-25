@@ -77,6 +77,22 @@ void	print_battlefiled(t_rules* rules, t_champion** champions)
 	}
 }
 
+void	print_dump(t_rules* rules)
+{
+	int count;
+
+	count = 0;
+	while (count < MEM_SIZE)
+	{
+		ft_printf("%.2x", rules->battlefield[count]);
+		if (((count + 1) % 32) == 0)
+			ft_printf("\n");
+		else if (((count + 1) % 2) == 0)
+			ft_printf(" ");
+		count++;
+	}
+}
+
 void	to_string(t_champion* cursors, char flag_body)
 {
 	int count;

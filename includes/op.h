@@ -19,8 +19,8 @@
 # define OP_H
 
 #define IND_SIZE				2
-#define REG_SIZE				1
-#define DIR_SIZE				REG_SIZE
+#define REG_CODE_SIZE			1
+#define REG_SIZE				4
 #define BYTES_BEFORE_ARGS		2
 #define OP_SIZE					1
 

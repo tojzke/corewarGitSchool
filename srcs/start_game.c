@@ -58,6 +58,7 @@ void	introduction(t_champion** champions, t_rules* rules)
 				champions[current_champion]->comment);
 		current_champion++;
 	}
+	free(champions);
 }
 
 void	start_game(t_champion* cursors, t_rules* rules, t_champion** champions)
@@ -84,9 +85,8 @@ void	start_game(t_champion* cursors, t_rules* rules, t_champion** champions)
 		}
 		cursor = cursors;
 		if (rules->dump == rules->number_cycle)
-			ft_printf("print dump memory\n");
+			end_game(PRINTING_DUMP, rules, cursors);
 			//Печать дампа памяти
 			//Выход из проги
 	}
-
 }

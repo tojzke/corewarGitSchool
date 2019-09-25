@@ -12,18 +12,6 @@
 
 #include "corewar.h"
 
-void free_cursor(t_champion** cursor)
-{
-	if (cursor != 0 && *cursor != 0)
-	{
-		free((*cursor)->name);
-		free((*cursor)->comment);
-		free((*cursor)->body);
-		free((*cursor)->color);
-		*cursor = NULL;
-	}
-}
-
 t_champion*		delete_cursor(t_champion* del_cursor, t_champion** cursors)
 {
 	t_champion* cursor;

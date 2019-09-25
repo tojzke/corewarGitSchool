@@ -97,10 +97,12 @@ void					check_cursors(t_champion** cursors, t_rules* rules);
 void					exec_command(t_rules *rules, t_champion *cursor);
 int						count_size_args(unsigned char* type_args, int how_many_arg, int op_code);
 int						allowed_args(int op_code, unsigned char args_code, unsigned char* types_args);
+void					print_dump(t_rules* rules);
+void					free_cursor(t_champion** cursor);
 
-typedef void	(*t_op_func)(t_rules*, t_champion*, unsigned char*);
+typedef void			(*t_op_func)(t_rules*, t_champion*, unsigned char*);
 
-extern  t_op g_op_tab[17];
-extern  t_op_func g_func_tab[17];
+extern  t_op 			g_op_tab[17];
+extern  t_op_func 		g_func_tab[17];
 
 #endif
