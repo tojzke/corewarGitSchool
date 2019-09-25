@@ -77,11 +77,26 @@ void	add_func(t_rules *rules, t_champion *cursor, unsigned char *args_types)
 {
 	unsigned char	first_reg;
 	unsigned char	second_reg;
-	unsigned char	where_to_write;
-	int 			offset;
+	unsigned char	reg_to_write;
 
-	offset = BYTES_BEFORE_ARGS;
-	first_reg = (unsigned char)get_value_from_battlefield(rules, cursor->position, offset, REG_CODE_SIZE);
-	offset += REG_CODE_SIZE;
-	second_reg = (unsigned
+
+	first_reg = get_arg(rules, cursor, args_types, 0);
+	second_reg = get_arg(rules, cursor, args_types, 1);
+	reg_to_write = get_arg(rules, cursor, args_types, 2);
+	cursor->reg[reg_to_write] = cursor->reg[first_reg] + cursor->reg[second_reg];
+	cursor->carry = (cursor->reg[reg_to_write] == 0) ? 1 : 0;
+}
+
+void	sub_func(t_rules *rules, t_champion *cursor, unsigned char *args_types)
+{
+	unsigned char	first_reg;
+	unsigned char	second_reg;
+	unsigned char	reg_to_write;
+
+
+	first_reg = get_arg(rules, cursor, args_types, 0);
+	second_reg = get_arg(rules, cursor, args_types, 1);
+	reg_to_write = get_arg(rules, cursor, args_types, 2);
+	cursor->reg[reg_to_write] = cursor->reg[first_reg] - cursor->reg[second_reg];
+	cursor->carry = (cursor->reg[reg_to_write] == 0) ? 1 : 0;
 }
