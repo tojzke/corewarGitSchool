@@ -48,7 +48,7 @@ int		check_arg_reg(t_rules* rules, t_champion* cursor,
 	{
 		if (type_args[cur_arg] == REG_CODE)
 		{
-			offset = cur_arg_size_args(type_args, cur_arg, cursor->code_operation) + BYTES_BEFORE_ARGS;
+			offset = count_size_args(type_args, cur_arg, cursor->code_operation) + BYTES_BEFORE_ARGS;
 			arg_reg = (unsigned char)get_value_from_battlefield(rules, cursor->position, offset,
 					sizeof(unsigned char));
 			if (arg_reg < 1 || arg_reg > REG_NUMBER)
@@ -75,10 +75,10 @@ int		is_valid_op(t_rules *rules,t_champion *cursor, unsigned char* type_args)
 		// нужно напсиать отдельную функцию так как память циклическая
 		// и возможны перехды на на начало поля
 		status_check = allowed_args(cursor->code_operation, args_code, type_args);
-		// Проверка кода тип аргументов
+		// Проверка кода тип аргументов, и запись их в массив type_args
 		if (status_check)
 			status_check = check_arg_reg(rules, cursor, type_args);
-			// Проверка регистра
+			// Проверка массива type_args на наличие типа reg, и его валидности при нахождении
 		cursor->byte_for_next_operation = count_size_args(type_args,
 				g_op_tab[cursor->code_operation].number_arg, cursor->code_operation)
 				+ BYTES_BEFORE_ARGS;
@@ -91,6 +91,17 @@ int		is_valid_op(t_rules *rules,t_champion *cursor, unsigned char* type_args)
 ** Функция решения запуска команды
 ** Если аргументы невалидные - переместить каретку на указанные аргументы в коде типов
 */
+
+void	 skip_operation(t_champion* cursor)
+{
+	if (g_op_tab[cursor->code_operation].is_code_type_arg)
+		cursor->position =  (cursor->position + cursor->byte_for_next_operation)
+				% MEM_SIZE;
+	else
+		cursor->position =  (cursor->position +
+				g_op_tab[cursor->code_operation].dir_size + OP_SIZE)
+				% MEM_SIZE;
+}
 
 void	exec_command(t_rules *rules, t_champion *cursor)
 {
@@ -107,7 +118,7 @@ void	exec_command(t_rules *rules, t_champion *cursor)
 	}
 
 	free(type_args);
-	cursor->position =  (cursor->position + cursor->byte_for_next_operation) % MEM_SIZE;
+	skip_operation(cursor);
 	// Здесь нужна функция так как, byte_for_next_operation считается только для функций
 	// с кодом типов операций, для операций без кода типов byte_for_next_operation
 	// будет фиксированным
