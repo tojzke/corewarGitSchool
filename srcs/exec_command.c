@@ -108,6 +108,7 @@ void	exec_command(t_rules *rules, t_champion *cursor)
 	ft_printf("Здесь код валиации типов аргументов, аргументов, и исполнения"
 		   "команды при успешной валидации\n");
 	unsigned char*		type_args;
+
 	type_args = (unsigned char*)malloc(sizeof(unsigned char) *
 				g_op_tab[cursor->code_operation].number_arg);
 	// выделяем память под массив типов аргументов

@@ -12,13 +12,12 @@
 
 #include "commands.h"
 
-void    live_func(t_rules *rules, t_champion *cursor, unsigned char *t_args)
+void    live_func(t_rules *rules, t_champion *cursor, unsigned char *args_types)
 {
     int     val;
-    int     offset;
 
-    val = (int)get_value_from_battlefield(rules, cursor->position, BYTES_BEFORE_ARGS, g_op_tab[cursor->code_operation].dir_size);
-
+    val = (int)get_value_from_battlefield(rules, cursor->position, BYTES_BEFORE_ARGS,
+            g_op_tab[cursor->code_operation].dir_size);
     if (val == cursor->reg[1])
     {
         rules->last_alive = -val;
@@ -27,4 +26,31 @@ void    live_func(t_rules *rules, t_champion *cursor, unsigned char *t_args)
     ++(rules->number_live_of_ctd);
 }
 
-//void    ld_
+void    ld_func(t_rules *rules, t_champion *cursor, unsigned char *args_types) {
+    int             value;
+    unsigned char   reg_to_write;
+    int             offset;
+    unsigned char   dir_size;
+
+    offset = BYTES_BEFORE_ARGS;
+    dir_size = g_op_tab[cursor->code_operation].dir_size;
+    if (args_types[0] == DIR_CODE) // value - это просто число
+    {
+        value = (int)get_value_from_battlefield(rules, cursor->position, offset,
+                dir_size);
+        offset += dir_size;
+        reg_to_write = (int)get_value_from_battlefield(rules, cursor, offset,
+                REG_SIZE);
+        cursor->carry = ((cursor->reg[reg_to_write] = value) == 0) ? 1 : 0;
+    }
+    else if (args_types[0] == IND_CODE) // считать из адреса value 4 байта
+    {
+        value = cursor->position + (int)get_value_from_battlefield(rules, cursor, offset,
+                IND_SIZE) % IDX_MOD;
+        value = (int)get_value_from_battlefield(rules, value, 0, REG_SIZE);
+        offset += IND_SIZE;
+        reg_to_write = (unsigned char)get_value_from_battlefield(rules, cursor, offset,
+                    REG_SIZE);
+        cursor->carry = ((cursor->reg[reg_to_write] = value) == 0) ? 1 : 0;
+    }
+}
