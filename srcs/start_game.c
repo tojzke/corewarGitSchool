@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "corewar.h"
+#include "commands.h"
 
 void    action_with_cursor(t_champion* cursor, t_rules* rules)
 {

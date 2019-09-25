@@ -59,7 +59,7 @@ typedef struct			s_champion
 	int					code_operation;
 	int					last_live_in_cycle;
 	int					cycle_before_run;
-	int					number_byte_for_next_operation;
+	int					bytes_for_next_operation;
 	void				(*to_string)(struct s_champion* cursor, char flag_body);
 	struct s_champion* 	next;
 }						t_champion;

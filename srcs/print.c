@@ -90,8 +90,8 @@ void	to_string(t_champion* cursors, char flag_body)
 	ft_printf("size: %d\n", cursors->size);
 	ft_printf("position: %d\ncarry: %d\ncode_operation: %d\n",
 			  cursors->position, cursors->carry, cursors->code_operation);
-	ft_printf("last_live_in_cycle: %d\ncycle_before_run: %d\nnumber_byte_for_next_operation: %d\n",
-			  cursors->last_live_in_cycle, cursors->cycle_before_run, cursors->number_byte_for_next_operation);
+	ft_printf("last_live_in_cycle: %d\ncycle_before_run: %d\nbytes_for_next_operation: %d\n",
+			  cursors->last_live_in_cycle, cursors->cycle_before_run, cursors->bytes_for_next_operation);
 	ft_printf("Registers:\n");
 	while (count <= REG_NUMBER)
 	{

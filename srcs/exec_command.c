@@ -79,7 +79,7 @@ int		is_valid_op(t_rules *rules,t_champion *cursor, unsigned char* type_args)
 		if (status_check)
 			status_check = check_arg_reg(rules, cursor, type_args);
 			// Проверка массива type_args на наличие типа reg, и его валидности при нахождении
-		cursor->byte_for_next_operation = count_size_args(type_args,
+		cursor->bytes_for_next_operation = count_size_args(type_args,
 				g_op_tab[cursor->code_operation].number_arg, cursor->code_operation)
 				+ BYTES_BEFORE_ARGS;
 	}
@@ -95,7 +95,7 @@ int		is_valid_op(t_rules *rules,t_champion *cursor, unsigned char* type_args)
 void	 skip_operation(t_champion* cursor)
 {
 	if (g_op_tab[cursor->code_operation].is_code_type_arg)
-		cursor->position =  (cursor->position + cursor->byte_for_next_operation)
+		cursor->position =  (cursor->position + cursor->bytes_for_next_operation)
 				% MEM_SIZE;
 	else
 		cursor->position =  (cursor->position +
@@ -114,7 +114,7 @@ void	exec_command(t_rules *rules, t_champion *cursor)
 	if (is_valid_op(rules, cursor, type_args))
 	{
 		//			Функция выбора функции на исполнение команды
-		 g_func_tab[cursor->code_operation](rules, cursor, type_args)
+		 g_func_tab[cursor->code_operation](rules, cursor, type_args);
 	}
 
 	free(type_args);
@@ -123,5 +123,5 @@ void	exec_command(t_rules *rules, t_champion *cursor)
 	// с кодом типов операций, для операций без кода типов byte_for_next_operation
 	// будет фиксированным
 
-	//Сдвинуть каретку на number_byte_for_next_operation
+	//Сдвинуть каретку на bytes_for_next_operation
 }
