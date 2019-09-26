@@ -77,6 +77,9 @@ void	print_battlefiled(t_rules* rules, t_champion** champions)
 	}
 }
 
+/*
+ * правки внесены для облегчения сравнивания дампов со стандартной вирт машиной
+ */
 void	print_dump(t_rules* rules)
 {
 	int count;
@@ -84,11 +87,17 @@ void	print_dump(t_rules* rules)
 	count = 0;
 	while (count < MEM_SIZE)
 	{
-		ft_printf("%.2x", rules->battlefield[count]);
-		if (((count + 1) % 32) == 0)
+		if ((count % 64) == 0) // 64 заменить на 32
+		{
+			if (count == 0)
+				ft_printf("0x");
+			ft_printf("%#.4x : ", count);
+		}
+		ft_printf("%.2x ", rules->battlefield[count]); //убрать пробел
+		if (((count + 1) % 64) == 0) // 64 заменить на 32
 			ft_printf("\n");
-		else if (((count + 1) % 2) == 0)
-			ft_printf(" ");
+//		else if (((count + 1) % 2) == 0)
+//			ft_printf(" ");
 		count++;
 	}
 }

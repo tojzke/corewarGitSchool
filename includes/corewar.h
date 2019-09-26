@@ -30,20 +30,6 @@
 # include <stdlib.h>
 # include "op.h"
 
-typedef struct 			s_rules
-{
-	int					dump;
-	int					number_cursors;		//количество кареток
-	int					much_players;		//количество игроков
-	unsigned char		battlefield[MEM_SIZE];
-	int					last_alive;        //последний прокукарекавший петух
-	int					number_cycle;     //Количество циклов с начала игры
-	int					number_live_of_ctd; //Количество выполненых операций live за CYCLE_TO_DIE
-	int					ctd;				//CYCLE_TO_DIE - длительность периода до проверки
-	int					number_check;		//Количество проведёных проверок
-	t_champion*			cursors;			//Указатель на начало списка кареток
-}						t_rules;
-
 typedef struct			s_champion
 {
     int             	number_cursors;
@@ -64,6 +50,21 @@ typedef struct			s_champion
 	void				(*to_string)(struct s_champion* cursor, char flag_body);
 	struct s_champion* 	next;
 }						t_champion;
+
+typedef struct 			s_rules
+{
+	int					dump;
+	int					number_cursors;		//количество кареток
+	int					much_players;		//количество игроков
+	unsigned char		battlefield[MEM_SIZE];
+	int					last_alive;        //последний прокукарекавший петух
+	char*				name_winner;
+	int					number_cycle;     //Количество циклов с начала игры
+	int					number_live_of_ctd; //Количество выполненых операций live за CYCLE_TO_DIE
+	int					ctd;				//CYCLE_TO_DIE - длительность периода до проверки
+	int					number_check;		//Количество проведёных проверок
+	t_champion*			cursors;			//Указатель на начало списка кареток
+}						t_rules;
 
 typedef struct          s_op
 {
@@ -100,6 +101,8 @@ int						count_size_args(unsigned char* type_args, int how_many_arg, int op_code
 int						allowed_args(int op_code, unsigned char args_code, unsigned char* types_args);
 void					print_dump(t_rules* rules);
 void					free_cursor(t_champion** cursor);
+int						get_arg(t_rules* rules, t_champion* cursor, unsigned char *t_args, int num_arg);
+void					end_game(int reason, t_rules* rules, t_champion* cursors);
 
 typedef void			(*t_op_func)(t_rules*, t_champion*, unsigned char*);
 

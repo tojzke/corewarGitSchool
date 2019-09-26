@@ -106,6 +106,7 @@ void	set_rules(t_rules* rules, t_champion** champions)
     while (champions[current_champion] == NULL)
         current_champion--;
     rules->last_alive = current_champion;
+	rules->name_winner = ft_strdup(champions[current_champion]->name);
 	rules->ctd = CYCLE_TO_DIE;
 }
 
@@ -138,10 +139,11 @@ int 	main(int argc, char** argv) {
 	 * number_cursor определяется здесь же
 	 */
 	cursors = create_cursor(champions, rules);
-	print_rules(rules);
-	print_cursors(cursors, 1);
-    start_game(cursors, rules, champions);
 //	print_rules(rules);
-//    print_battlefiled(rules, champions);
+//	print_cursors(cursors, 1);
+//  print_battlefiled(rules, champions);
+	start_game(cursors, rules, champions);
+//	Печатать после старт гейма есть смысл только в функции end_game,
+//	так как в завершении функции end_game, всё чистится
 }
 

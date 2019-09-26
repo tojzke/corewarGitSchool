@@ -48,5 +48,12 @@ void	end_game(int reason, t_rules* rules, t_champion* cursors)
 {
 	if (reason == PRINTING_DUMP)
 		print_dump(rules);
+	if (reason == GAME_OVER)
+	{
+		ft_printf("Contestant %d, \"%s\", has won !\n", rules->last_alive,
+				  rules->name_winner);
+		print_rules(rules);
+	}
 	clean_memory(rules, cursors);
+	exit(0);
 }

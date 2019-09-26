@@ -97,7 +97,8 @@ void	 skip_operation(t_champion* cursor)
 	if (g_op_tab[cursor->code_operation].is_code_type_arg)
 		cursor->position =  (cursor->position + cursor->bytes_for_next_operation)
 				% MEM_SIZE;
-	else
+	else if (cursor->code_operation != ZJMP_OP ||
+	(cursor->code_operation == ZJMP_OP && cursor->carry != 1))
 		cursor->position =  (cursor->position +
 				g_op_tab[cursor->code_operation].dir_size + OP_SIZE)
 				% MEM_SIZE;
@@ -105,8 +106,8 @@ void	 skip_operation(t_champion* cursor)
 
 void	exec_command(t_rules *rules, t_champion *cursor)
 {
-	ft_printf("Здесь код валиации типов аргументов, аргументов, и исполнения"
-		   "команды при успешной валидации\n");
+	//ft_printf("Здесь код валиации типов аргументов, аргументов, и исполнения"
+	//	   "команды при успешной валидации\n");
 	unsigned char*		type_args;
 
 	type_args = (unsigned char*)malloc(sizeof(unsigned char) *

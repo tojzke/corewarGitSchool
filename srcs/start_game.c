@@ -23,7 +23,7 @@ void    action_with_cursor(t_champion* cursor, t_rules* rules)
     	{
 			cursor->cycle_before_run = g_op_tab[cursor->code_operation].
 					cycle_before_run;//Возможно прям здесь нужно будет деинкрементить cycle_before_run
-			ft_printf("Код операции: %d\nЦиклов до исполения: %d\n", cursor->code_operation, cursor->cycle_before_run);
+			//ft_printf("Код операции: %d\nЦиклов до исполения: %d\n", cursor->code_operation, cursor->cycle_before_run);
 		}
     	else
     		cursor->position = (cursor->position + 1) % MEM_SIZE;
@@ -95,4 +95,5 @@ void	start_game(t_champion* cursors, t_rules* rules, t_champion** champions)
 			//Печать дампа памяти
 			//Выход из проги
 	}
+	end_game(GAME_OVER, rules, cursors);
 }
