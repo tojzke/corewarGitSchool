@@ -61,7 +61,7 @@ void		set_value_in_battlefield(t_rules *rules, int position, int size, int value
 	while (byte_index < size)
 	{
 		byte_value = 0;
-		byte_value |= (value >> (byte_index * 8));
+		byte_value |= (value >> ((size - byte_index - 1) * 8));
 		rules->battlefield[(position + byte_index) % MEM_SIZE] = byte_value;
 		++byte_index;
 	}

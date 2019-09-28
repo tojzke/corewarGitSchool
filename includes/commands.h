@@ -38,6 +38,22 @@
 
 # include "corewar.h"
 
+
+typedef struct          s_op
+{
+	char*				name;
+	unsigned char		number_arg; // кол-во принимаемых аргументов
+	unsigned char		types_args[3];
+	unsigned char		number;
+	int					cycle_before_run;
+	char*				description;
+	unsigned char		is_code_type_arg;
+	unsigned char		dir_size;
+}                       t_op;
+
+extern  t_op 			g_op_tab[17];
+extern  t_op_func 		g_func_tab[17];
+
 /*
 ** Args checking
 */
@@ -51,7 +67,6 @@ void		set_value_in_battlefield(t_rules *rules, int position, int size, int value
 /*
 ** ASM functions
 */
-
 
 void			live_func(t_rules *rules, t_champion *cursor, unsigned char *t_args);
 void			load_func(t_rules *rules, t_champion *cursor, unsigned char *t_args);

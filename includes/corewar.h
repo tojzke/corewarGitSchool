@@ -66,18 +66,6 @@ typedef struct 			s_rules
 	t_champion*			cursors;			//Указатель на начало списка кареток
 }						t_rules;
 
-typedef struct          s_op
-{
-    char*				name;
-    unsigned char		number_arg; // кол-во принимаемых аргументов
-    unsigned char		types_args[3];
-    unsigned char		number;
-    int					cycle_before_run;
-    char*				description;
-    unsigned char		is_code_type_arg;
-    unsigned char		dir_size;
-}                       t_op;
-
 int						createChampion(t_champion* champion, t_rules* rules, int fd);
 void 					print_bytes_hex(unsigned char* bytes, int size);
 void					create_battlefield(t_rules* rules, t_champion** champions);
@@ -105,8 +93,5 @@ int						get_arg(t_rules* rules, t_champion* cursor, unsigned char *t_args, int 
 void					end_game(int reason, t_rules* rules, t_champion* cursors);
 
 typedef void			(*t_op_func)(t_rules*, t_champion*, unsigned char*);
-
-extern  t_op 			g_op_tab[17];
-extern  t_op_func 		g_func_tab[17];
 
 #endif

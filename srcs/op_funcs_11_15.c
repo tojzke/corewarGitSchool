@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "corewar.h"
+#include "commands.h"
 
 void			sti_func(t_rules *rules, t_champion *cursor, unsigned char *t_args)
 {
@@ -63,7 +64,7 @@ void			lld_func(t_rules *rules, t_champion *cursor, unsigned char *t_args)
 	arg1 = get_arg(rules, cursor, t_args, 0);
 	arg2 = get_arg(rules, cursor, t_args, 1);
 
-	if (t_args[0] = IND_CODE)
+	if (t_args[0] == IND_CODE)
 		arg1 = get_value_from_battlefield(rules, cursor->position,
 										  arg1, REG_SIZE);
 	cursor->reg[arg2] = arg1;

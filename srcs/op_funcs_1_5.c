@@ -62,19 +62,17 @@ void    load_func(t_rules *rules, t_champion *cursor, unsigned char *args_types)
 void    store_func(t_rules *rules, t_champion *cursor, unsigned char *args_types)
 {
 	unsigned char	from;
-	unsigned int	to;
+	int				to;
 
-	from = (unsigned char)get_value_from_battlefield(rules, cursor->position, BYTES_BEFORE_ARGS, REG_CODE_SIZE);
+	from = (unsigned char)get_arg(rules, cursor, args_types, 0);
+	to = (int)get_arg(rules, cursor, args_types, 1);
 	if (args_types[1] == REG_CODE)
 	{
-		to = (unsigned char)get_value_from_battlefield(rules, cursor->position,
-				BYTES_BEFORE_ARGS + REG_CODE_SIZE, REG_CODE_SIZE);
 		cursor->reg[to] = cursor->reg[from];
 	}
 	else // IND_CODE
 	{
-		to = cursor->position + (int)get_value_from_battlefield(rules, cursor->position,
-				BYTES_BEFORE_ARGS + REG_CODE_SIZE, IND_SIZE) % IDX_MOD;
+		to = cursor->position + to % IDX_MOD;
 		set_value_in_battlefield(rules, to, REG_SIZE, cursor->reg[from]);
 	}
 }
