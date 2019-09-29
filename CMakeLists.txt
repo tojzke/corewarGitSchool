@@ -8,8 +8,6 @@ include_directories(ft_printf_fd/libft/includes)
 include_directories(includes)
 include_directories(libft/includes)
 
-link_directories(libft)
-link_directories(ft_printf_fd)
 
 set(SRC_LIST ${SRC_LIST} srcs/battlefield.c
         srcs/check_cursor_args.c
@@ -28,10 +26,11 @@ set(SRC_LIST ${SRC_LIST} srcs/battlefield.c
         srcs/print.c
         srcs/start_game.c)
 
-file(GLOB SRCFILES srcs/*.c)
 
 add_executable(corewar ${SRC_LIST})
 
-target_link_libraries(corewar ftprintf.a)
-target_link_libraries(corewar libftprintf.a)
+add_subdirectory(ft_printf_fd)
+target_link_libraries(corewar ftprintf)
+add_subdirectory(libft)
+target_link_libraries(corewar ft)
 
