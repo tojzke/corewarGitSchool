@@ -22,7 +22,8 @@ void    action_with_cursor(t_champion* cursor, t_rules* rules)
 				cursor->code_operation <= AFF_OP)
     	{
 			cursor->cycle_before_run = g_op_tab[cursor->code_operation].
-					cycle_before_run;//Возможно прям здесь нужно будет деинкрементить cycle_before_run
+					cycle_before_run - 1;
+			//Возможно прям здесь нужно будет деинкрементить cycle_before_run
 			//ft_printf("Код операции: %d\nЦиклов до исполения: %d\n", cursor->code_operation, cursor->cycle_before_run);
 		}
     	else
