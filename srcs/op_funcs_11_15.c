@@ -27,6 +27,9 @@ void			sti_func(t_rules *rules, t_champion *cursor, unsigned char *t_args)
 										  arg2 % IDX_MOD, REG_SIZE);
 	else if (t_args[1] == REG_CODE)
 		arg2 = cursor->reg[arg2];
+	else if (t_args[1] == DIR_CODE)
+		arg2 = (short)arg2;
+
 	if (t_args[2] == REG_CODE)
 		arg3 = cursor->reg[arg3];
 	set_value_in_battlefield(rules, cursor->position
@@ -43,7 +46,7 @@ void			fork_func(t_rules *rules, t_champion *cursor, unsigned char *t_args)
 	t_args[0] = DIR_CODE;
 	// zjmp не имеет кода типа, следовательно t_args не заполнялся
 	// плюс задействуем t_args что бы не ругался компилятор, из-за неиспользования переменной
-	arg1 = get_arg(rules, cursor, t_args, 0);
+	arg1 = (short)get_arg(rules, cursor, t_args, 0);
 	copy_cursor = ft_memalloc(sizeof(t_champion));
 	copy_cursor->position = ((cursor->position + arg1) % IDX_MOD) % MEM_SIZE;
 	while (--registr != 0) {
@@ -85,8 +88,12 @@ void			lldi_func(t_rules *rules, t_champion *cursor, unsigned char *t_args)
 										  arg1 % IDX_MOD, REG_SIZE);
 	else if (t_args[0] == REG_CODE)
 		arg1 = cursor->reg[arg1];
+	else
+		arg1 = (short)arg1;
 	if (t_args[1] == REG_CODE)
 		arg2 = cursor->reg[arg2];
+	else
+		arg2 = (short)arg2;
 	cursor->reg[arg3] = get_value_from_battlefield(rules, cursor->position,
 												   arg1 + arg2, REG_SIZE);
 }
@@ -101,7 +108,7 @@ void			lfork_func(t_rules *rules, t_champion *cursor, unsigned char *t_args)
 	t_args[0] = DIR_CODE;
 	// zjmp не имеет кода типа, следовательно t_args не заполнялся
 	// плюс задействуем t_args что бы не ругался компилятор, из-за неиспользования переменной
-	arg1 = get_arg(rules, cursor, t_args, 0);
+	arg1 = (short)get_arg(rules, cursor, t_args, 0);
 	copy_cursor = ft_memalloc(sizeof(t_champion));
 	copy_cursor->position = (cursor->position + arg1) % MEM_SIZE;
 	while (--registr != 0) {

@@ -51,7 +51,7 @@ int				allowed_args(int op_code, unsigned char args_code, unsigned char* type_ar
 	{
 		type_args[arg_num - 1] = get_type_arg(args_code, arg_num);
 		if (status_check &&
-		!check_types_args_for_operation(type_args[arg_num - 1], op_code, arg_num))
+		!check_types_args_for_operation(type_args[arg_num - 1], op_code, arg_num - 1))
  		//операция проверки принадлежности типа аргумента операции
 				status_check = 0;
 		arg_num++;

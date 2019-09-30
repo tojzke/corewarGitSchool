@@ -91,7 +91,7 @@ void			zjmp_func(t_rules *rules, t_champion *cursor, unsigned char *t_args)
 	// плюс задействуем t_args что бы не ругался компилятор, из-за неиспользования переменной
 	if (cursor->carry == 1)
 	{
-		arg1 = get_arg(rules, cursor, t_args, 0);
+		arg1 = (short)get_arg(rules, cursor, t_args, 0);
 		cursor->position = (cursor->position + (arg1 % IDX_MOD)) % MEM_SIZE;
 	}
 }
@@ -110,8 +110,12 @@ void			ldi_func(t_rules *rules, t_champion *cursor, unsigned char *t_args)
 										  arg1 % IDX_MOD, REG_SIZE);
 	else if (t_args[0] == REG_CODE)
 		arg1 = cursor->reg[arg1];
+	else
+		arg1 = (short)arg1;
 	if (t_args[1] == REG_CODE)
 		arg2 = cursor->reg[arg2];
+	else
+		arg2 = (short)arg2;
 	cursor->reg[arg3] = get_value_from_battlefield(rules, cursor->position,
 												   (arg1 + arg2) % IDX_MOD, REG_SIZE);
 }
