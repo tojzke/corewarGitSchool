@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: bkiehn <bkiehn@student.42.fr>              +#+  +:+       +#+         #
+#    By: dzboncak <dzboncak@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/24 19:28:38 by bkiehn            #+#    #+#              #
-#    Updated: 2019/09/20 19:46:47 by bkiehn           ###   ########.fr        #
+#    Updated: 2019/10/01 19:24:03 by dzboncak         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -58,3 +58,35 @@ libare:
 printfre:
 	make -C $(PRINTF) re
 
+## Diff arguments ##
+
+# Write champs from stdin
+## e.g CHAMPS = Batman.cor Gangnat.cor
+CHAMPS =
+
+# Dump
+## e.g DUMP = 2000
+DEF_DUMP_FLAG = -d
+OURS_DUMP_FLAG = -dump
+DUMP =
+
+DEF_NAME = defcorewar
+DEF_OUT = def.res
+OURS_OUT = ours.res
+
+diff_output: ##Usage: make diff_output DUMP=<dump_cycle> CHAMPS=<champs_arg>
+ifeq ($(strip $(CHAMPS)),)
+	@echo "No champs given"
+	@echo "Result is incorrect"
+endif
+#Run with not given dump
+ifeq ($(strip $(DUMP)),)
+	$(addprefix ./,$(NAME)) $(CHAMPS) > $(OURS_OUT)
+	$(addprefix ./,$(DEF_NAME)) $(CHAMPS) > $(DEF_OUT)
+	diff $(OURS_OUT) $(DEF_OUT)
+else
+	$(addprefix ./,$(NAME)) $(OURS_DUMP_FLAG) $(DUMP)  $(CHAMPS) > $(OURS_OUT)
+	$(addprefix ./,$(DEF_NAME)) $(DEF_DUMP_FLAG) $(DUMP) $(CHAMPS) > $(DEF_OUT)
+	diff $(OURS_OUT) $(DEF_OUT)
+endif	
+## End Diff ##
