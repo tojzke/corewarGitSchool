@@ -69,7 +69,7 @@ void	start_game(t_champion* cursors, t_rules* rules, t_champion** champions)
 	t_champion* cursor;
 
 	ctd = rules->ctd;
-	cursor = cursors;
+	cursor = rules->cursors;
 	while (rules->number_cursors)
 	{
 		rules->number_cycle++;
@@ -81,7 +81,7 @@ void	start_game(t_champion* cursors, t_rules* rules, t_champion** champions)
 		}
 		if (ctd <= 0)
 		{
-			check_cursors(&cursors, rules);
+			check_cursors(&rules->cursors, rules);
 			// ? участвуют ли в проверке созданые в это м же цикле каретки операциями fork
 			// если да, то строку "cursor = rules->cursors" нужно добавить между блоком
 			// проверки и блоком действий над курсорами

@@ -48,6 +48,9 @@ void			fork_func(t_rules *rules, t_champion *cursor, unsigned char *t_args)
 	// плюс задействуем t_args что бы не ругался компилятор, из-за неиспользования переменной
 	arg1 = (short)get_arg(rules, cursor, t_args, 0);
 	copy_cursor = ft_memalloc(sizeof(t_champion));
+
+	//Обработать отрицательные значений!!!!!
+
 	copy_cursor->position = ((cursor->position + arg1) % IDX_MOD) % MEM_SIZE;
 	while (--registr != 0) {
 		copy_cursor->reg[registr] = cursor->reg[registr];
@@ -56,7 +59,9 @@ void			fork_func(t_rules *rules, t_champion *cursor, unsigned char *t_args)
 	copy_cursor->last_live_in_cycle = cursor->last_live_in_cycle;
 	copy_cursor->color = ft_strdup(cursor->color);
 	copy_cursor->name = ft_strdup(cursor->name);
+    copy_cursor->number = rules->number_cycle;
 	rules->cursors = add_cursor_in_start(rules->cursors, copy_cursor);
+	rules->number_cursors++;
 }
 
 void			lld_func(t_rules *rules, t_champion *cursor, unsigned char *t_args)
@@ -119,4 +124,5 @@ void			lfork_func(t_rules *rules, t_champion *cursor, unsigned char *t_args)
 	copy_cursor->color = ft_strdup(cursor->color);
 	copy_cursor->name = ft_strdup(cursor->name);
 	rules->cursors = add_cursor_in_start(rules->cursors, copy_cursor);
+    rules->number_cursors++;
 }

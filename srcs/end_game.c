@@ -52,8 +52,8 @@ void	end_game(int reason, t_rules* rules, t_champion* cursors)
 	{
 		ft_printf("Contestant %d, \"%s\", has won !\n", rules->last_alive,
 				  rules->name_winner);
-		print_rules(rules);
+//		print_rules(rules);
 	}
-	clean_memory(rules, cursors);
+//	clean_memory(rules, cursors);
 	exit(0);
 }
