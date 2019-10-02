@@ -92,7 +92,10 @@ void			zjmp_func(t_rules *rules, t_champion *cursor, unsigned char *t_args)
 	if (cursor->carry == 1)
 	{
 		arg1 = (short)get_arg(rules, cursor, t_args, 0);
-		cursor->position = (cursor->position + (arg1 % IDX_MOD)) % MEM_SIZE;
+		if (arg1 < 0 && cursor->position < abs(arg1))
+			cursor->position = (MEM_SIZE - ((-arg1 % IDX_MOD) - cursor->position)) % MEM_SIZE;
+		else
+			cursor->position = (cursor->position + (arg1 % IDX_MOD)) % MEM_SIZE;
 	}
 }
 

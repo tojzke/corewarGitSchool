@@ -50,8 +50,16 @@ void			fork_func(t_rules *rules, t_champion *cursor, unsigned char *t_args)
 	copy_cursor = ft_memalloc(sizeof(t_champion));
 
 	//Обработать отрицательные значений!!!!!
-
-	copy_cursor->position = ((cursor->position + arg1) % IDX_MOD) % MEM_SIZE;
+//	if (arg1 < 0 && copy_cursor->position < abs(arg1))
+//	{
+//		arg1 = arg1 % MEM_SIZE;
+//		if (copy_cursor->position < abs(arg1))
+//			copy_cursor->position = MEM_SIZE - (abs(arg1) - cursor->position);
+//		else
+//			copy_cursor->position = ((cursor->position + arg1) % IDX_MOD) % MEM_SIZE;
+//	}
+//	else
+		copy_cursor->position = ((cursor->position + arg1) % IDX_MOD) % MEM_SIZE;
 	while (--registr != 0) {
 		copy_cursor->reg[registr] = cursor->reg[registr];
 	}
