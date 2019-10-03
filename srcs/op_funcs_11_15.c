@@ -33,7 +33,7 @@ void			sti_func(t_rules *rules, t_champion *cursor, unsigned char *t_args)
 	if (t_args[2] == REG_CODE)
 		arg3 = cursor->reg[arg3];
 	set_value_in_battlefield(rules, cursor->position
-							+ (arg2 + arg3) % IDX_MOD,REG_SIZE, cursor->reg[arg1]);
+							+ (arg2 + arg3) % IDX_MOD,REG_SIZE, &cursor->reg[arg1]);
 }
 
 void			fork_func(t_rules *rules, t_champion *cursor, unsigned char *t_args)

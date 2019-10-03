@@ -60,23 +60,18 @@ unsigned int	get_value_from_battlefield(t_rules *rules,
 	return (value);
 }
 
-void			set_value_in_battlefield(t_rules *rules, int position,
-	int size, int value)
+void		set_value_in_battlefield(t_rules *rules, int position, int size, const void *value)
 {
-	unsigned char	byte_value;
+	unsigned char	*byte_value;
 	int				byte_index;
 
-	if (position < 0)
-    {
-	    position = MEM_SIZE - (-(position % MEM_SIZE));
-    }
 	byte_index = 0;
+	byte_value = (unsigned char*)value + size - 1;
 	while (byte_index < size)
 	{
-		byte_value = 0;
-		byte_value |= (value >> ((size - byte_index - 1) * 8));
-		rules->battlefield[(position + byte_index) % MEM_SIZE] = byte_value;
+		rules->battlefield[(position + byte_index) % MEM_SIZE] = *byte_value;
 		++byte_index;
+		--byte_value;
 	}
 }
 

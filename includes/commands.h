@@ -62,7 +62,7 @@ int				check_for_possible_args(int op_code, int args_code);
 void			print_bits(const size_t size, const void *ptr);
 unsigned int	get_value_from_battlefield(t_rules *rules,
                                            int position, int offset, int size);
-void		set_value_in_battlefield(t_rules *rules, int position, int size, int value);
+void		set_value_in_battlefield(t_rules *rules, int position, int size, const void *value);
 
 /*
 ** ASM functions

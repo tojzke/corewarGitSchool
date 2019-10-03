@@ -62,7 +62,7 @@ void    load_func(t_rules *rules, t_champion *cursor, unsigned char *args_types)
 void    store_func(t_rules *rules, t_champion *cursor, unsigned char *args_types)
 {
 	unsigned char	from;
-	short 			to;
+	int				to;
 
 	from = (unsigned char)get_arg(rules, cursor, args_types, 0);
 	to = (short)get_arg(rules, cursor, args_types, 1);
@@ -73,7 +73,7 @@ void    store_func(t_rules *rules, t_champion *cursor, unsigned char *args_types
 	else // IND_CODE
 	{
 		to = cursor->position + to % IDX_MOD;
-		set_value_in_battlefield(rules, to, REG_SIZE, cursor->reg[from]);
+		set_value_in_battlefield(rules, to, REG_SIZE, &(cursor->reg[from]));
 	}
 }
 
