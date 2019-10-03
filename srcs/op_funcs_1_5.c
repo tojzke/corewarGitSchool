@@ -62,10 +62,10 @@ void    load_func(t_rules *rules, t_champion *cursor, unsigned char *args_types)
 void    store_func(t_rules *rules, t_champion *cursor, unsigned char *args_types)
 {
 	unsigned char	from;
-	int				to;
+	short 			to;
 
 	from = (unsigned char)get_arg(rules, cursor, args_types, 0);
-	to = (int)get_arg(rules, cursor, args_types, 1);
+	to = (short)get_arg(rules, cursor, args_types, 1);
 	if (args_types[1] == REG_CODE)
 	{
 		cursor->reg[to] = cursor->reg[from];
