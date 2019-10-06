@@ -49,13 +49,13 @@ void			fork_func(t_rules *rules, t_champion *cursor, unsigned char *t_args)
 	arg1 = (short)get_arg(rules, cursor, t_args, 0);
 	copy_cursor = ft_memalloc(sizeof(t_champion));
 
-	//Обработать отрицательные значений!!!!!
-//	if (arg1 < 0 && cursor->position < abs(arg1))
-//	{
-//		arg1 = (-arg1 % IDX_MOD) - cursor->position;
-//		copy_cursor->position = (MEM_SIZE - (arg1 % MEM_SIZE)) % IDX_MOD;
-//	}
-//	else
+	//Обработать отрицательные значений, обработал нужно проверить
+	if (arg1 < 0 && cursor->position < (-arg1 % IDX_MOD))
+	{
+		arg1 = (-arg1 % IDX_MOD);
+		copy_cursor->position = MEM_SIZE + cursor->position - arg1;
+	}
+	else
 		copy_cursor->position = (cursor->position + (arg1 % IDX_MOD)) % MEM_SIZE;
 	while (--registr != 0) {
 		copy_cursor->reg[registr] = cursor->reg[registr];
@@ -120,7 +120,14 @@ void			lfork_func(t_rules *rules, t_champion *cursor, unsigned char *t_args)
 	// плюс задействуем t_args что бы не ругался компилятор, из-за неиспользования переменной
 	arg1 = (short)get_arg(rules, cursor, t_args, 0);
 	copy_cursor = ft_memalloc(sizeof(t_champion));
-	copy_cursor->position = (cursor->position + arg1) % MEM_SIZE;
+	//Обработка отрицательных значений требует проверки
+	if (arg1 < 0 && cursor->position < (-arg1 % IDX_MOD))
+	{
+		arg1 = (-arg1 % IDX_MOD);
+		copy_cursor->position = MEM_SIZE + cursor->position - arg1;
+	}
+	else
+		copy_cursor->position = (cursor->position + arg1) % MEM_SIZE;
 	while (--registr != 0) {
 		copy_cursor->reg[registr] = cursor->reg[registr];
 	}
