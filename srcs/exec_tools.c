@@ -65,6 +65,9 @@ void		set_value_in_battlefield(t_rules *rules, int position, int size, const voi
 	unsigned char	*byte_value;
 	int				byte_index;
 
+
+	if (position < 0)
+		position = MEM_SIZE - (-(position % MEM_SIZE));
 	byte_index = 0;
 	byte_value = (unsigned char*)value + size - 1;
 	while (byte_index < size)

@@ -90,8 +90,9 @@ void	print_dump(t_rules* rules)
 		if ((count % 64) == 0) // 64 заменить на 32
 		{
 			if (count == 0)
-				ft_putstr("0x"); // Заменил принтф на путстр потому что иногда некорректно отрабатывала
-			ft_printf("%#.4x : ", count);
+				ft_putstr("0x0000 : "); // Заменил принтф на путстр потому что иногда некорректно отрабатывала
+			else
+				ft_printf("%#.4x : ", count);
 		}
 		ft_printf("%.2x ", rules->battlefield[count]); //убрать пробел
 		if (((count + 1) % 64) == 0) // 64 заменить на 32

@@ -44,22 +44,19 @@ void			fork_func(t_rules *rules, t_champion *cursor, unsigned char *t_args)
 
 	registr = REG_NUMBER + 1;
 	t_args[0] = DIR_CODE;
-	// zjmp не имеет кода типа, следовательно t_args не заполнялся
+	// fork не имеет кода типа, следовательно t_args не заполнялся
 	// плюс задействуем t_args что бы не ругался компилятор, из-за неиспользования переменной
 	arg1 = (short)get_arg(rules, cursor, t_args, 0);
 	copy_cursor = ft_memalloc(sizeof(t_champion));
 
 	//Обработать отрицательные значений!!!!!
-//	if (arg1 < 0 && copy_cursor->position < abs(arg1))
+//	if (arg1 < 0 && cursor->position < abs(arg1))
 //	{
-//		arg1 = arg1 % MEM_SIZE;
-//		if (copy_cursor->position < abs(arg1))
-//			copy_cursor->position = MEM_SIZE - (abs(arg1) - cursor->position);
-//		else
-//			copy_cursor->position = ((cursor->position + arg1) % IDX_MOD) % MEM_SIZE;
+//		arg1 = (-arg1 % IDX_MOD) - cursor->position;
+//		copy_cursor->position = (MEM_SIZE - (arg1 % MEM_SIZE)) % IDX_MOD;
 //	}
 //	else
-		copy_cursor->position = ((cursor->position + arg1) % IDX_MOD) % MEM_SIZE;
+		copy_cursor->position = (cursor->position + (arg1 % IDX_MOD)) % MEM_SIZE;
 	while (--registr != 0) {
 		copy_cursor->reg[registr] = cursor->reg[registr];
 	}
@@ -119,7 +116,7 @@ void			lfork_func(t_rules *rules, t_champion *cursor, unsigned char *t_args)
 
 	registr = REG_NUMBER + 1;
 	t_args[0] = DIR_CODE;
-	// zjmp не имеет кода типа, следовательно t_args не заполнялся
+	// lfork не имеет кода типа, следовательно t_args не заполнялся
 	// плюс задействуем t_args что бы не ругался компилятор, из-за неиспользования переменной
 	arg1 = (short)get_arg(rules, cursor, t_args, 0);
 	copy_cursor = ft_memalloc(sizeof(t_champion));
