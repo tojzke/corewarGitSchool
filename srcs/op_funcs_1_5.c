@@ -49,7 +49,7 @@ void    load_func(t_rules *rules, t_champion *cursor, unsigned char *args_types)
     }
     else //IND_CODE - считать из адреса value 4 байта
     {
-        value = cursor->position + (int)get_value_from_battlefield(rules, cursor->position, offset,
+        value = cursor->position + (short)get_value_from_battlefield(rules, cursor->position, offset,
                 IND_SIZE) % IDX_MOD;
         value = (int)get_value_from_battlefield(rules, value, 0, REG_SIZE);
         offset += IND_SIZE;
@@ -84,9 +84,9 @@ void	add_func(t_rules *rules, t_champion *cursor, unsigned char *args_types)
 	unsigned char	reg_to_write;
 
 
-	first_reg = get_arg(rules, cursor, args_types, 0);
-	second_reg = get_arg(rules, cursor, args_types, 1);
-	reg_to_write = get_arg(rules, cursor, args_types, 2);
+	first_reg = (unsigned  char)get_arg(rules, cursor, args_types, 0);
+	second_reg = (unsigned  char)get_arg(rules, cursor, args_types, 1);
+	reg_to_write = (unsigned  char)get_arg(rules, cursor, args_types, 2);
 	cursor->reg[reg_to_write] = cursor->reg[first_reg] + cursor->reg[second_reg];
 	cursor->carry = (cursor->reg[reg_to_write] == 0) ? 1 : 0;
 }
@@ -98,9 +98,9 @@ void	sub_func(t_rules *rules, t_champion *cursor, unsigned char *args_types)
 	unsigned char	reg_to_write;
 
 
-	first_reg = get_arg(rules, cursor, args_types, 0);
-	second_reg = get_arg(rules, cursor, args_types, 1);
-	reg_to_write = get_arg(rules, cursor, args_types, 2);
+	first_reg = (unsigned  char)get_arg(rules, cursor, args_types, 0);
+	second_reg = (unsigned  char)get_arg(rules, cursor, args_types, 1);
+	reg_to_write = (unsigned  char)get_arg(rules, cursor, args_types, 2);
 	cursor->reg[reg_to_write] = cursor->reg[first_reg] - cursor->reg[second_reg];
 	cursor->carry = (cursor->reg[reg_to_write] == 0) ? 1 : 0;
 }
