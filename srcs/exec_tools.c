@@ -6,7 +6,7 @@
 /*   By: dzboncak <dzboncak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/21 18:52:10 by dzboncak          #+#    #+#             */
-/*   Updated: 2019/09/30 17:36:52 by dzboncak         ###   ########.fr       */
+/*   Updated: 2019/10/10 16:56:36 by dzboncak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,13 @@ int				get_arg(t_rules *rules, t_champion *cursor,
 		offset = count_size_args(t_args, num_arg,
 		cursor->code_operation) + OP_SIZE;
 	if (t_args[num_arg] == IND_CODE)
-		arg = (int)get_value_from_battlefield(rules,
+		arg = (short)get_value_from_battlefield(rules,
 		cursor->position, offset, IND_SIZE);
 	else if (t_args[num_arg] == DIR_CODE)
 		arg = (int)get_value_from_battlefield(rules, cursor->position, offset,
 		g_op_tab[cursor->code_operation].dir_size);
 	else if (t_args[num_arg] == REG_CODE)
-		arg = get_value_from_battlefield(rules, cursor->position, offset,
+		arg = (char)get_value_from_battlefield(rules, cursor->position, offset,
 		REG_CODE_SIZE);
 	return (arg);
 }

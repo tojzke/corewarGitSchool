@@ -12,29 +12,27 @@
 
 #include "corewar.h"
 
-t_champion*		delete_cursor(t_champion* del_cursor, t_champion** cursors)
+void	delete_cursor(t_champion* del_cursor, t_champion** cursors)
 {
-	t_champion* cursor;
-	t_champion* tmp;
+	t_champion* current;
+	t_champion* prev;
 
-	cursor = *cursors;
-	tmp = cursor;
-	if (del_cursor == *cursors)
+	current = *cursors;
+	if (*cursors == del_cursor)
 	{
 		*cursors = (*cursors)->next;
-		free_cursor(&tmp);
-		return *cursors;
+		ft_memdel((void**)&current);
+		return ;
 	}
-	while (cursor != del_cursor)
+	while (current != NULL && current != del_cursor)
 	{
-		tmp = cursor;
-		if (cursor == NULL)
-			return 0; //Что то пошло не так, удаляемый курсор не найден
-		cursor = cursor->next;
+		prev = current;
+		current = current->next;
 	}
-	tmp->next = cursor->next;
-	free_cursor(&cursor);
-	return tmp->next;
+	if (current == NULL)
+		return ;
+	prev->next = current->next;
+	ft_memdel((void**)&current);
 }
 
 void			check_cursors(t_champion** cursors, t_rules* rules)
@@ -46,12 +44,11 @@ void			check_cursors(t_champion** cursors, t_rules* rules)
 	while (cursor)
 	{
 		if (rules->ctd <= 0 ||
-		rules->number_cycle - cursor->last_live_in_cycle >= rules->ctd)
-		{
-			cursor = delete_cursor(cursor, cursors);
+		rules->number_cycle - cursor->last_live_in_cycle >= rules->ctd) {
+			delete_cursor(cursor, cursors);
 			rules->number_cursors--;
-		}
-		else
+			cursor = *cursors;
+		}else
 			cursor = cursor->next;
 	}
 	if (rules->number_live_of_ctd >= NBR_LIVE ||

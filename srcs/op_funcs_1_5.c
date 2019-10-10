@@ -36,43 +36,29 @@ void    load_func(t_rules *rules, t_champion *cursor, unsigned char *args_types)
 {
 	int             value;
 	unsigned char   reg_to_write;
-	int             offset;
-	unsigned char   dir_size;
 
-	offset = BYTES_BEFORE_ARGS;
-	dir_size = g_op_tab[cursor->code_operation].dir_size;
-	if (args_types[0] == DIR_CODE) // value - это просто число
-    {
-        value = (int)get_value_from_battlefield(rules, cursor->position, offset,
-                dir_size);
-        offset += dir_size;
-    }
-    else //IND_CODE - считать из адреса value 4 байта
-    {
-        value = cursor->position + (short)get_value_from_battlefield(rules, cursor->position, offset,
-                IND_SIZE) % IDX_MOD;
-        value = (int)get_value_from_battlefield(rules, value, 0, REG_SIZE);
-        offset += IND_SIZE;
-    }
-	reg_to_write = (unsigned char)get_value_from_battlefield(rules, cursor->position, offset,
-															 REG_CODE_SIZE);
+	value = get_arg(rules, cursor, args_types, 0);
+	if (args_types[0] == IND_CODE)
+		value = (int)get_value_from_battlefield(rules, cursor->position + value % IDX_MOD,
+				0, REG_SIZE);
+	reg_to_write = (unsigned char)get_arg(rules, cursor, args_types, 1);
     cursor->carry = ((cursor->reg[reg_to_write] = value) == 0) ? 1 : 0;
 }
 
 void    store_func(t_rules *rules, t_champion *cursor, unsigned char *args_types)
 {
-	unsigned char	from;
+	char	from;
 	int				to;
 
-	from = (unsigned char)get_arg(rules, cursor, args_types, 0);
-	to = (short)get_arg(rules, cursor, args_types, 1);
+	from = (char)get_arg(rules, cursor, args_types, 0);
+	to = get_arg(rules, cursor, args_types, 1);
 	if (args_types[1] == REG_CODE)
 	{
-		cursor->reg[to] = cursor->reg[from];
+		cursor->reg[(char)to] = cursor->reg[from];
 	}
 	else // IND_CODE
 	{
-		to = cursor->position + to % IDX_MOD;
+		to = cursor->position + (short)to % IDX_MOD;
 		set_value_in_battlefield(rules, to, REG_SIZE, &(cursor->reg[from]));
 	}
 }
