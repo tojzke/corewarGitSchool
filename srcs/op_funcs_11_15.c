@@ -23,8 +23,8 @@ void			sti_func(t_rules *rules, t_champion *cursor, unsigned char *t_args)
 	arg2 = get_arg(rules, cursor, t_args, 1);
 	arg3 = get_arg(rules, cursor, t_args, 2);
 	if (t_args[1] == IND_CODE)
-		arg2 = get_value_from_battlefield(rules, cursor->position,
-										  (short)arg2 % IDX_MOD, REG_SIZE);
+		arg2 = get_value_from_battlefield(rules, cursor->position +
+												 (short) arg2 % IDX_MOD, REG_SIZE);
 	else if (t_args[1] == REG_CODE)
 		arg2 = cursor->reg[arg2];
 	else if (t_args[1] == DIR_CODE)
@@ -74,14 +74,14 @@ void			fork_func(t_rules *rules, t_champion *cursor, unsigned char *t_args)
 void			lld_func(t_rules *rules, t_champion *cursor, unsigned char *t_args)
 {
 	int arg1;
-	int arg2;
+	char arg2;
 
 	arg1 = get_arg(rules, cursor, t_args, 0);
-	arg2 = get_arg(rules, cursor, t_args, 1);
+	arg2 = (char)get_arg(rules, cursor, t_args, 1);
 
 	if (t_args[0] == IND_CODE)
-		arg1 = get_value_from_battlefield(rules, cursor->position,
-												 (short)arg1, REG_SIZE);
+		arg1 = get_value_from_battlefield(rules, cursor->position +
+												 (short) arg1, REG_SIZE);
 	cursor->reg[arg2] = arg1;
 	cursor->carry = (cursor->reg[arg2] == 0) ? 1 : 0;
 }
@@ -96,8 +96,8 @@ void			lldi_func(t_rules *rules, t_champion *cursor, unsigned char *t_args)
 	arg2 = get_arg(rules, cursor, t_args, 1);
 	arg3 = get_arg(rules, cursor, t_args, 2);
 	if (t_args[0] == IND_CODE)
-		arg1 = get_value_from_battlefield(rules, cursor->position,
-										  (short)arg1 % IDX_MOD, REG_SIZE);
+		arg1 = get_value_from_battlefield(rules, cursor->position +
+												 (short) arg1 % IDX_MOD, REG_SIZE);
 	else if (t_args[0] == REG_CODE)
 		arg1 = cursor->reg[arg1];
 	else
@@ -106,8 +106,7 @@ void			lldi_func(t_rules *rules, t_champion *cursor, unsigned char *t_args)
 		arg2 = cursor->reg[arg2];
 	else
 		arg2 = (short)arg2;
-	cursor->reg[arg3] = get_value_from_battlefield(rules, cursor->position,
-												   arg1 + arg2, REG_SIZE);
+	cursor->reg[arg3] = get_value_from_battlefield(rules, cursor->position + (arg1 + arg2), REG_SIZE);
 }
 
 void			lfork_func(t_rules *rules, t_champion *cursor, unsigned char *t_args)

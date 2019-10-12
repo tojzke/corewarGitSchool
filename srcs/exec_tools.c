@@ -26,19 +26,18 @@ int				get_arg(t_rules *rules, t_champion *cursor,
 		offset = count_size_args(t_args, num_arg,
 		cursor->code_operation) + OP_SIZE;
 	if (t_args[num_arg] == IND_CODE)
-		arg = (short)get_value_from_battlefield(rules,
-		cursor->position, offset, IND_SIZE);
+		arg = (short) get_value_from_battlefield(rules,
+												 cursor->position + offset, IND_SIZE);
 	else if (t_args[num_arg] == DIR_CODE)
-		arg = (int)get_value_from_battlefield(rules, cursor->position, offset,
-		g_op_tab[cursor->code_operation].dir_size);
+		arg = (int) get_value_from_battlefield(rules, cursor->position + offset,
+											   g_op_tab[cursor->code_operation].dir_size);
 	else if (t_args[num_arg] == REG_CODE)
-		arg = (char)get_value_from_battlefield(rules, cursor->position, offset,
-		REG_CODE_SIZE);
+		arg = (char) get_value_from_battlefield(rules, cursor->position + offset,
+												REG_CODE_SIZE);
 	return (arg);
 }
 
-int	get_value_from_battlefield(t_rules *rules,
-	int position, int offset, int size)
+int get_value_from_battlefield(t_rules *rules, int position, int size)
 {
 	int				value;
 	int				byte_value;
@@ -53,7 +52,7 @@ int	get_value_from_battlefield(t_rules *rules,
 	while (byte_index < size)
 	{
 		byte_value = rules->battlefield[(position +
-			offset + byte_index) % MEM_SIZE];
+			byte_index) % MEM_SIZE];
 		value = value | (byte_value << ((size - byte_index - 1) * 8));
 		++byte_index;
 	}

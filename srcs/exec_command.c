@@ -49,8 +49,8 @@ int		check_arg_reg(t_rules* rules, t_champion* cursor,
 		if (type_args[cur_arg] == REG_CODE)
 		{
 			offset = count_size_args(type_args, cur_arg, cursor->code_operation) + BYTES_BEFORE_ARGS;
-			arg_reg = (unsigned char)get_value_from_battlefield(rules, cursor->position, offset,
-					sizeof(unsigned char));
+			arg_reg = (unsigned char) get_value_from_battlefield(rules, cursor->position + offset,
+																 sizeof(unsigned char));
 			if (arg_reg < 1 || arg_reg > REG_NUMBER)
 				return 0;
 		}
@@ -69,8 +69,8 @@ int		is_valid_op(t_rules *rules,t_champion *cursor, unsigned char* type_args)
 		return (1);
 	else
 	{
-		args_code = (unsigned char)get_value_from_battlefield(rules, cursor->position, OP_SIZE,
-															  sizeof(unsigned char));
+		args_code = (unsigned char) get_value_from_battlefield(rules, cursor->position + OP_SIZE,
+															   sizeof(unsigned char));
 		// Переместиться на код типов аргументов, для перемещения каретки
 		// нужно напсиать отдельную функцию так как память циклическая
 		// и возможны перехды на на начало поля

@@ -60,9 +60,8 @@ extern  t_op_func 		g_func_tab[17];
 
 int				check_for_possible_args(int op_code, int args_code);
 void			print_bits(const size_t size, const void *ptr);
-int	get_value_from_battlefield(t_rules *rules,
-                                           int position, int offset, int size);
-void		set_value_in_battlefield(t_rules *rules, int position, int size, const void *value);
+int 			get_value_from_battlefield(t_rules *rules, int position, int size);
+void			set_value_in_battlefield(t_rules *rules, int position, int size, const void *value);
 
 /*
 ** ASM functions

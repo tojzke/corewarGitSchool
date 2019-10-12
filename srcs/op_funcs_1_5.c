@@ -16,8 +16,8 @@ void    live_func(t_rules *rules, t_champion *cursor, unsigned char *args_types)
 {
     int     val;
 
-    val = (int)get_value_from_battlefield(rules, cursor->position, OP_SIZE,
-            g_op_tab[cursor->code_operation].dir_size);
+    val = (int) get_value_from_battlefield(rules, cursor->position + OP_SIZE,
+										   g_op_tab[cursor->code_operation].dir_size);
     // Макс тут BYTES_BEFORE_ARGS заменил на OP_SIZE так как live не имеет кода типа
     // Или можно использовать функцию get_arg, там я добавил проверку на этот случай
     if (val == cursor->reg[1]) // Возможно значение val нужно сравнивать со всеми живыми игроками
@@ -39,8 +39,8 @@ void    load_func(t_rules *rules, t_champion *cursor, unsigned char *args_types)
 
 	value = get_arg(rules, cursor, args_types, 0);
 	if (args_types[0] == IND_CODE)
-		value = (int)get_value_from_battlefield(rules, cursor->position,
-												(short)value % IDX_MOD, REG_SIZE);
+		value = (int) get_value_from_battlefield(rules, cursor->position +
+														(short) value % IDX_MOD, REG_SIZE);
 	reg_to_write = (char)get_arg(rules, cursor, args_types, 1);
     cursor->carry = ((cursor->reg[reg_to_write] = value) == 0) ? 1 : 0;
 }
@@ -53,14 +53,9 @@ void    store_func(t_rules *rules, t_champion *cursor, unsigned char *args_types
 	from = (char)get_arg(rules, cursor, args_types, 0);
 	to = get_arg(rules, cursor, args_types, 1);
 	if (args_types[1] == REG_CODE)
-	{
 		cursor->reg[(char)to] = cursor->reg[from];
-	}
 	else // IND_CODE
-	{
-		to = cursor->position + (short)to % IDX_MOD;
-		set_value_in_battlefield(rules, to, REG_SIZE, &(cursor->reg[from]));
-	}
+		set_value_in_battlefield(rules, cursor->position + (short)to % IDX_MOD, REG_SIZE, &(cursor->reg[from]));
 }
 
 void	add_func(t_rules *rules, t_champion *cursor, unsigned char *args_types)
