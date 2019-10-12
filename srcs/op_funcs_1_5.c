@@ -34,14 +34,14 @@ void    live_func(t_rules *rules, t_champion *cursor, unsigned char *args_types)
 
 void    load_func(t_rules *rules, t_champion *cursor, unsigned char *args_types)
 {
-	int             value;
-	unsigned char   reg_to_write;
+	int		value;
+	char	reg_to_write;
 
 	value = get_arg(rules, cursor, args_types, 0);
 	if (args_types[0] == IND_CODE)
-		value = (int)get_value_from_battlefield(rules, cursor->position + value % IDX_MOD,
-				0, REG_SIZE);
-	reg_to_write = (unsigned char)get_arg(rules, cursor, args_types, 1);
+		value = (int)get_value_from_battlefield(rules, cursor->position,
+												(short)value % IDX_MOD, REG_SIZE);
+	reg_to_write = (char)get_arg(rules, cursor, args_types, 1);
     cursor->carry = ((cursor->reg[reg_to_write] = value) == 0) ? 1 : 0;
 }
 
@@ -65,28 +65,28 @@ void    store_func(t_rules *rules, t_champion *cursor, unsigned char *args_types
 
 void	add_func(t_rules *rules, t_champion *cursor, unsigned char *args_types)
 {
-	unsigned char	first_reg;
-	unsigned char	second_reg;
-	unsigned char	reg_to_write;
+	char	first_reg;
+	char	second_reg;
+	char	reg_to_write;
 
 
-	first_reg = (unsigned  char)get_arg(rules, cursor, args_types, 0);
-	second_reg = (unsigned  char)get_arg(rules, cursor, args_types, 1);
-	reg_to_write = (unsigned  char)get_arg(rules, cursor, args_types, 2);
+	first_reg = (char)get_arg(rules, cursor, args_types, 0);
+	second_reg = (char)get_arg(rules, cursor, args_types, 1);
+	reg_to_write = (char)get_arg(rules, cursor, args_types, 2);
 	cursor->reg[reg_to_write] = cursor->reg[first_reg] + cursor->reg[second_reg];
 	cursor->carry = (cursor->reg[reg_to_write] == 0) ? 1 : 0;
 }
 
 void	sub_func(t_rules *rules, t_champion *cursor, unsigned char *args_types)
 {
-	unsigned char	first_reg;
-	unsigned char	second_reg;
-	unsigned char	reg_to_write;
+	char	first_reg;
+	char	second_reg;
+	char	reg_to_write;
 
 
-	first_reg = (unsigned  char)get_arg(rules, cursor, args_types, 0);
-	second_reg = (unsigned  char)get_arg(rules, cursor, args_types, 1);
-	reg_to_write = (unsigned  char)get_arg(rules, cursor, args_types, 2);
+	first_reg = (char)get_arg(rules, cursor, args_types, 0);
+	second_reg = (char)get_arg(rules, cursor, args_types, 1);
+	reg_to_write = (char)get_arg(rules, cursor, args_types, 2);
 	cursor->reg[reg_to_write] = cursor->reg[first_reg] - cursor->reg[second_reg];
 	cursor->carry = (cursor->reg[reg_to_write] == 0) ? 1 : 0;
 }

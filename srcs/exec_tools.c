@@ -37,11 +37,11 @@ int				get_arg(t_rules *rules, t_champion *cursor,
 	return (arg);
 }
 
-unsigned int	get_value_from_battlefield(t_rules *rules,
+int	get_value_from_battlefield(t_rules *rules,
 	int position, int offset, int size)
 {
-	unsigned int	value;
-	unsigned int	byte_value;
+	int				value;
+	int				byte_value;
 	int				byte_index;
 
     if (position < 0)
