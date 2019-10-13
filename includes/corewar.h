@@ -66,7 +66,14 @@ typedef struct 			s_rules
 	t_champion*			cursors;			//Указатель на начало списка кареток
 }						t_rules;
 
-int						createChampion(t_champion* champion, t_rules* rules, int fd);
+/*
+ * * Parsing
+ */
+
+int 	get_num_of_players(int argc, char **argv);
+int		all_valid(int argc, char **argv, t_champion **champions, t_rules *rules);
+
+int						create_champion(t_champion** champions, t_rules* rules, int fd, int current_num);
 void 					print_bytes_hex(unsigned char* bytes, int size);
 void					create_battlefield(t_rules* rules, t_champion** champions);
 void					print_battlefiled(t_rules* rules, t_champion** champions);

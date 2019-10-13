@@ -101,23 +101,30 @@ int		readBody(int fd, t_champion* champion)
 	return 1;
 }
 
-int		createChampion(t_champion* champion, t_rules* rules, int fd)
+int		create_champion(t_champion** champions, t_rules* rules, int fd, int current_num)
 {	
+	if (champions[current_num] != NULL)
+		return (0);
+	else
+	{
+		champions[current_num] = ft_memalloc(sizeof(t_champion));
+		champions[current_num]->number = current_num;
+		champions[current_num]->reg[1] = -current_num;
+	}
 	if (!checkMagicHeader(fd))
 		return 0; //Засланый казачёк
-	
 	if ((lseek(fd, PROG_NAME_LENGTH + 4, SEEK_CUR)) == -1L)
 		return 0; //Внутри казачка пустота
-	
-	if ((champion->size = checkSizeChampion(fd)) == -1)
+
+	if ((champions[current_num]->size = checkSizeChampion(fd)) == -1)
 		return 0; //Жирный казачёк
 		
-	champion->name = readName(fd);
-	champion->comment = readComment(fd);
-	champion->fd = fd;
-	select_color(champion);
+	champions[current_num]->name = readName(fd);
+	champions[current_num]->comment = readComment(fd);
+	champions[current_num]->fd = fd;
+	select_color(champions[current_num]);
 	
-	if (!readBody(fd, champion))
+	if (!readBody(fd, champions[current_num]))
 		return 0; //Размер петуха несоответствует обещанному
 	close(fd);
 	return 1;
