@@ -16,14 +16,14 @@ void    live_func(t_rules *rules, t_champion *cursor, unsigned char *args_types)
 {
     int     val;
 
-    val = (int) get_value_from_battlefield(rules, cursor->position + OP_SIZE,
+    val = -(int)get_value_from_battlefield(rules, cursor->position + OP_SIZE,
 										   g_op_tab[cursor->code_operation].dir_size);
     // Макс тут BYTES_BEFORE_ARGS заменил на OP_SIZE так как live не имеет кода типа
     // Или можно использовать функцию get_arg, там я добавил проверку на этот случай
-    if (val == cursor->reg[1]) // Возможно значение val нужно сравнивать со всеми живыми игроками
+    if (val == -cursor->reg[1] && val > 0 && val <= rules->much_players) // Возможно значение val нужно сравнивать со всеми живыми игроками
     							// и засчитывать живым соответсвующего игрока
     {
-        rules->last_alive = -val;
+        rules->last_alive = val;
         if (rules->name_winner != 0)
         	free(rules->name_winner);
         rules->name_winner = ft_strdup(cursor->name);
