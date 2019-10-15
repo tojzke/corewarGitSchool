@@ -3,19 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   check_cursors.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aleksey <aleksey@student.42.fr>            +#+  +:+       +#+        */
+/*   By: dzboncak <dzboncak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/19 17:24:25 by aleksey           #+#    #+#             */
-/*   Updated: 2019/09/19 19:14:16 by aleksey          ###   ########.fr       */
+/*   Updated: 2019/10/15 19:21:36 by dzboncak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
 
-void	delete_cursor(t_champion* del_cursor, t_champion** cursors)
+void	delete_cursor(t_champion *del_cursor, t_champion **cursors)
 {
-	t_champion* current;
-	t_champion* prev;
+	t_champion *current;
+	t_champion *prev;
 
 	current = *cursors;
 	if (*cursors == del_cursor)
@@ -35,20 +35,22 @@ void	delete_cursor(t_champion* del_cursor, t_champion** cursors)
 	ft_memdel((void**)&current);
 }
 
-void			check_cursors(t_champion** cursors, t_rules* rules)
+void	check_cursors(t_champion **cursors, t_rules *rules)
 {
-	t_champion* cursor;
+	t_champion *cursor;
 
 	cursor = *cursors;
 	rules->number_check++;
 	while (cursor)
 	{
 		if (rules->ctd <= 0 ||
-		rules->number_cycle - cursor->last_live_in_cycle >= rules->ctd) {
+		rules->number_cycle - cursor->last_live_in_cycle >= rules->ctd)
+		{
 			delete_cursor(cursor, cursors);
 			rules->number_cursors--;
 			cursor = *cursors;
-		}else
+		}
+		else
 			cursor = cursor->next;
 	}
 	if (rules->number_live_of_ctd >= NBR_LIVE ||
@@ -59,7 +61,4 @@ void			check_cursors(t_champion** cursors, t_rules* rules)
 	}
 	rules->number_live_of_ctd = 0;
 	rules->cursors = *cursors;
-	// Можно было обойтись только входящим параметром rules но, так как
-	// rules->cursors появился после всего этого написанного, что бы не ломать
-	// код и голову просто добавилась последняя строчка "rules->cursors = *cursors";
 }

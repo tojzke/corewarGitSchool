@@ -1,19 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exit.c                                             :+:      :+:    :+:   */
+/*   end_game.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bkiehn <bkiehn@student.42.fr>              +#+  +:+       +#+        */
+/*   By: dzboncak <dzboncak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/25 19:17:09 by bkiehn            #+#    #+#             */
-/*   Updated: 2019/09/25 19:17:14 by bkiehn           ###   ########.fr       */
+/*   Updated: 2019/10/15 19:57:09 by dzboncak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
 #include "commands.h"
 
-void free_cursor(t_champion** cursor)
+void	free_cursor(t_champion **cursor)
 {
 	if (cursor != 0 && *cursor != 0)
 	{
@@ -30,28 +30,28 @@ void free_cursor(t_champion** cursor)
 	}
 }
 
-void	clean_memory(t_rules* rules, t_champion* cursors)
+void	clean_memory(t_rules *rules, t_champion *cursors)
 {
-	t_champion*		tmp;
+	t_champion	*tmp;
 
 	if (rules != 0)
 		free(rules);
 	while (cursors)
 	{
-		tmp = cursors;
+		tmp = cursors->next;
 		free_cursor(&cursors);
-		cursors = tmp->next;
+		cursors = tmp;
 	}
 }
 
-void	end_game(int reason, t_rules* rules, t_champion* cursors)
+void	end_game(int reason, t_rules *rules, t_champion *cursors)
 {
 	if (reason == PRINTING_DUMP)
 		print_dump(rules);
 	if (reason == GAME_OVER)
 	{
 		ft_printf("Contestant %d, \"%s\", has won !\n", rules->last_alive,
-				  rules->name_winner);
+		rules->name_winner);
 //		print_rules(rules);
 	}
 //	clean_memory(rules, cursors);

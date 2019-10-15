@@ -78,7 +78,7 @@ void			xor_func(t_rules *rules, t_champion *cursor, unsigned char *t_args);
 void			zjmp_func(t_rules *rules, t_champion *cursor, unsigned char *t_args);
 void			ldi_func(t_rules *rules, t_champion *cursor, unsigned char *t_args);
 void			sti_func(t_rules *rules, t_champion *cursor, unsigned char *t_args);
-void			fork_func(t_rules *rules, t_champion *cursor, unsigned char *t_args);
+void			fork_func(t_rules *rules, t_champion *crs, unsigned char *t_args);
 void			lld_func(t_rules *rules, t_champion *cursor, unsigned char *t_args);
 void			lldi_func(t_rules *rules, t_champion *cursor, unsigned char *t_args);
 void			lfork_func(t_rules *rules, t_champion *cursor, unsigned char *t_args);

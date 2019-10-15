@@ -6,7 +6,7 @@
 /*   By: dzboncak <dzboncak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/13 16:22:13 by aleksey           #+#    #+#             */
-/*   Updated: 2019/09/21 20:31:42 by dzboncak         ###   ########.fr       */
+/*   Updated: 2019/10/15 19:44:24 by dzboncak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,15 @@ typedef struct 			s_rules
 int 	get_num_of_players(int argc, char **argv);
 int		all_valid(int argc, char **argv, t_champion **champions, t_rules *rules);
 
+/*
+ * * Read and create champion
+ */
+
+char					*read_name(int fd);
+char					*read_comment(int fd);
+int		read_body(int fd, t_champion *champion);	
 int						create_champion(t_champion** champions, t_rules* rules, int fd, int current_num);
+
 void 					print_bytes_hex(unsigned char* bytes, int size);
 void					create_battlefield(t_rules* rules, t_champion** champions);
 void					print_battlefiled(t_rules* rules, t_champion** champions);

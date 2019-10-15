@@ -12,7 +12,7 @@ include_directories(libft/includes)
 set(SRC_LIST ${SRC_LIST} srcs/battlefield.c
         srcs/check_cursor_args.c
         srcs/check_cursors.c
-        srcs/createChampion.c
+        srcs/create_champion.c
         srcs/cursors.c
         srcs/end_game.c
         srcs/exec_command.c
@@ -25,7 +25,8 @@ set(SRC_LIST ${SRC_LIST} srcs/battlefield.c
         srcs/op_func_16.c
         srcs/print.c
         srcs/start_game.c
-        srcs/check_args.c)
+        srcs/check_args.c
+        srcs/read_champion.c)
 
 
 add_executable(corewar ${SRC_LIST})

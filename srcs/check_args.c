@@ -6,14 +6,13 @@
 /*   By: dzboncak <dzboncak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/13 19:39:02 by dzboncak          #+#    #+#             */
-/*   Updated: 2019/10/13 19:39:21 by dzboncak         ###   ########.fr       */
+/*   Updated: 2019/10/15 19:07:04 by dzboncak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
 
-
-int 	get_num_of_players(int argc, char **argv)
+int		get_num_of_players(int argc, char **argv)
 {
 	int	num;
 	int	i;
@@ -35,18 +34,20 @@ int 	get_num_of_players(int argc, char **argv)
 	return (num);
 }
 
-int create_n_champ(char **argv, int argi, t_champion **champions, t_rules *rules)
+int		create_n_champ(char **argv, int argi,
+		t_champion **champions, t_rules *rules)
 {
 	int fd;
 	int current_num;
 	int num_players;
 
-
 	if ((fd = open(argv[argi + 2], O_RDONLY)) == -1)
 		return (0);
 	++argi;
 	current_num = ft_atoi(argv[argi]);
-	if (current_num <= 0 || current_num > rules->much_players || champions[current_num] != NULL)
+	if (current_num <= 0
+	|| current_num > rules->much_players
+	|| champions[current_num] != NULL)
 	{
 		close(fd);
 		ft_putendl("Use -n correctly!");
@@ -61,9 +62,8 @@ int create_n_champ(char **argv, int argi, t_champion **champions, t_rules *rules
 	return (1);
 }
 
-
-
-int valid_n_flags(int argc, char **argv, t_champion **champions, t_rules *rules)
+int		valid_n_flags(int argc, char **argv,
+		t_champion **champions, t_rules *rules)
 {
 	int i;
 	int	fd;
@@ -76,14 +76,14 @@ int valid_n_flags(int argc, char **argv, t_champion **champions, t_rules *rules)
 		{
 			if (!create_n_champ(argv, i, champions, rules))
 				return (0);
-			i += 2; // Пропустить аргументы для создания c -n флагом "-n 4 champ.cor"
+			i += 2;
 		}
 		++i;
 	}
 	return (1);
 }
 
-int all_valid(int argc, char **argv, t_champion **champions, t_rules *rules)
+int		all_valid(int argc, char **argv, t_champion **champions, t_rules *rules)
 {
 	int num_players;
 
