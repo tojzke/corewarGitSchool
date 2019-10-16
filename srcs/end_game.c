@@ -17,14 +17,7 @@ void	free_cursor(t_champion **cursor)
 {
 	if (cursor != 0 && *cursor != 0)
 	{
-		if ((*cursor)->name)
-			free((*cursor)->name);
-		if ((*cursor)->comment)
-			free((*cursor)->comment);
-		if ((*cursor)->body)
-			free((*cursor)->body);
-		if ((*cursor)->color)
-			free((*cursor)->color);
+
 		free(*cursor);
 		*cursor = NULL;
 	}
@@ -43,6 +36,7 @@ void	clean_memory(t_rules *rules, t_champion *cursors)
 		cursors = tmp;
 	}
 }
+
 
 void	end_game(int reason, t_rules *rules, t_champion *cursors)
 {

@@ -49,6 +49,8 @@ void	introduction(t_champion **champions, t_rules *rules)
 				champions[current_champion]->size,
 				champions[current_champion]->name,
 				champions[current_champion]->comment);
+		free(champions[current_champion]->comment);
+		free(champions[current_champion]->body);
 		current_champion++;
 	}
 	free(champions);

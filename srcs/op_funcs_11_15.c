@@ -58,7 +58,7 @@ void	fork_func(t_rules *rules, t_champion *crs, unsigned char *t_args)
 		cp_crs->reg[registr] = crs->reg[registr];
 	cp_crs->carry = crs->carry;
 	cp_crs->last_live_in_cycle = crs->last_live_in_cycle;
-	cp_crs->color = ft_strdup(crs->color);
+	cp_crs->color = crs->color;
 	cp_crs->name = ft_strdup(crs->name);
 	cp_crs->number = rules->number_cycle;
 	rules->cursors = add_cursor_in_start(rules->cursors, cp_crs);
@@ -125,7 +125,7 @@ void	lfork_func(t_rules *rules, t_champion *cursor, unsigned char *t_args)
 		copy_cursor->reg[registr] = cursor->reg[registr];
 	copy_cursor->carry = cursor->carry;
 	copy_cursor->last_live_in_cycle = cursor->last_live_in_cycle;
-	copy_cursor->color = ft_strdup(cursor->color);
+	copy_cursor->color = cursor->color;
 	copy_cursor->name = ft_strdup(cursor->name);
 	rules->cursors = add_cursor_in_start(rules->cursors, copy_cursor);
 	rules->number_cursors++;
