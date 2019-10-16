@@ -96,31 +96,31 @@ void	set_rules(t_rules* rules, t_champion** champions)
     while (champions[current_champion] == NULL)
         current_champion--;
     rules->last_alive = current_champion;
-	rules->name_winner = ft_strdup(champions[current_champion]->name);
+	rules->name_winner = champions[current_champion]->name;
 	rules->ctd = CYCLE_TO_DIE;
 }
 
 int 	main(int argc, char** argv) {
-	t_rules*		rules;
+	t_rules		rules;
 	t_champion**	champions;
 	t_champion*     cursors;
 
 	champions = ft_memalloc(sizeof(t_champion*) * 5);
-	rules = ft_memalloc(sizeof(t_rules));
-	rules->much_players = get_num_of_players(argc, argv);
-	if (!parseArg(argc, argv, rules, champions))
+	ft_memset(&rules, 0, sizeof(t_rules));
+	rules.much_players = get_num_of_players(argc, argv);
+	if (!parseArg(argc, argv, &rules, champions))
 	{
 		ft_printf("%sОшибка на этапе обнаружения настроек для разрушителей или при их создании.%s\n", RED, NO_COLOR);
 		exit (0);
 	}
-	if (rules->much_players != 0)
-		set_rules(rules, champions);
+	if (rules.much_players != 0)
+		set_rules(&rules, champions);
 	else
 	{
 		ft_printf("Zdes budet usage\n");
 		exit (0);
 	}
-	create_battlefield(rules, champions);
+	create_battlefield(&rules, champions);
 	/*
 	 * Исторически сложилось, что начал работать с массивом
 	 * чемпионов и последнии параметры для них устанавливаются в
@@ -129,11 +129,11 @@ int 	main(int argc, char** argv) {
 	 * что делается в creat_cursor, но это всё теже структуры.
 	 * number_cursor определяется здесь же
 	 */
-	cursors = create_cursor(champions, rules);
+	cursors = create_cursor(champions, &rules);
 //	print_rules(rules);
 //	print_cursors(cursors, 1);
 //  print_battlefiled(rules, champions);
-	start_game(cursors, rules, champions);
+	start_game(cursors, &rules, champions);
 //	Печатать после старт гейма есть смысл только в функции end_game,
 //	так как в завершении функции end_game, всё чистится
 }

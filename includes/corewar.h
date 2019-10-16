@@ -77,7 +77,7 @@ int		all_valid(int argc, char **argv, t_champion **champions, t_rules *rules);
  * * Read and create champion
  */
 
-char					*read_name(int fd);
+char *read_name(int fd, int current_num);
 char					*read_comment(int fd);
 int		read_body(int fd, t_champion *champion);	
 int						create_champion(t_champion** champions, t_rules* rules, int fd, int current_num);
@@ -98,6 +98,7 @@ void					start_game(t_champion* cursors, t_rules* rules,
 									t_champion** champions);
 t_champion*				add_cursor_in_start(t_champion* cursors,
 									   		t_champion* champion);
+void	delete_cursor(t_champion *del_cursor, t_champion **cursors);
 void					check_cursors(t_champion** cursors, t_rules* rules);
 void					exec_command(t_rules *rules, t_champion *cursor);
 int						count_size_args(unsigned char* type_args, int how_many_arg, int op_code);

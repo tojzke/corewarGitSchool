@@ -83,7 +83,7 @@ int		create_champion(t_champion **champions, t_rules *rules,
 		return (0);
 	if ((champions[current_num]->size = check_size_champion(fd)) == -1)
 		return (0);
-	champions[current_num]->name = read_name(fd);
+	champions[current_num]->name = read_name(fd, current_num);
 	champions[current_num]->comment = read_comment(fd);
 	champions[current_num]->fd = fd;
 	select_color(champions[current_num]);

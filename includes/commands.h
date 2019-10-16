@@ -53,6 +53,7 @@ typedef struct          s_op
 
 extern  t_op 			g_op_tab[17];
 extern  t_op_func 		g_func_tab[17];
+extern  char 			names_tab[MAX_PLAYERS + 1][PROG_NAME_LENGTH + 4];
 
 /*
 ** Args checking

@@ -21,9 +21,7 @@ void	live_func(t_rules *rules, t_champion *cursor, unsigned char *args_types)
 	if (val == -cursor->reg[1] && val > 0 && val <= rules->much_players)
 	{
 		rules->last_alive = val;
-		if (rules->name_winner != 0)
-			free(rules->name_winner);
-		rules->name_winner = ft_strdup(cursor->name);
+		rules->name_winner = cursor->name;
 	}
 	cursor->last_live_in_cycle = rules->number_cycle;
 	++(rules->number_live_of_ctd);

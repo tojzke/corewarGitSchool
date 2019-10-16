@@ -11,15 +11,13 @@
 /* ************************************************************************** */
 
 #include "corewar.h"
+#include "commands.h"
 
-char	*read_name(int fd)
+char *read_name(int fd, int current_num)
 {
-	char	*name;
-
 	lseek(fd, -(PROG_NAME_LENGTH + 8), SEEK_CUR);
-	name = (char*)malloc(PROG_NAME_LENGTH + 4);
-	read(fd, name, PROG_NAME_LENGTH + 4);
-	return (name);
+	read(fd, names_tab[current_num], PROG_NAME_LENGTH + 4);
+	return names_tab[current_num];
 }
 
 char	*read_comment(int fd)

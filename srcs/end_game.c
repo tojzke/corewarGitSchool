@@ -23,17 +23,16 @@ void	free_cursor(t_champion **cursor)
 	}
 }
 
-void	clean_memory(t_rules *rules, t_champion *cursors)
+void	clean_memory(t_rules *rules, t_champion **cursors)
 {
-	t_champion	*tmp;
+	t_champion *cursor;
 
-	if (rules != 0)
-		free(rules);
-	while (cursors)
+	cursor = *cursors;
+	while (rules->number_cursors != 0)
 	{
-		tmp = cursors->next;
-		free_cursor(&cursors);
-		cursors = tmp;
+		delete_cursor(cursor, cursors);
+		rules->number_cursors--;
+		cursor = *cursors;
 	}
 }
 

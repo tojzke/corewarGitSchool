@@ -14,6 +14,8 @@
 #include "op.h"
 #include <stdlib.h>
 
+char 	names_tab[MAX_PLAYERS + 1][PROG_NAME_LENGTH + 4] = {0};
+
 t_op_func g_func_tab[17] =
 {
 	NULL,
