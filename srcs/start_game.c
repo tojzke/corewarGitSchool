@@ -82,5 +82,5 @@ void	start_game(t_champion *cursors, t_rules *rules, t_champion **champions)
 		if (rules->dump == rules->number_cycle)
 			end_game(PRINTING_DUMP, rules, rules->cursors);
 	}
-	end_game(GAME_OVER, rules, cursors);
+	end_game(GAME_OVER, rules, rules->cursors);
 }
