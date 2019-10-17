@@ -13,26 +13,17 @@
 #include "corewar.h"
 #include "commands.h"
 
-void	free_cursor(t_champion **cursor)
+void	clean_memory(t_rules *rules, t_champion *cursors)
 {
-	if (cursor != 0 && *cursor != 0)
+	t_champion *current;
+	t_champion *next;
+
+	current = cursors;
+	while (current != NULL)
 	{
-
-		free(*cursor);
-		*cursor = NULL;
-	}
-}
-
-void	clean_memory(t_rules *rules, t_champion **cursors)
-{
-	t_champion *cursor;
-
-	cursor = *cursors;
-	while (rules->number_cursors != 0)
-	{
-		delete_cursor(cursor, cursors);
-		rules->number_cursors--;
-		cursor = *cursors;
+		next = current->next;
+		free(current);
+		current = next;
 	}
 }
 
@@ -40,13 +31,15 @@ void	clean_memory(t_rules *rules, t_champion **cursors)
 void	end_game(int reason, t_rules *rules, t_champion *cursors)
 {
 	if (reason == PRINTING_DUMP)
+	{
 		print_dump(rules);
-	if (reason == GAME_OVER)
+		clean_memory(rules, cursors);
+	}
+	else if (reason == GAME_OVER)
 	{
 		ft_printf("Contestant %d, \"%s\", has won !\n", rules->last_alive,
 		rules->name_winner);
 //		print_rules(rules);
 	}
-//	clean_memory(rules, cursors);
 	exit(0);
 }
