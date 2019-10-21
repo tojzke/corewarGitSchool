@@ -18,7 +18,7 @@ void	live_func(t_rules *rules, t_champion *cursor, unsigned char *args_types)
 
 	val = -(int)get_value_from_battlefield(rules, cursor->position + OP_SIZE,
 		g_op_tab[cursor->code_operation].dir_size);
-	if (val == -cursor->reg[1] && val > 0 && val <= rules->much_players)
+	if (val > 0 && val <= rules->much_players)
 	{
 		rules->last_alive = val;
 		rules->name_winner = cursor->name;

@@ -38,8 +38,7 @@ void	end_game(int reason, t_rules *rules, t_champion *cursors)
 	else if (reason == GAME_OVER)
 	{
 		ft_printf("Contestant %d, \"%s\", has won !\n", rules->last_alive,
-		rules->name_winner);
-//		print_rules(rules);
+		names_tab[rules->last_alive]);
 	}
 	exit(0);
 }
