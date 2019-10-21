@@ -44,6 +44,11 @@
 # define ERR_TOO_MANY 3
 # define ERR_N_MISUSE 4
 # define ERR_DUMP 5
+# define ERR_OPEN_FILE 6
+# define ERR_INDEX_CUR_CHAMP 7
+# define ERR_MAGIC_HEADER 8
+# define ERR_CONTENT_CHAMP 9
+# define ERR_SIZE_BODY 10
 
 # include "corewar.h"
 

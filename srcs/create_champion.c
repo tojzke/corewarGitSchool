@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "corewar.h"
+#include "commands.h"
 
 int		check_magic_header(int fd)
 {
@@ -70,7 +71,7 @@ int		create_champion(t_champion **champions, t_rules *rules,
 		int fd, int current_num)
 {
 	if (champions[current_num] != NULL)
-		return (0);
+		error_msg(ERR_INDEX_CUR_CHAMP);
 	else
 	{
 		champions[current_num] = ft_memalloc(sizeof(t_champion));
@@ -78,17 +79,17 @@ int		create_champion(t_champion **champions, t_rules *rules,
 		champions[current_num]->reg[1] = -current_num;
 	}
 	if (!check_magic_header(fd))
-		return (0);
+		error_msg(ERR_MAGIC_HEADER);
 	if ((lseek(fd, PROG_NAME_LENGTH + 4, SEEK_CUR)) == -1L)
-		return (0);
+		error_msg(ERR_CONTENT_CHAMP);
 	if ((champions[current_num]->size = check_size_champion(fd)) == -1)
-		return (0);
+		error_msg(ERR_CONTENT_CHAMP);
 	champions[current_num]->name = read_name(fd, current_num);
 	champions[current_num]->comment = read_comment(fd);
 	champions[current_num]->fd = fd;
 	select_color(champions[current_num]);
 	if (!read_body(fd, champions[current_num]))
-		return (0);
+		error_msg(ERR_SIZE_BODY);
 	close(fd);
 	return (1);
 }

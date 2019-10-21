@@ -37,12 +37,10 @@ int		parseArg(int argc, char** argv, t_rules *rules, t_champion **champions)
 {
 	int arg;
 	int fd;
-	int	current_num;
 
 	if (!all_valid(argc, argv, champions, rules))
 		return (0);
 	arg = 1;
-	current_num = 0;
 	while (arg < argc)
 	{	
 		if (ft_strequ(argv[arg], "-dump"))
@@ -51,23 +49,16 @@ int		parseArg(int argc, char** argv, t_rules *rules, t_champion **champions)
 			if (arg <= argc)
 				rules->dump = ft_atoi(argv[arg]);
 			else
-				return 0; //ошибка юзача
+				error_msg(PRINT_USAGE); //ошибка юзача
 		}
 		else if (ft_strequ(argv[arg], "-n"))
 			arg += 2;
 		else
 		{
 			if ((fd = open(argv[arg], O_RDONLY)) == -1)
-				return 0; //ошибка открытия файла
+				error_msg(ERR_OPEN_FILE); //ошибка открытия файла
 			else
-			{
-				if (current_num == 0)
-					if ((current_num = calcNumberChampion(rules, champions)) == 0)
-						return 0; //С номером петуха что-то не так
-				if (!create_champion(champions, rules, fd, current_num))
-					return 0; //Ошибка при создании разрушителя миров
-				current_num = 0;
-			}
+				create_champion(champions, rules, fd, calcNumberChampion(rules, champions));
 		}
 		arg++;
 	}
@@ -92,6 +83,7 @@ int 	main(int argc, char** argv) {
 	t_champion*     cursors;
 
 	champions = ft_memalloc(sizeof(t_champion*) * 5);
+
 	ft_memset(&rules, 0, sizeof(t_rules));
 	rules.much_players = get_num_of_players(argc, argv);
 	if (!parseArg(argc, argv, &rules, champions))
