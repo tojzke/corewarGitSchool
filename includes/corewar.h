@@ -70,6 +70,7 @@ typedef struct 			s_rules
  * * Parsing
  */
 
+void	error_msg(int err_code);
 int 	get_num_of_players(int argc, char **argv);
 int		all_valid(int argc, char **argv, t_champion **champions, t_rules *rules);
 

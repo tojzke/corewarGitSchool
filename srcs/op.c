@@ -16,6 +16,15 @@
 
 char 	names_tab[MAX_PLAYERS + 1][PROG_NAME_LENGTH + 4] = {0};
 
+const char	error_tab[ERR_NUM + 1][MAX_ERR_LENGTH + 1] =
+		{
+			"Usage: > ./corewar [-dump nbr_cycles] [[-n number] champion1.cor ...]",
+			"Something wrong with champs!",
+			"Too many champs!",
+			"Use -n correctly!",
+			"Dump error!"
+		};
+
 t_op_func g_func_tab[17] =
 {
 	NULL,

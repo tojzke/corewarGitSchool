@@ -36,6 +36,15 @@
 # define PRINTING_DUMP	1
 # define GAME_OVER		2
 
+# define ERR_NUM 10
+# define MAX_ERR_LENGTH 100
+
+# define PRINT_USAGE 1
+# define ERR_PARSE 2
+# define ERR_TOO_MANY 3
+# define ERR_N_MISUSE 4
+# define ERR_DUMP 5
+
 # include "corewar.h"
 
 
@@ -54,6 +63,8 @@ typedef struct          s_op
 extern  t_op 			g_op_tab[17];
 extern  t_op_func 		g_func_tab[17];
 extern  char 			names_tab[MAX_PLAYERS + 1][PROG_NAME_LENGTH + 4];
+extern const char		error_tab[ERR_NUM + 1][MAX_ERR_LENGTH + 1];
+
 
 /*
 ** Args checking

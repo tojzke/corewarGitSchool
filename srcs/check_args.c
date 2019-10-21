@@ -10,6 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "commands.h"
 #include "corewar.h"
 
 int		get_num_of_players(int argc, char **argv)
@@ -30,7 +31,9 @@ int		get_num_of_players(int argc, char **argv)
 		}
 	}
 	if (num > 4)
-		return (0);
+		error_msg(ERR_TOO_MANY);
+	else if (num == 0)
+		error_msg(PRINT_USAGE);
 	return (num);
 }
 
@@ -89,8 +92,7 @@ int		all_valid(int argc, char **argv, t_champion **champions, t_rules *rules)
 
 	if ((num_players = get_num_of_players(argc, argv)) == 0)
 	{
-		ft_putendl("Too many champs!");
-		return (0);
+
 	}
 	if (!valid_n_flags(argc, argv, champions, rules))
 		return (0);

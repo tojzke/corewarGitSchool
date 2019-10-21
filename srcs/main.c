@@ -10,34 +10,20 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "commands.h"
 #include "corewar.h"
 
-int			checkNumberChampion(int currentNumberChampion, t_rules* rules, t_champion** champions)
+void		error_msg(int err_code)
 {
-	if (currentNumberChampion < 1 || currentNumberChampion > 4)
-		return 0; //Не возможный номер петуха
-	if (rules->much_players == 4)
-		return 0; //Превышенно количество петухов
-	rules->much_players++;
-	if (champions[currentNumberChampion] != NULL)
-		return 0; //Такой петух уже есть
-	champions[currentNumberChampion] = ft_memalloc(sizeof(t_champion));
-	champions[currentNumberChampion]->number = currentNumberChampion;
-	champions[currentNumberChampion]->reg[1] = -currentNumberChampion;
-
-	return currentNumberChampion;
+	ft_putendl(error_tab[err_code]);
+	exit(err_code);
 }
-
 
 int			calcNumberChampion(t_rules* rules, t_champion** champions)
 {
 	int		currentNumberChampion;
 
-//	if (rules->much_players == 4) !Количество игроково считается сразу!
-//		return 0; //Превышенно количество петухов
-//	rules->much_players++;
 	currentNumberChampion = 1;
-
 	while (champions[currentNumberChampion] != NULL)
 	{
 		currentNumberChampion++;
@@ -109,10 +95,7 @@ int 	main(int argc, char** argv) {
 	ft_memset(&rules, 0, sizeof(t_rules));
 	rules.much_players = get_num_of_players(argc, argv);
 	if (!parseArg(argc, argv, &rules, champions))
-	{
-		ft_printf("%sОшибка на этапе обнаружения настроек для разрушителей или при их создании.%s\n", RED, NO_COLOR);
-		exit (0);
-	}
+		error_msg(ERR_PARSE);
 	if (rules.much_players != 0)
 		set_rules(&rules, champions);
 	else
