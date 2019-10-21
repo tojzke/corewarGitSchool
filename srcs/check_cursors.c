@@ -38,6 +38,7 @@ void	delete_cursor(t_champion *del_cursor, t_champion **cursors)
 void	check_cursors(t_champion **cursors, t_rules *rules)
 {
 	t_champion *cursor;
+	t_champion *tmp;
 
 	cursor = *cursors;
 	rules->number_check++;
@@ -46,9 +47,10 @@ void	check_cursors(t_champion **cursors, t_rules *rules)
 		if (rules->ctd <= 0 ||
 		rules->number_cycle - cursor->last_live_in_cycle >= rules->ctd)
 		{
+			tmp = cursor->next;
 			delete_cursor(cursor, cursors);
 			rules->number_cursors--;
-			cursor = *cursors;
+			cursor = tmp;
 		}
 		else
 			cursor = cursor->next;
