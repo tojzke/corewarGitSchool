@@ -78,36 +78,37 @@ int		all_valid(int argc, char **argv, t_champion **champions, t_rules *rules);
  * * Read and create champion
  */
 
-char *read_name(int fd, int current_num);
+char					*read_name(int fd, int current_num);
 char					*read_comment(int fd);
-int		read_body(int fd, t_champion *champion);	
-int						create_champion(t_champion** champions, t_rules* rules, int fd, int current_num);
+int						read_body(int fd, t_champion *champion);
+int						create_champion(t_champion** champions, t_rules *rules, int fd, int current_num);
 
 void 					print_bytes_hex(unsigned char* bytes, int size);
-void					create_battlefield(t_rules* rules, t_champion** champions);
-void					print_battlefiled(t_rules* rules, t_champion** champions);
+void					create_battlefield(t_rules *rules, t_champion** champions);
+void					print_battlefiled(t_rules *rules, t_champion** champions);
 int						select_champion(t_champion** champions, int current_champion);
-t_champion*				create_cursor(t_champion** champions, t_rules* rules);
+t_champion*				create_cursor(t_champion** champions, t_rules *rules);
 void					print_cursors(t_champion* cursor, char flag_body);
 void					to_string(t_champion* cursors, char flag_body);
 						/*
 						 * flag_body == 1 body print
 						 * flag_body == 0 body no print
 						 */
-void					print_rules(t_rules* rules);
-void					start_game(t_champion* cursors, t_rules* rules,
+void					print_rules(t_rules *rules);
+void					start_game(t_champion* cursors, t_rules *rules,
 									t_champion** champions);
 t_champion*				add_cursor_in_start(t_champion* cursors,
 									   		t_champion* champion);
-void	delete_cursor(t_champion *del_cursor, t_champion **cursors);
-void					check_cursors(t_champion** cursors, t_rules* rules);
+void					delete_cursor(t_champion *del_cursor, t_champion **cursors);
+void					check_cursors(t_champion** cursors, t_rules *rules);
 void					exec_command(t_rules *rules, t_champion *cursor);
 int						count_size_args(unsigned char* type_args, int how_many_arg, int op_code);
 int						allowed_args(int op_code, unsigned char args_code, unsigned char* types_args);
-void					print_dump(t_rules* rules);
+void					print_dump(t_rules *rules);
 void					free_cursor(t_champion** cursor);
-int						get_arg(t_rules* rules, t_champion* cursor, unsigned char *t_args, int num_arg);
-void					end_game(int reason, t_rules* rules, t_champion* cursors);
+int						get_arg(t_rules *rules, t_champion* cursor, unsigned char *t_args, int num_arg);
+void					end_game(int reason, t_rules *rules, t_champion* cursors);
+int						valid_n_flags(int argc, char **argv, t_champion **champions, t_rules *rules);
 
 typedef void			(*t_op_func)(t_rules*, t_champion*, unsigned char*);
 
