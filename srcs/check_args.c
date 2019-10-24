@@ -53,8 +53,7 @@ int		create_n_champ(char **argv, int argi,
 	|| champions[current_num] != NULL)
 	{
 		close(fd);
-		ft_putendl("Use -n correctly!");
-		return (0);
+		error_msg(ERR_N_MISUSE);
 	}
 	++argi;
 	if (!create_champion(champions, rules, fd, current_num))
@@ -73,10 +72,11 @@ int		valid_n_flags(int argc, char **argv,
 	int current_num;
 
 	i = 1;
-	while (i < argc - 2)
+	while (i < argc)
 	{
-		if (ft_strequ(argv[i], "-n"))
-		{
+		if (ft_strequ(argv[i], "-n")) {
+			if (i == argc - 1 || i == argc - 2)
+				error_msg(ERR_N_MISUSE);
 			if (!create_n_champ(argv, i, champions, rules))
 				return (0);
 			i += 2;
