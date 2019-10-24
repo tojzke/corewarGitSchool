@@ -25,7 +25,8 @@ set(SRC_LIST ${SRC_LIST} srcs/battlefield.c
         srcs/print.c
         srcs/start_game.c
         srcs/check_args.c
-        srcs/read_champion.c)
+        srcs/read_champion.c
+        srcs/debug_function.c)
 
 
 add_executable(corewar ${SRC_LIST})

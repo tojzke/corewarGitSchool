@@ -15,7 +15,7 @@
 
 void		error_msg(int err_code)
 {
-	ft_putendl(error_tab[err_code]);
+	ft_putendl(g_error_tab[err_code]);
 	exit(err_code);
 }
 

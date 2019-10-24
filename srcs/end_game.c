@@ -27,7 +27,6 @@ void	clean_memory(t_rules *rules, t_champion *cursors)
 	}
 }
 
-
 void	end_game(int reason, t_rules *rules, t_champion *cursors)
 {
 	if (reason == PRINTING_DUMP)
@@ -38,7 +37,7 @@ void	end_game(int reason, t_rules *rules, t_champion *cursors)
 	else if (reason == GAME_OVER)
 	{
 		ft_printf("Contestant %d, \"%s\", has won !\n", rules->last_alive,
-		names_tab[rules->last_alive]);
+				g_names_tab[rules->last_alive]);
 	}
 	exit(0);
 }
