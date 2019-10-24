@@ -52,54 +52,69 @@
 
 # include "corewar.h"
 
-
-typedef struct          s_op
+typedef struct		s_op
 {
-	char*				name;
-	unsigned char		number_arg; // кол-во принимаемых аргументов
-	unsigned char		types_args[3];
-	unsigned char		number;
-	int					cycle_before_run;
-	char*				description;
-	unsigned char		is_code_type_arg;
-	unsigned char		dir_size;
-}                       t_op;
+	char			*name;
+	unsigned char	number_arg;
+	unsigned char	types_args[3];
+	unsigned char	number;
+	int				cycle_before_run;
+	char			*description;
+	unsigned char	is_code_type_arg;
+	unsigned char	dir_size;
+}					t_op;
 
-extern  t_op 			g_op_tab[17];
-extern  t_op_func 		g_func_tab[17];
-extern  char 			names_tab[MAX_PLAYERS + 1][PROG_NAME_LENGTH + 4];
-extern const char		error_tab[ERR_NUM + 1][MAX_ERR_LENGTH + 1];
-
+extern t_op			g_op_tab[17];
+extern t_op_func	g_func_tab[17];
+extern char			g_names_tab[MAX_PLAYERS + 1][PROG_NAME_LENGTH + 4];
+extern const char	g_error_tab[ERR_NUM + 1][MAX_ERR_LENGTH + 1];
 
 /*
 ** Args checking
 */
 
-int				check_for_possible_args(int op_code, int args_code);
-void			print_bits(const size_t size, const void *ptr);
-int 			get_value_from_battlefield(t_rules *rules, int position, int size);
-void			set_value_in_battlefield(t_rules *rules, int position, int size, const void *value);
+int					check_for_possible_args(int op_code, int args_code);
+void				print_bits(const size_t size, const void *ptr);
+int					get_value_from_battlefield(t_rules *rules,
+						int position, int size);
+void				set_value_in_battlefield(t_rules *rules, int position,
+							int size, const void *value);
 
 /*
 ** ASM functions
 */
 
-void			live_func(t_rules *rules, t_champion *cursor, unsigned char *t_args);
-void			load_func(t_rules *rules, t_champion *cursor, unsigned char *t_args);
-void			store_func(t_rules *rules, t_champion *cursor, unsigned char *t_args);
-void			add_func(t_rules *rules, t_champion *cursor, unsigned char *t_args);
-void			sub_func(t_rules *rules, t_champion *cursor, unsigned char *t_args);
-void			and_func(t_rules *rules, t_champion *cursor, unsigned char *t_args);
-void			or_func(t_rules *rules, t_champion *cursor, unsigned char *t_args);
-void			xor_func(t_rules *rules, t_champion *cursor, unsigned char *t_args);
-void			zjmp_func(t_rules *rules, t_champion *cursor, unsigned char *t_args);
-void			ldi_func(t_rules *rules, t_champion *cursor, unsigned char *t_args);
-void			sti_func(t_rules *rules, t_champion *cursor, unsigned char *t_args);
-void			fork_func(t_rules *rules, t_champion *crs, unsigned char *t_args);
-void			lld_func(t_rules *rules, t_champion *cursor, unsigned char *t_args);
-void			lldi_func(t_rules *rules, t_champion *cursor, unsigned char *t_args);
-void			lfork_func(t_rules *rules, t_champion *cursor, unsigned char *t_args);
-void			aff_func(t_rules *rules, t_champion *cursor, unsigned char *t_args);
-
+void				live_func(t_rules *rules, t_champion *cursor,
+							unsigned char *t_args);
+void				load_func(t_rules *rules, t_champion *cursor,
+							unsigned char *t_args);
+void				store_func(t_rules *rules, t_champion *cursor,
+							unsigned char *t_args);
+void				add_func(t_rules *rules, t_champion *cursor,
+							unsigned char *t_args);
+void				sub_func(t_rules *rules, t_champion *cursor,
+							unsigned char *t_args);
+void				and_func(t_rules *rules, t_champion *cursor,
+							unsigned char *t_args);
+void				or_func(t_rules *rules, t_champion *cursor,
+							unsigned char *t_args);
+void				xor_func(t_rules *rules, t_champion *cursor,
+							unsigned char *t_args);
+void				zjmp_func(t_rules *rules, t_champion *cursor,
+							unsigned char *t_args);
+void				ldi_func(t_rules *rules, t_champion *cursor,
+							unsigned char *t_args);
+void				sti_func(t_rules *rules, t_champion *cursor,
+							unsigned char *t_args);
+void				fork_func(t_rules *rules, t_champion *crs,
+							unsigned char *t_args);
+void				lld_func(t_rules *rules, t_champion *cursor,
+							unsigned char *t_args);
+void				lldi_func(t_rules *rules, t_champion *cursor,
+							unsigned char *t_args);
+void				lfork_func(t_rules *rules, t_champion *cursor,
+							unsigned char *t_args);
+void				aff_func(t_rules *rules, t_champion *cursor,
+							unsigned char *t_args);
 
 #endif

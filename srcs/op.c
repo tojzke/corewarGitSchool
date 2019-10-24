@@ -14,24 +14,24 @@
 #include "op.h"
 #include <stdlib.h>
 
-char 	names_tab[MAX_PLAYERS + 1][PROG_NAME_LENGTH + 4] = {0};
+char		g_names_tab[MAX_PLAYERS + 1][PROG_NAME_LENGTH + 4] = {0};
 
-const char	error_tab[ERR_NUM + 1][MAX_ERR_LENGTH + 1] =
-		{
-			"",
-			"Usage: > ./corewar [-dump nbr_cycles] [[-n number] champion1.cor ...]",
-			"Something wrong with champs!",
-			"Too many champs!",
-			"Use -n correctly!",
-			"Dump error!",
-			"Error open file",
-   			"Error index champion",
-   			"Error magic header",
-   			"Error content champ",
-   			"Error size body"
-		};
+const char	g_error_tab[ERR_NUM + 1][MAX_ERR_LENGTH + 1] =
+{
+	"",
+	"Usage: > ./corewar [-dump nbr_cycles] [[-n number] champion1.cor ...]",
+	"Something wrong with champs!",
+	"Too many champs!",
+	"Use -n correctly!",
+	"Dump error!",
+	"Error open file",
+	"Error index champion",
+	"Error magic header",
+	"Error content champ",
+	"Error size body"
+};
 
-t_op_func g_func_tab[17] =
+t_op_func	g_func_tab[17] =
 {
 	NULL,
 	&live_func,
@@ -52,7 +52,7 @@ t_op_func g_func_tab[17] =
 	&aff_func
 };
 
-t_op	g_op_tab[17] =
+t_op		g_op_tab[17] =
 {
 	{0, 0, {0}, 0, 0, 0, 0, 0},
 	{"live", 1, {T_DIR}, 1, 10, "alive", 0, 4},
