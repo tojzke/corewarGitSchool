@@ -4,7 +4,6 @@ project(corewar)
 set(CMAKE_CXX_STANDARD 14)
 
 include_directories(ft_printf_fd/includes)
-include_directories(ft_printf_fd/libft/includes)
 include_directories(includes)
 include_directories(libft/includes)
 

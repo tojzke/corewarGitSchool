@@ -85,16 +85,3 @@ int		valid_n_flags(int argc, char **argv,
 	}
 	return (1);
 }
-
-//int		all_valid(int argc, char **argv, t_champion **champions, t_rules *rules)
-//{
-////	int num_players;
-////
-////	if ((num_players = get_num_of_players(argc, argv)) == 0)
-////	{
-////
-////	}
-//	if (!valid_n_flags(argc, argv, champions, rules))
-//		return (0);
-//	return (1);
-//}

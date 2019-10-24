@@ -149,8 +149,8 @@ void	print_rules(t_rules* rules)
 		    "last_alive: %d\nnumber_cycle: %d\nnumber_live_of_ctd: %d\n"
 	        "cycles_to_die(ctd): %d\nnumber_check: %d\n"
 		    "---------------------------\n",
-	        rules->dump, rules->number_cursors,
-	        rules->much_players, rules->last_alive,
-			rules->number_cycle, rules->number_live_of_ctd, rules->ctd,
-			rules->number_check);
+			  rules->dump, rules->number_cursors,
+			  rules->much_players, rules->last_alive,
+			  rules->number_cycle, rules->num_live_of_ctd, rules->ctd,
+			  rules->number_check);
 }

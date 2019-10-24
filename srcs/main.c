@@ -73,6 +73,19 @@ void		set_rules(t_rules *rules, t_champion **champions)
 	rules->ctd = CYCLE_TO_DIE;
 }
 
+/*
+**	Исторически сложилось, что начал работать с массивом
+**	чемпионов и последнии параметры для них устанавливаются в
+**	creat_battlefield, но для удобства реализации процесса игры
+**	чемпионов нужно переделать в список, и обозвать их курсорами
+**	что делается в creat_cursor, но это всё теже структуры.
+**	number_cursor определяется здесь же
+**	Функции для отладки%
+**	print_rules(rules);
+**	print_cursors(cursors, 1);
+**	print_battlefiled(rules, champions);
+*/
+
 int			main(int argc, char **argv)
 {
 	t_rules			rules;
@@ -96,20 +109,3 @@ int			main(int argc, char **argv)
 	cursors = create_cursor(champions, &rules);
 	start_game(cursors, &rules, champions);
 }
-
-/*
- * Исторически сложилось, что начал работать с массивом
- * чемпионов и последнии параметры для них устанавливаются в
- * creat_battlefield, но для удобства реализации процесса игры
- * чемпионов нужно переделать в список, и обозвать их курсорами
- * что делается в creat_cursor, но это всё теже структуры.
- * number_cursor определяется здесь же
- *
- *
- * Функции для отладки%
- * print_rules(rules);
- * print_cursors(cursors, 1);
- * print_battlefiled(rules, champions);
- *
- *
- */

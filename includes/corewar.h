@@ -60,7 +60,7 @@ typedef struct 			s_rules
 	int					last_alive;        //последний прокукарекавший петух
 	char*				name_winner;
 	int					number_cycle;     //Количество циклов с начала игры
-	int					number_live_of_ctd; //Количество выполненых операций live за CYCLE_TO_DIE
+	int					num_live_of_ctd; //Количество выполненых операций live за CYCLE_TO_DIE
 	int					ctd;				//CYCLE_TO_DIE - длительность периода до проверки
 	int					number_check;		//Количество проведёных проверок
 	t_champion*			cursors;			//Указатель на начало списка кареток

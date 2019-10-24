@@ -55,12 +55,11 @@ void	check_cursors(t_champion **cursors, t_rules *rules)
 		else
 			cursor = cursor->next;
 	}
-	if (rules->number_live_of_ctd >= NBR_LIVE ||
-			MAX_CHECKS == rules->number_check)
+	if (rules->num_live_of_ctd >= NBR_LIVE || MAX_CHECKS == rules->number_check)
 	{
 		rules->ctd -= CYCLE_DELTA;
 		rules->number_check = 0;
 	}
-	rules->number_live_of_ctd = 0;
+	rules->num_live_of_ctd = 0;
 	rules->cursors = *cursors;
 }
