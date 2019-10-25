@@ -74,7 +74,8 @@ int		valid_n_flags(int argc, char **argv,
 	i = 1;
 	while (i < argc)
 	{
-		if (ft_strequ(argv[i], "-n")) {
+		if (ft_strequ(argv[i], "-n"))
+		{
 			if (i == argc - 1 || i == argc - 2)
 				error_msg(ERR_N_MISUSE);
 			if (!create_n_champ(argv, i, champions, rules))
