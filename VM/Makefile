@@ -6,7 +6,7 @@
 #    By: dzboncak <dzboncak@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/24 19:28:38 by bkiehn            #+#    #+#              #
-#    Updated: 2019/10/01 19:24:03 by dzboncak         ###   ########.fr        #
+#    Updated: 2019/10/25 22:58:39 by lcutjack         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,12 +22,10 @@ INC = ./includes
 
 LIBAFERST = make -C $(LIBRARY)
 
-LIBRARY = libft
+LIBRARY = ../libft
 
-PRINTF = ft_printf_fd
-	
 $(NAME): $(OBJS)
-	@gcc -o $(NAME) $(OBJS) -I $(INC) -L ./$(LIBRARY) -lft -L ./ft_printf_fd -lftprintf
+	@gcc -o $(NAME) $(OBJS) -I $(INC) -L ./$(LIBRARY) -lft
 
 liba:
 	make -C $(LIBRARY)
@@ -48,7 +46,7 @@ fclean: clean
 	rm -f $(NAME)
 	make -C $(LIBRARY) fclean
 	make -C $(PRINTF) fclean
-	
+
 re: fclean libare printfre $(OBJS)
 	gcc -o $(NAME) $(SRCS) -I $(INC) -L ./$(LIBRARY) -lft  -L ./ft_printf_fd -lftprintf
 

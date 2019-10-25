@@ -6,7 +6,7 @@
 /*   By: dzboncak <dzboncak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/13 16:22:13 by aleksey           #+#    #+#             */
-/*   Updated: 2019/10/15 19:44:24 by dzboncak         ###   ########.fr       */
+/*   Updated: 2019/10/25 22:58:16 by lcutjack         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,7 @@
 # define CYAN      	"\033[36m"
 # define NO_COLOR	"\033[m"
 
-# include "../libft/includes/libft.h"
-# include "ft_printf.h"
-# include "unistd.h"
-# include <stdio.h>
-# include <fcntl.h>
-# include <stdlib.h>
+# include "../../libft/includes/libft.h"
 # include "op.h"
 
 typedef struct			s_champion
