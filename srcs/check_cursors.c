@@ -12,48 +12,39 @@
 
 #include "corewar.h"
 
-void	delete_cursor(t_champion *del_cursor, t_champion **cursors)
+t_champion	*delete_cursor(t_champion *del_cursor, t_champion **cursors,
+		t_champion *prev, t_rules *rules)
 {
-	t_champion *current;
-	t_champion *prev;
-
-	current = *cursors;
-	if (*cursors == del_cursor)
-	{
-		*cursors = (*cursors)->next;
-		ft_memdel((void**)&current);
-		return ;
-	}
-	while (current != NULL && current != del_cursor)
-	{
-		prev = current;
-		current = current->next;
-	}
-	if (current == NULL)
-		return ;
-	prev->next = current->next;
-	ft_memdel((void**)&current);
-}
-
-void	check_cursors(t_champion **cursors, t_rules *rules)
-{
-	t_champion *cursor;
 	t_champion *tmp;
 
+	rules->number_cursors--;
+	tmp = del_cursor->next;
+	if (del_cursor == *cursors)
+		*cursors = del_cursor->next;
+	else
+		prev->next = del_cursor->next;
+	ft_memdel((void**)&del_cursor);
+	return (tmp);
+}
+
+void		check_cursors(t_champion **cursors, t_rules *rules)
+{
+	t_champion *cursor;
+	t_champion *prev;
+
 	cursor = *cursors;
+	prev = cursor;
 	rules->number_check++;
 	while (cursor)
 	{
 		if (rules->ctd <= 0 ||
 		rules->number_cycle - cursor->last_live_in_cycle >= rules->ctd)
-		{
-			tmp = cursor->next;
-			delete_cursor(cursor, cursors);
-			rules->number_cursors--;
-			cursor = tmp;
-		}
+			cursor = delete_cursor(cursor, cursors, prev, rules);
 		else
+		{
+			prev = cursor;
 			cursor = cursor->next;
+		}
 	}
 	if (rules->num_live_of_ctd >= NBR_LIVE || MAX_CHECKS == rules->number_check)
 	{

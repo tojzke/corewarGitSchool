@@ -118,8 +118,9 @@ void					start_game(t_champion *cursors, t_rules *rules,
 							t_champion **champions);
 t_champion				*add_cursor_in_start(t_champion *cursors,
 							t_champion *champion);
-void					delete_cursor(t_champion *del_cursor,
-							t_champion **cursors);
+t_champion				*delete_cursor(t_champion *del_cursor,
+							t_champion **cursors, t_champion *prev,
+							t_rules *rules);
 void					check_cursors(t_champion **cursors, t_rules *rules);
 void					exec_command(t_rules *rules, t_champion *cursor);
 int						count_size_args(unsigned char *type_args,
