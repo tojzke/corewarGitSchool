@@ -1,7 +1,24 @@
-.*
+# Object files
 objs/*.o
 libft/*.o
 ft_printf_fd/objs/*.o
-ft_printf_fd/libft/*.o
+
+# Cmake tmp files
 *cmake*
+
+# Debug folders
 *.dSYM
+
+# Vscode related stuff
+.vscode
+
+# Tmp files
+*.res
+
+#Executables
+*.out
+corewar
+*.exe
+
+# Folder
+.DS_Store
