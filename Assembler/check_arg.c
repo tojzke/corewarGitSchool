@@ -6,7 +6,7 @@
 /*   By: lcutjack <lcutjack@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/01 15:54:34 by lcutjack          #+#    #+#             */
-/*   Updated: 2019/10/25 22:40:01 by lcutjack         ###   ########.fr       */
+/*   Updated: 2019/10/26 15:00:08 by lcutjack         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,9 @@ static char		check_value(int *value, char **s)
 		*s = tmp;
 		if (!label_correct(*s) && (g_error.id = 11))
 		{
-			// ft_strdel(s);
-			free(*s);
-			*s = NULL;
+			ft_strdel(s);
+			// free(*s);
+			// *s = NULL;
 			return (1);
 		}
 	}

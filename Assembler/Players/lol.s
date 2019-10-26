@@ -3,6 +3,7 @@
 .name "zork"
 .comment "I'M ALIIIIVE"
 
+zjmp 1t
 fork	%:coregeni
 ardeftgt:
 
